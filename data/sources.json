@@ -1,0 +1,227 @@
+[
+  {
+    "name": "G1 / Globo",
+    "url": "https://g1.globo.com/rss/g1/",
+    "category": "brasil",
+    "language": "pt",
+    "country": "BR",
+    "economic_axis": 0.2,
+    "authority_axis": 0.1
+  },
+  {
+    "name": "Folha de S.Paulo",
+    "url": "https://feeds.folha.uol.com.br/emcimadahora/rss091.xml",
+    "category": "brasil",
+    "language": "pt",
+    "country": "BR",
+    "economic_axis": 0.1,
+    "authority_axis": -0.1
+  },
+  {
+    "name": "UOL Notícias",
+    "url": "https://rss.uol.com.br/feed/noticias.xml",
+    "category": "brasil",
+    "language": "pt",
+    "country": "BR",
+    "economic_axis": 0.0,
+    "authority_axis": 0.0
+  },
+  {
+    "name": "Agência Brasil",
+    "url": "https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml",
+    "category": "brasil",
+    "language": "pt",
+    "country": "BR",
+    "economic_axis": -0.2,
+    "authority_axis": 0.2
+  },
+  {
+    "name": "Brasil de Fato",
+    "url": "https://www.brasildefato.com.br/rss",
+    "category": "brasil",
+    "language": "pt",
+    "country": "BR",
+    "economic_axis": -0.7,
+    "authority_axis": -0.2
+  },
+  {
+    "name": "BBC News",
+    "url": "http://feeds.bbci.co.uk/news/rss.xml",
+    "category": "internacional",
+    "language": "en",
+    "country": "GB",
+    "economic_axis": 0.0,
+    "authority_axis": 0.0
+  },
+  {
+    "name": "Reuters",
+    "url": "https://feeds.reuters.com/reuters/topNews",
+    "category": "internacional",
+    "language": "en",
+    "country": "US",
+    "economic_axis": 0.1,
+    "authority_axis": 0.0
+  },
+  {
+    "name": "Associated Press",
+    "url": "https://rsshub.app/apnews/topics/apf-topnews",
+    "category": "internacional",
+    "language": "en",
+    "country": "US",
+    "economic_axis": 0.0,
+    "authority_axis": 0.0
+  },
+  {
+    "name": "Al Jazeera",
+    "url": "https://www.aljazeera.com/xml/rss/all.xml",
+    "category": "internacional",
+    "language": "en",
+    "country": "QA",
+    "economic_axis": -0.1,
+    "authority_axis": 0.1
+  },
+  {
+    "name": "The Guardian",
+    "url": "https://www.theguardian.com/world/rss",
+    "category": "internacional",
+    "language": "en",
+    "country": "GB",
+    "economic_axis": -0.3,
+    "authority_axis": -0.3
+  },
+  {
+    "name": "Fox News",
+    "url": "https://moxie.foxnews.com/google-publisher/world.xml",
+    "category": "internacional",
+    "language": "en",
+    "country": "US",
+    "economic_axis": 0.7,
+    "authority_axis": 0.4
+  },
+  {
+    "name": "Hacker News",
+    "url": "https://hnrss.org/frontpage",
+    "category": "tecnologia",
+    "language": "en",
+    "country": "US",
+    "economic_axis": 0.2,
+    "authority_axis": -0.4
+  },
+  {
+    "name": "Ars Technica",
+    "url": "https://feeds.arstechnica.com/arstechnica/index",
+    "category": "tecnologia",
+    "language": "en",
+    "country": "US",
+    "economic_axis": -0.1,
+    "authority_axis": -0.2
+  },
+  {
+    "name": "The Verge",
+    "url": "https://www.theverge.com/rss/index.xml",
+    "category": "tecnologia",
+    "language": "en",
+    "country": "US",
+    "economic_axis": 0.0,
+    "authority_axis": -0.1
+  },
+  {
+    "name": "TechCrunch",
+    "url": "https://techcrunch.com/feed/",
+    "category": "tecnologia",
+    "language": "en",
+    "country": "US",
+    "economic_axis": 0.3,
+    "authority_axis": -0.1
+  },
+  {
+    "name": "MIT Tech Review",
+    "url": "https://www.technologyreview.com/feed/",
+    "category": "tecnologia",
+    "language": "en",
+    "country": "US",
+    "economic_axis": 0.0,
+    "authority_axis": -0.1
+  },
+  {
+    "name": "NASA News",
+    "url": "https://www.nasa.gov/rss/dyn/breaking_news.rss",
+    "category": "ciencia",
+    "language": "en",
+    "country": "US",
+    "economic_axis": 0.0,
+    "authority_axis": 0.1
+  },
+  {
+    "name": "Scientific American",
+    "url": "http://rss.sciam.com/ScientificAmerican-Global",
+    "category": "ciencia",
+    "language": "en",
+    "country": "US",
+    "economic_axis": -0.1,
+    "authority_axis": -0.1
+  },
+  {
+    "name": "Nature",
+    "url": "https://www.nature.com/nature.rss",
+    "category": "ciencia",
+    "language": "en",
+    "country": "GB",
+    "economic_axis": 0.0,
+    "authority_axis": 0.0
+  },
+  {
+    "name": "Infobae",
+    "url": "https://www.infobae.com/feeds/rss/",
+    "category": "america-latina",
+    "language": "es",
+    "country": "AR",
+    "economic_axis": 0.5,
+    "authority_axis": 0.2
+  },
+  {
+    "name": "El País",
+    "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
+    "category": "america-latina",
+    "language": "es",
+    "country": "ES",
+    "economic_axis": -0.2,
+    "authority_axis": -0.1
+  },
+  {
+    "name": "DW Brasil",
+    "url": "https://rss.dw.com/rdf/rss-br-todas",
+    "category": "internacional",
+    "language": "pt",
+    "country": "DE",
+    "economic_axis": 0.0,
+    "authority_axis": 0.0
+  },
+  {
+    "name": "France 24 PT",
+    "url": "https://www.france24.com/pt/rss",
+    "category": "internacional",
+    "language": "pt",
+    "country": "FR",
+    "economic_axis": -0.1,
+    "authority_axis": 0.0
+  },
+  {
+    "name": "Bloomberg",
+    "url": "https://feeds.bloomberg.com/markets/news.rss",
+    "category": "economia",
+    "language": "en",
+    "country": "US",
+    "economic_axis": 0.5,
+    "authority_axis": 0.1
+  },
+  {
+    "name": "Financial Times",
+    "url": "https://www.ft.com/rss/home",
+    "category": "economia",
+    "language": "en",
+    "country": "GB",
+    "economic_axis": 0.3,
+    "authority_axis": 0.0
+  }
+]

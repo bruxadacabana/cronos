@@ -1,0 +1,12 @@
+# Cronos v1.2 — dependências
+PyQt6>=6.4.0
+feedparser>=6.0
+httpx>=0.24
+beautifulsoup4>=4.12
+readability-lxml>=0.8
+deep-translator>=1.11
+# Redes sociais
+praw>=7.7           # Reddit
+atproto>=0.0.46     # Bluesky
+twscrape>=0.12      # Twitter/X (desativado por padrão)
+google-api-python-client>=2.0  # YouTube

@@ -1,0 +1,405 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    CRONOS — LEITOR DE NOTÍCIAS v1.4                        ║
+║                    Documentação Completa                                    ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. INSTALAÇÃO DE PRÉ-REQUISITOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌─ WINDOWS 10 / 11 ──────────────────────────────────────────────────────────┐
+
+  1. Instale o Python 3.10 ou superior:
+     https://www.python.org/downloads/windows/
+     ⚠  Durante a instalação, marque "Add Python to PATH"
+
+  2. Verifique a instalação abrindo o Prompt de Comando (cmd):
+       python --version
+       pip --version
+
+  3. (Opcional) Instale o Ollama para análise com IA:
+     https://ollama.ai/download/windows
+     Após instalar, abra o cmd e execute:
+       ollama pull llama3
+
+  4. (Opcional) Instale as fontes do Cronos:
+     Abra o PowerShell como Administrador e execute:
+       Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+       cd C:\caminho\para\cronos
+       install_fonts.ps1
+     OU instale manualmente os .ttf da pasta src/assets/fonts/
+
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ LINUX — CachyOS / Arch Linux ─────────────────────────────────────────────┐
+
+  1. Instale as dependências do sistema:
+       sudo pacman -S python python-pip python-virtualenv
+       sudo pacman -S qt6-base qt6-tools
+       # Fontes necessárias (opcional — o cronos.sh faz isso automaticamente)
+       sudo pacman -S noto-fonts ttf-liberation
+
+  2. (Opcional) Instale o Ollama:
+       curl -fsSL https://ollama.ai/install.sh | sh
+       ollama pull llama3
+
+  3. Não é necessário mais nada — o cronos.sh cuida do resto.
+
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ LINUX — Ubuntu / Debian / Linux Mint ─────────────────────────────────────┐
+
+  1. Instale as dependências do sistema:
+       sudo apt update
+       sudo apt install python3 python3-pip python3-venv
+       sudo apt install libxcb-cursor0 libxcb-xinerama0  # necessário para PyQt6
+
+  2. (Opcional) Instale o Ollama:
+       curl -fsSL https://ollama.ai/install.sh | sh
+       ollama pull llama3
+
+  3. Não é necessário mais nada — o cronos.sh cuida do resto.
+
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ ANDROID (Termux — experimental) ──────────────────────────────────────────┐
+
+  1. Instale o Termux pela F-Droid (não pela Play Store):
+     https://f-droid.org/packages/com.termux/
+
+  2. No Termux:
+       pkg update && pkg upgrade
+       pkg install python python-pip x11-repo
+       pkg install termux-x11-nightly
+       pip install PyQt6 --extra-index-url https://pypi.org/simple/
+     
+  3. Para exibir a interface gráfica:
+       Instale o Termux:X11
+       Execute: export DISPLAY=:0
+       Inicie o Termux:X11 e então: python cronos.py
+
+  ⚠  A experiência no Android é experimental. Resolução e toque podem
+     não funcionar perfeitamente. Recomendado apenas para uso avançado.
+
+└────────────────────────────────────────────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. INICIALIZAÇÃO DO PROGRAMA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌─ WINDOWS ───────────────────────────────────────────────────────────────────┐
+
+  Método 1 — Duplo clique (mais fácil):
+    Duplo clique em  cronos.bat
+
+  Método 2 — Prompt de Comando:
+    cd C:\caminho\para\cronos
+    cronos.bat
+
+  Método 3 — PowerShell:
+    cd C:\caminho\para\cronos
+    python cronos.py
+
+  ℹ  Na primeira execução, o cronos.bat cria automaticamente o ambiente
+     virtual (.venv) e instala todas as dependências. Isso leva alguns
+     minutos. As execuções seguintes iniciam em segundos.
+
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ LINUX / CachyOS ───────────────────────────────────────────────────────────┐
+
+  Método 1 — Terminal (mais fácil):
+    cd /caminho/para/cronos
+    bash cronos.sh
+
+  Método 2 — Duplo clique no gerenciador de arquivos:
+    Clique direito em cronos.sh → "Executar como programa"
+    (dependendo do DE, pode ser necessário habilitar execução)
+
+  Método 3 — Manual:
+    cd /caminho/para/cronos
+    python3 -m venv .venv
+    source .venv/bin/activate
+    pip install -r requirements.txt
+    python3 cronos.py
+
+└────────────────────────────────────────────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. ATALHO NA LISTA DE APLICATIVOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌─ WINDOWS ───────────────────────────────────────────────────────────────────┐
+
+  Opção A — Menu Iniciar:
+    1. Clique direito em cronos.bat → "Criar atalho"
+    2. Mova o atalho criado para:
+         %APPDATA%\Microsoft\Windows\Start Menu\Programs\
+       (Cole esse caminho na barra do Explorador de Arquivos)
+    3. O Cronos aparecerá no Menu Iniciar
+
+  Opção B — Área de trabalho:
+    Clique direito em cronos.bat → Enviar para → Área de Trabalho (criar atalho)
+
+  Opção C — Barra de tarefas:
+    Clique direito no atalho → Fixar na barra de tarefas
+
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ LINUX (GNOME, KDE, XFCE, LXDE — qualquer DE com suporte .desktop) ────────┐
+
+  1. Edite o arquivo cronos.desktop na pasta do programa:
+     Abra-o num editor de texto e substitua:
+       /CAMINHO/PARA/CRONOS
+     pelo caminho real onde você extraiu o programa, por exemplo:
+       /home/usuario/cronos
+
+  2. Copie para a pasta de aplicativos do usuário:
+       cp cronos.desktop ~/.local/share/applications/
+
+  3. Atualize o banco de dados de aplicativos:
+       update-desktop-database ~/.local/share/applications/
+
+  4. O Cronos aparecerá no launcher/menu de aplicativos do seu DE.
+
+  ℹ  Para instalar para todos os usuários do sistema (requer root):
+       sudo cp cronos.desktop /usr/share/applications/
+
+└────────────────────────────────────────────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. FONTES DE NOTÍCIAS (data/sources.json)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  A partir da v1.4, a lista de fontes RSS é armazenada em:
+    data/sources.json
+
+  Esse arquivo é criado automaticamente na primeira execução com 25 fontes
+  padrão. Você pode editá-lo manualmente com qualquer editor de texto.
+
+  Formato de cada fonte:
+    {
+      "name":           "Nome da fonte",
+      "url":            "https://exemplo.com/rss",
+      "category":       "brasil|internacional|tecnologia|ciencia|economia|...",
+      "language":       "pt|en|es",
+      "country":        "BR|US|GB|...",
+      "economic_axis":  -1.0 a 1.0,   // negativo=esquerda, positivo=direita
+      "authority_axis": -1.0 a 1.0    // negativo=libertário, positivo=autoritário
+    }
+
+  Fontes padrão incluídas (25):
+    Brasil:        G1/Globo, Folha de S.Paulo, UOL, Agência Brasil, Brasil de Fato
+    Internacional: BBC, Reuters, AP, Al Jazeera, The Guardian, Fox News
+    Tecnologia:    Hacker News, Ars Technica, The Verge, TechCrunch, MIT Tech Review
+    Ciência:       NASA, Scientific American, Nature
+    América Latina:Infobae, El País
+    Outros:        DW Brasil, France 24 PT, Bloomberg, Financial Times
+
+  ⚠  Alterações no sources.json só são sincronizadas com o banco de dados
+     na próxima inicialização do programa. Para adicionar fontes em tempo
+     real, use a aba Fontes dentro do programa.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. FUNCIONALIDADES v1.4 (NOVIDADES)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  SIDEBAR REFEITA:
+    - Logotipo "CRONOS" fixo no topo com estrelas desenhadas a lápis
+    - O logo nunca colapsa — permanece visível independentemente do menu
+    - Menu recolhido (só ícones, 56px) → expande ao hover (210px)
+    - Animação suave de largura com debounce anti-flicker no Windows
+    - Indicador Ollama (● verde = online, ● vermelho = offline) no rodapé
+
+  EFEITOS VISUAIS (funcionando no Windows):
+    - Textura de papel: PNG embutido aplicado via background-image
+    - Canto dobrado: triângulo no canto superior direito de cada card (QPainter)
+    - Sombra deslocada sólida: offset 3px sem sombra difusa (efeito carimbo)
+    - Linhas pautadas horizontais: desenhadas no fundo de cada card (QPainter)
+    - Estrelas no logotipo: desenhadas via QPainter com variação de tamanho e rotação
+    - Border-radius: 2px apenas — cantos quase retos
+
+  FONTES RSS EM ARQUIVO SEPARADO:
+    - data/sources.json separado do banco de dados principal
+    - Editável com qualquer editor de texto
+    - Funções de API: save_source_to_json, remove_source_from_json, update_source_json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. FUNCIONALIDADES v1.3
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  PONTOS DE VISTA:
+    - Cards visuais com barra de viés político colorida (vermelho=esq, azul=dir)
+    - Abre matéria sem fechar o dialog (compare múltiplas coberturas)
+    - Filtra a própria fonte automaticamente
+
+  ABA ARQUIVO (🗂):
+    - Salva artigos com múltiplas tags (ex: "política, favoritos, para-ler")
+    - Nota opcional por artigo
+    - Renomear e apagar tags
+    - Busca por título ou nota
+
+  AVISO DE CLICKBAIT:
+    - Badge "⚠ CLICKBAIT XX%" no card do feed quando >50%
+    - Banner de aviso no topo do leitor ao abrir a matéria
+
+  BÚSSOLA POLÍTICA:
+    - Pontos sobrepostos se afastam ao hover
+    - Zoom com scroll, pan com arrastar
+
+  DASHBOARD (4 abas):
+    - Viés: bússola + termômetro de polarização da sua leitura
+    - Palavras: nuvem de keywords + radar de categorias
+    - Fontes: ranking com medalhas + linha do tempo emocional
+    - Clickbait: índice por fonte + evolução de viés
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. INTELIGÊNCIA ARTIFICIAL (OLLAMA)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Instale: https://ollama.ai
+
+  Modelos recomendados (execute no terminal após instalar o Ollama):
+    ollama pull llama3        — rápido, ótimo para PT/EN
+    ollama pull mistral       — ótimo para análise política
+    ollama pull gemma2        — equilibrado
+    ollama pull phi3          — leve, para máquinas com pouca RAM
+
+  Configure em: Configurações → Inteligência Artificial
+  Indicador na sidebar: ● verde = Ollama online, ● vermelho = offline
+
+  O Cronos analisa automaticamente cada artigo ao abri-lo:
+    - Resumo neutro (1-2 parágrafos)
+    - Tom emocional (neutro/positivo/negativo/alarmista/esperançoso/...)
+    - Score de clickbait 0–100%
+    - Eixo econômico e autoritário (-1 a +1)
+    - Palavras-chave e implicações
+    - Análise em chunks para artigos longos (>15.000 caracteres)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. PRIVACIDADE E DADOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Todos os dados ficam LOCALMENTE na pasta data/:
+    data/cronos.db       — banco de dados (artigos, análises, arquivo pessoal)
+    data/sources.json    — lista de fontes RSS (editável)
+    data/settings.json   — preferências do usuário
+    data/logs/           — logs de execução
+    data/cache/          — cache temporário
+
+  Nenhum dado pessoal é enviado para servidores externos, exceto:
+    - Requisições RSS para as URLs das fontes configuradas
+    - API do Ollama (local, rodando na sua máquina)
+    - Google Translate (opcional, quando tradução é solicitada)
+    - API Feedly (opcional, busca de novas fontes RSS — somente leitura)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9. ESTRUTURA DE ARQUIVOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  cronos/
+  ├── data/                       ← TODOS os dados do usuário aqui
+  │   ├── cronos.db               — banco de dados principal
+  │   ├── sources.json            — lista de fontes RSS (v1.4, editável)
+  │   ├── settings.json           — preferências
+  │   ├── cache/                  — cache temporário
+  │   └── logs/                   — logs de execução
+  ├── src/
+  │   ├── assets/
+  │   │   ├── fonts/              — Special Elite, IM Fell English
+  │   │   ├── textures.py         — texturas de papel embutidas (base64)
+  │   │   ├── paper_day.png       — textura dia (gerada automaticamente)
+  │   │   └── paper_night.png     — textura noite (gerada automaticamente)
+  │   ├── core/
+  │   │   ├── database.py         — BD + sources.json + arquivo pessoal
+  │   │   ├── fetcher.py          — RSS + scraping
+  │   │   ├── ai.py               — Ollama
+  │   │   ├── analyzer.py         — Fila de análise (QThread)
+  │   │   ├── font_loader.py      — Fontes + textura de papel
+  │   │   ├── trending.py         — Detecção trending (Jaccard)
+  │   │   ├── scheduler.py        — Timer de atualização
+  │   │   ├── translator.py       — Tradução
+  │   │   ├── notifier.py         — Notificações do sistema
+  │   │   └── social/             — Reddit, Bluesky, Mastodon, YouTube, Twitter, Substack
+  │   └── ui/
+  │       ├── main_window.py
+  │       ├── feed_view.py
+  │       ├── reader_view.py      — Pontos de Vista, Arquivar, Banner clickbait
+  │       ├── archive_view.py     — Aba Arquivo com tags
+  │       ├── dashboard_view.py   — Dashboard 4 abas
+  │       ├── sources_view.py
+  │       ├── social_view.py
+  │       ├── settings_view.py
+  │       ├── trending_view.py
+  │       ├── themes/
+  │       │   ├── day.qss         — Tema papel envelhecido (reescrito v1.4)
+  │       │   └── night.qss       — Tema cyberpunk roxo (reescrito v1.4)
+  │       └── widgets/
+  │           ├── sidebar.py      — Sidebar refeita (v1.4)
+  │           ├── article_card.py — Canto dobrado + sombra + linhas (v1.4)
+  │           ├── compass.py      — Bússola com repulsão de sobrepostos
+  │           ├── dashboard_widgets.py — Nuvem, radar, termômetro
+  │           ├── carousel.py
+  │           ├── flow_layout.py
+  │           └── star_widget.py
+  ├── cronos.py                   — Ponto de entrada
+  ├── cronos.sh                   — Atalho Linux (auto-instala dependências)
+  ├── cronos.bat                  — Atalho Windows (auto-instala dependências)
+  ├── cronos.desktop              — Integração com launchers Linux
+  ├── install_fonts.sh            — Instalação de fontes (Linux)
+  ├── requirements.txt            — Dependências Python
+  └── DOCUMENTACAO.txt            — Este arquivo
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+10. SOLUÇÃO DE PROBLEMAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  [Windows] Tela preta ou erro ao iniciar:
+    → Certifique-se de que Python está no PATH
+    → Abra o cmd e execute: python --version
+    → Se não funcionar, reinstale o Python marcando "Add to PATH"
+
+  [Windows] Fontes não aparecem corretamente:
+    → Instale as fontes manualmente: clique duplo nos .ttf em src/assets/fonts/
+    → Ou execute install_fonts.bat como Administrador
+
+  [Linux] Erro "xcb" ou tela não aparece:
+    → Ubuntu/Debian: sudo apt install libxcb-cursor0 libxcb-xinerama0
+    → Arch/CachyOS: sudo pacman -S xcb-util-cursor
+
+  [Qualquer OS] Fontes não carregam:
+    → bash install_fonts.sh  (Linux)
+    → Verifique se curl está instalado: curl --version
+
+  [Qualquer OS] Ollama não conecta:
+    → Verifique se está rodando: curl http://localhost:11434/api/tags
+    → Inicie: ollama serve
+    → Configure outra URL em Configurações → IA
+
+  [Qualquer OS] Banco corrompido:
+    → Apague data/cronos.db (perde histórico e arquivo pessoal)
+    → Na próxima execução é recriado automaticamente
+    → ⚠  data/sources.json é preservado separadamente
+
+  Logs de erro:
+    → data/logs/cronos.log
+    → error_log.txt (erros fatais na raiz do programa)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+11. DEPENDÊNCIAS (requirements.txt)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  PyQt6>=6.4.0                Interface gráfica (Windows, Linux, Android)
+  Pillow>=9.0                 Geração de texturas de papel (opcional, melhor qualidade)
+  feedparser>=6.0             Leitura de feeds RSS
+  httpx>=0.24                 Requisições HTTP
+  beautifulsoup4>=4.12        Parsing HTML
+  readability-lxml>=0.8       Extração de conteúdo limpo
+  deep-translator>=1.11       Tradução (Google Translate)
+  praw>=7.7                   Reddit
+  atproto>=0.0.46             Bluesky
+  twscrape>=0.12              Twitter/X (desativado por padrão)
+  google-api-python-client>=2.0  YouTube
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Cronos v1.4 — Código aberto, uso pessoal

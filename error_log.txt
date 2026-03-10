@@ -1,0 +1,64 @@
+
+==================================================
+CRASH EM: 2026-03-10 16:47:30.647773
+Traceback (most recent call last):
+  File "D:\windows\ProgramFiles\cronos-v1.4\cronos.py", line 49, in <module>
+    main()
+    ~~~~^^
+  File "D:\windows\ProgramFiles\cronos-v1.4\cronos.py", line 44, in main
+    window = MainWindow()
+  File "D:\windows\ProgramFiles\cronos-v1.4\src\ui\main_window.py", line 47, in __init__
+    self._build_ui()
+    ~~~~~~~~~~~~~~^^
+  File "D:\windows\ProgramFiles\cronos-v1.4\src\ui\main_window.py", line 69, in _build_ui
+    self.sidebar.navigate.connect(self._navigate)
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Sidebar' object has no attribute 'navigate'
+
+==================================================
+CRASH EM: 2026-03-10 16:48:27.649867
+Traceback (most recent call last):
+  File "D:\windows\ProgramFiles\cronos-v1.4\cronos.py", line 49, in <module>
+    main()
+    ~~~~^^
+  File "D:\windows\ProgramFiles\cronos-v1.4\cronos.py", line 44, in main
+    window = MainWindow()
+  File "D:\windows\ProgramFiles\cronos-v1.4\src\ui\main_window.py", line 47, in __init__
+    self._build_ui()
+    ~~~~~~~~~~~~~~^^
+  File "D:\windows\ProgramFiles\cronos-v1.4\src\ui\main_window.py", line 69, in _build_ui
+    self.sidebar.navigate.connect(self._navigate)
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Sidebar' object has no attribute 'navigate'
+
+==================================================
+CRASH EM: 2026-03-10 16:50:17.022701
+Traceback (most recent call last):
+  File "D:\windows\ProgramFiles\cronos-v1.4\cronos.py", line 49, in <module>
+    main()
+    ~~~~^^
+  File "D:\windows\ProgramFiles\cronos-v1.4\cronos.py", line 44, in main
+    window = MainWindow()
+  File "D:\windows\ProgramFiles\cronos-v1.4\src\ui\main_window.py", line 47, in __init__
+    self._build_ui()
+    ~~~~~~~~~~~~~~^^
+  File "D:\windows\ProgramFiles\cronos-v1.4\src\ui\main_window.py", line 69, in _build_ui
+    self.sidebar.navigate.connect(self._navigate)
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Sidebar' object has no attribute 'navigate'
+
+==================================================
+CRASH EM: 2026-03-10 16:51:49.462021
+Traceback (most recent call last):
+  File "D:\windows\ProgramFiles\cronos-v1.4\cronos.py", line 49, in <module>
+    main()
+    ~~~~^^
+  File "D:\windows\ProgramFiles\cronos-v1.4\cronos.py", line 44, in main
+    window = MainWindow()
+  File "D:\windows\ProgramFiles\cronos-v1.4\src\ui\main_window.py", line 47, in __init__
+    self._build_ui()
+    ~~~~~~~~~~~~~~^^
+  File "D:\windows\ProgramFiles\cronos-v1.4\src\ui\main_window.py", line 69, in _build_ui
+    self.sidebar.navigate.connect(self._navigate)
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Sidebar' object has no attribute 'navigate'

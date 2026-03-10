@@ -1,0 +1,275 @@
+/* ══════════════════════════════════════════════════════════════════
+   CRONOS — TEMA NOITE  (cyberpunk / roxo fluorescente)
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Base ─────────────────────────────────────────────────────── */
+QMainWindow, QDialog {
+    background-color: #06000e;
+    color: #e0d0ff;
+    font-family: "Special Elite", "Courier New", monospace;
+}
+QWidget {
+    background-color: transparent;
+    color: #e0d0ff;
+    font-family: "Special Elite", "Courier New", monospace;
+    font-size: 12px;
+    border-radius: 2px;
+}
+QWidget#centralWidget, QStackedWidget, QScrollArea, QScrollArea > QWidget > QWidget {
+    background-color: #06000e;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────── */
+QScrollBar:vertical {
+    background: #0e001e;
+    width: 6px;
+    border-radius: 3px;
+    margin: 0;
+}
+QScrollBar::handle:vertical {
+    background: #5500aa;
+    border-radius: 3px;
+    min-height: 24px;
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: none; }
+QScrollBar:horizontal {
+    background: #0e001e;
+    height: 6px;
+    border-radius: 3px;
+}
+QScrollBar::handle:horizontal { background: #5500aa; border-radius: 3px; min-width: 24px; }
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal { width: 0; }
+
+/* ── Sidebar ──────────────────────────────────────────────────── */
+QFrame#sidebarDivider {
+    background-color: #9900ff55;
+    max-height: 1px;
+    border: none;
+    margin: 0 8px;
+}
+
+/* ── Área de conteúdo ─────────────────────────────────────────── */
+QWidget#feedContainer, QWidget#readerContainer, QWidget#contentArea {
+    background-color: #06000e;
+    border-left: 2px solid #9900ff44;
+    padding-left: 14px;
+}
+
+/* ── Cards ────────────────────────────────────────────────────── */
+QFrame#articleCard {
+    background-color: #0e0020;
+    border: 1px solid #4400aa;
+    border-radius: 2px;
+    margin-bottom: 3px;
+    margin-right: 3px;
+}
+QFrame#articleCard:hover {
+    background-color: #180038;
+    border-color: #7700ee;
+}
+
+/* ── Barra de filtro ─────────────────────────────────────────── */
+QFrame#filterBar {
+    background-color: #0a0018;
+    border-bottom: 1px solid #4400aa;
+    border-radius: 0;
+    padding: 4px 12px;
+}
+
+/* ── Inputs ───────────────────────────────────────────────────── */
+QLineEdit, QTextEdit, QPlainTextEdit, QComboBox, QSpinBox {
+    background-color: #0e001e;
+    border: 1px solid #5500aa;
+    border-radius: 2px;
+    padding: 4px 8px;
+    color: #e0d0ff;
+    font-family: "Special Elite", "Courier New", monospace;
+    selection-background-color: #7700ee;
+    selection-color: #f0e8ff;
+}
+QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
+    border-color: #9900ff;
+    background-color: #140028;
+}
+
+/* ── Botões ───────────────────────────────────────────────────── */
+QPushButton {
+    background-color: #1a0035;
+    color: #e0d0ff;
+    border: 1px solid #5500aa;
+    border-radius: 2px;
+    padding: 5px 14px;
+    font-family: "Special Elite", "Courier New", monospace;
+    font-size: 11px;
+    margin-bottom: 2px;
+    margin-right: 2px;
+}
+QPushButton:hover {
+    background-color: #2a0055;
+    border-color: #9900ff;
+    color: #ffffff;
+}
+QPushButton:pressed {
+    background-color: #3a0077;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-top: 2px;
+    margin-left: 2px;
+}
+QPushButton#btnPrimary {
+    background-color: #7700ee;
+    color: #f0e8ff;
+    border-color: #4400aa;
+}
+QPushButton#btnPrimary:hover { background-color: #9900ff; }
+QPushButton#btnDanger {
+    background-color: #aa0033;
+    color: #f0e8ff;
+    border-color: #660022;
+}
+QPushButton#btnDanger:hover { background-color: #cc0044; }
+
+/* ── Labels ───────────────────────────────────────────────────── */
+QLabel#sectionHeader {
+    font-family: "IM Fell English", Georgia, serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #cc88ff;
+    padding: 2px 0;
+}
+QLabel#stampLabel {
+    font-family: "Special Elite", "Courier New", monospace;
+    font-size: 9px;
+    color: #ff44aa;
+    border: 1px solid #ff44aa77;
+    border-radius: 2px;
+    padding: 1px 6px;
+    letter-spacing: 1.5px;
+}
+QLabel#categoryBadge {
+    background-color: #4400aa;
+    color: #e0d0ff;
+    border-radius: 2px;
+    padding: 1px 6px;
+    font-size: 9px;
+}
+QLabel#statusLabel {
+    color: #9966cc;
+    font-size: 10px;
+}
+QLabel#emptyLabel {
+    color: #7700ee;
+    font-family: "IM Fell English", Georgia, serif;
+    font-size: 14px;
+    font-style: italic;
+}
+
+/* ── Clickbait ────────────────────────────────────────────────── */
+QLabel#clickbaitBadge {
+    color: #f0e8ff;
+    background-color: #aa0033;
+    border: 1px solid #ff2266;
+    border-radius: 2px;
+    padding: 1px 7px;
+    font-size: 9px;
+    font-family: "Special Elite", "Courier New", monospace;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+QLabel#clickbaitBanner {
+    color: #f0e8ff;
+    background-color: #aa0033;
+    border: 2px solid #ff2266;
+    border-radius: 2px;
+    padding: 3px 16px;
+    font-size: 11px;
+    font-family: "Special Elite", "Courier New", monospace;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* ── Tabs ─────────────────────────────────────────────────────── */
+QTabWidget::pane {
+    background-color: #06000e;
+    border: 1px solid #4400aa;
+    border-radius: 2px;
+}
+QTabBar::tab {
+    background-color: #0e001e;
+    color: #9966cc;
+    border: 1px solid #4400aa;
+    border-bottom: none;
+    padding: 6px 16px;
+    font-family: "Special Elite", "Courier New", monospace;
+    font-size: 11px;
+    border-radius: 2px 2px 0 0;
+    margin-right: 2px;
+}
+QTabBar::tab:selected {
+    background-color: #06000e;
+    border-bottom: 2px solid #9900ff;
+    color: #cc88ff;
+}
+QTabBar::tab:hover:!selected { background-color: #180038; }
+
+/* ── Listas ───────────────────────────────────────────────────── */
+QListWidget {
+    background-color: #06000e;
+    border: 1px solid #4400aa;
+    border-radius: 2px;
+    font-family: "Special Elite", "Courier New", monospace;
+    outline: none;
+}
+QListWidget::item { padding: 6px 8px; }
+QListWidget::item:selected {
+    background-color: #7700ee;
+    color: #f0e8ff;
+    border-radius: 2px;
+}
+QListWidget::item:hover { background-color: #180038; }
+
+/* ── Splitter ─────────────────────────────────────────────────── */
+QSplitter::handle { background-color: #4400aa; width: 1px; height: 1px; }
+
+/* ── Tooltips ─────────────────────────────────────────────────── */
+QToolTip {
+    background-color: #0e001e;
+    color: #e0d0ff;
+    border: 1px solid #9900ff;
+    border-radius: 2px;
+    padding: 4px 8px;
+    font-family: "Special Elite", "Courier New", monospace;
+}
+
+/* ── Checkbox / Radio ─────────────────────────────────────────── */
+QCheckBox, QRadioButton {
+    color: #e0d0ff;
+    font-family: "Special Elite", "Courier New", monospace;
+    spacing: 6px;
+}
+
+/* ── GroupBox ─────────────────────────────────────────────────── */
+QGroupBox {
+    border: 1px solid #4400aa;
+    border-radius: 2px;
+    margin-top: 8px;
+    color: #e0d0ff;
+    font-family: "Special Elite", "Courier New", monospace;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 4px;
+    color: #9900ff;
+}
+
+/* ── Archive tag panel ────────────────────────────────────────── */
+QWidget#archiveTagPanel {
+    background-color: #0a0018;
+    border-right: 1px solid #4400aa;
+}
+QListWidget#tagList {
+    background-color: #0e001e;
+    border: 1px solid #4400aa;
+}

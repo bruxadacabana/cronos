@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Cronos
+Comment=Leitor de Notícias com Análise de IA
+Exec=bash /CAMINHO_ABSOLUTO/cronos/cronos.sh
+Icon=/CAMINHO_ABSOLUTO/cronos/src/assets/icons/cronos.png
+Terminal=false
+Categories=News;Network;
+Keywords=news;noticias;rss;jornal;
+StartupNotify=true
