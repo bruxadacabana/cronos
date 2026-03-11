@@ -3993,3 +3993,31 @@ For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/St
 2026-03-11 07:06:08,219 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
 2026-03-11 07:06:12,641 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
 2026-03-11 07:06:42,623 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:07:08,290 [ERROR] Ollama timeout
+2026-03-11 07:07:08,797 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:07:08,798 [INFO] A analisar parte 1/1 do artigo 4198
+2026-03-11 07:07:08,804 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:07:12,641 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:07:39,568 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 07:07:40,082 [INFO] Analisado artigo 4198 completo
+2026-03-11 07:07:40,089 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:07:40,089 [INFO] A analisar parte 1/1 do artigo 4711
+2026-03-11 07:07:40,095 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:07:42,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:08:00,614 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 07:08:01,135 [INFO] Analisado artigo 4711 completo
+2026-03-11 07:08:01,141 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:08:01,141 [INFO] A analisar parte 1/1 do artigo 4304
+2026-03-11 07:08:01,148 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:08:12,643 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:08:32,090 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 07:08:32,606 [INFO] Analisado artigo 4304 completo
+2026-03-11 07:08:32,613 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:08:32,613 [INFO] A analisar parte 1/1 do artigo 4790
+2026-03-11 07:08:32,619 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:08:42,623 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:08:46,723 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 07:08:47,242 [INFO] Analisado artigo 4790 completo
+2026-03-11 07:08:47,248 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:08:47,248 [INFO] A analisar parte 1/1 do artigo 4834
+2026-03-11 07:08:47,269 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
