@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import (
     Qt, QTimer, QPropertyAnimation, QEasingCurve,
-    pyqtSignal, QPoint
+    pyqtSignal, QPoint, QPointF
 )
 from PyQt6.QtGui import (
     QPainter, QColor, QPen, QBrush, QFont,
@@ -31,43 +31,84 @@ NAV_ITEMS = [
 
 
 class _LogoWidget(QWidget):
-    """Logotipo fixo com estrelas a lápis. Nunca colapsa."""
+    """
+    Logotipo fixo com estrelas animadas (piscando).
+    Incorpora a lógica do StarWidget — sem overlay externo.
+    """
     def __init__(self, night=False, parent=None):
         super().__init__(parent)
         self.night = night
         self.setFixedHeight(76)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         import random; random.seed(7)
-        # (x_frac, y_frac, size, rotation_deg)
         self._stars = [
-            (random.uniform(0.04, 0.96), random.uniform(0.07, 0.90),
-             random.uniform(4, 11), random.uniform(0, 360))
+            {
+                "x": random.uniform(0.04, 0.96),
+                "y": random.uniform(0.08, 0.90),
+                "size": random.uniform(3.5, 10.0),
+                "phase": random.uniform(0, 2 * math.pi),
+                "speed": random.uniform(0.5, 1.8),
+                "type": random.choice(["point", "star4", "star5"]),
+                "rot": random.uniform(-25, 25),
+            }
             for _ in range(12)
         ]
+        self._tick = 0.0
+        self._timer = QTimer(self)
+        self._timer.timeout.connect(self._tick_update)
+        self._timer.start(40)  # ~25fps
 
     def set_night(self, v):
         self.night = v
         self.update()
 
-    def _draw_star(self, p, cx, cy, size, rot_deg):
-        rot = math.radians(rot_deg - 90)
-        outer, inner = size, size * 0.42
-        path = QPainterPath()
-        for i in range(10):
-            r = outer if i % 2 == 0 else inner
-            a = rot + math.pi * i / 5
-            x, y = cx + r * math.cos(a), cy + r * math.sin(a)
-            path.moveTo(cx, cy) if i == 0 else None
-            if i == 0: path.moveTo(x, y)
-            else:       path.lineTo(x, y)
-        path.closeSubpath()
+    def _tick_update(self):
+        self._tick += 0.040
+        self.update()
+
+    def _draw_star(self, p, s, cx, cy):
+        brightness = 0.45 + 0.55 * math.sin(
+            self._tick * s["speed"] * 2 * math.pi + s["phase"])
+        sz = s["size"]
         if self.night:
-            p.setPen(QPen(QColor(180, 100, 255, 150), 0.7))
-            p.setBrush(QBrush(QColor(210, 150, 255, 55)))
+            col  = QColor(210, 170, 255, int(35 + 200 * brightness))
+            glow = QColor(180, 120, 255, int(10 + 50 * brightness))
         else:
-            p.setPen(QPen(QColor(110, 70, 15, 110), 0.7))
-            p.setBrush(QBrush(QColor(150, 110, 30, 45)))
-        p.drawPath(path)
+            col  = QColor(120, 85, 20, int(40 + 160 * brightness))
+            glow = QColor(180, 130, 30, int(8 + 35 * brightness))
+
+        # Halo quando brilhante
+        if brightness > 0.65:
+            from PyQt6.QtGui import QRadialGradient
+            grd = QRadialGradient(QPointF(cx, cy), sz * 2.2)
+            grd.setColorAt(0, glow); grd.setColorAt(1, QColor(0,0,0,0))
+            p.setBrush(QBrush(grd)); p.setPen(Qt.PenStyle.NoPen)
+            p.drawEllipse(QPointF(cx, cy), sz * 2.2, sz * 2.2)
+
+        pen = QPen(col); pen.setWidthF(1.0)
+        p.setPen(pen); p.setBrush(Qt.BrushStyle.NoBrush)
+        p.save()
+        p.translate(cx, cy)
+        p.rotate(s["rot"])
+
+        t = s["type"]
+        if t == "point":
+            for angle in [0, 90, 180, 270]:
+                a = math.radians(angle)
+                p.drawLine(QPointF(0,0), QPointF(math.cos(a)*sz, math.sin(a)*sz))
+            p.setBrush(QBrush(col)); p.setPen(Qt.PenStyle.NoPen)
+            p.drawEllipse(QPointF(0,0), sz*0.28, sz*0.28)
+        elif t == "star4":
+            for i in range(4):
+                a1 = math.radians(i*90-45); a2 = math.radians(i*90+45)
+                p.drawLine(QPointF(math.cos(a1)*sz, math.sin(a1)*sz),
+                           QPointF(math.cos(a2)*sz*0.35, math.sin(a2)*sz*0.35))
+        else:
+            for i in range(5):
+                a1 = math.radians(i*72-90); a2 = math.radians(i*72-90+36)
+                p.drawLine(QPointF(math.cos(a1)*sz, math.sin(a1)*sz),
+                           QPointF(math.cos(a2)*sz*0.42, math.sin(a2)*sz*0.42))
+        p.restore()
 
     def paintEvent(self, event):
         p = QPainter(self)
@@ -75,9 +116,10 @@ class _LogoWidget(QWidget):
         w, h = self.width(), self.height()
         bg = QColor("#0a0018" if self.night else "#c0aa78")
         p.fillRect(0, 0, w, h, bg)
-        for fx, fy, sz, rot in self._stars:
-            self._draw_star(p, fx * w, fy * h, sz, rot)
-        # texto
+        # Estrelas animadas
+        for s in self._stars:
+            self._draw_star(p, s, s["x"] * w, s["y"] * h)
+        # Texto CRONOS
         font = QFont("IM Fell English", 17)
         font.setItalic(True)
         p.setFont(font)
@@ -86,8 +128,8 @@ class _LogoWidget(QWidget):
         fm = QFontMetrics(font)
         tw = fm.horizontalAdvance("CRONOS")
         p.drawText(QPoint((w - tw) // 2, h // 2 + fm.ascent() // 2 - 2), "CRONOS")
-        # separador
-        p.setPen(QPen(QColor("#9900ff44" if self.night else "#8b691444"), 1))
+        # Separador
+        p.setPen(QPen(QColor("#9900ff55" if self.night else "#8b691455"), 1))
         p.drawLine(6, h - 1, w - 6, h - 1)
 
 

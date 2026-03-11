@@ -18,7 +18,6 @@ sys.path.insert(0, str(BASE_DIR / "src"))
 
 from core.database import init_db, get_setting, set_setting
 from .widgets.sidebar import Sidebar
-from .widgets.star_widget import StarWidget
 
 
 def _load_fonts():
@@ -70,11 +69,6 @@ class MainWindow(QMainWindow):
         self.sidebar.get_refresh_btn().clicked.connect(self._manual_fetch)
         root.addWidget(self.sidebar)
 
-        # ── Estrelas (sobre sidebar, transparente) ──
-        # Posicionadas dentro do logo frame via overlay
-        self.stars = StarWidget(count=10, night_mode=self.night_mode, parent=self.sidebar)
-        self.stars.setGeometry(0, 0, 58, 80)
-        self.stars.lower()
 
         # ── Stack principal ──
         from PyQt6.QtWidgets import QStackedWidget
@@ -303,7 +297,6 @@ class MainWindow(QMainWindow):
             apply_paper_texture(QApplication.instance(), theme)
         except Exception:
             pass
-        self.stars.set_night_mode(self.night_mode)
         if hasattr(self, "reader_view"):
             self.reader_view.set_night_mode(self.night_mode)
         if hasattr(self, "dashboard_view"):

@@ -273,3 +273,44 @@ QListWidget#tagList {
     background-color: #0e001e;
     border: 1px solid #4400aa;
 }
+
+/* ── Seletores adicionados v1.4 ──────────────────────────── */
+QLabel#keywordBadge {
+    background-color: #2a0055;
+    color: #cc88ff;
+    border: 1px solid #5500aa;
+    border-radius: 2px;
+    padding: 0px 5px;
+    font-size: 9px;
+    font-family: "Special Elite", "Courier New", monospace;
+}
+
+QTextBrowser {
+    background-color: #0e001e;
+    color: #e0d0ff;
+    border: 1px solid #4400aa;
+    border-radius: 2px;
+    font-family: "IM Fell English", Georgia, serif;
+    font-size: 14px;
+    selection-background-color: #7700ee;
+    selection-color: #f0e8ff;
+    padding: 8px;
+    line-height: 1.6;
+}
+
+QLineEdit#searchInput, QLineEdit[objectName="searchInput"] {
+    background-color: #0e001e;
+    border: 1px solid #5500aa;
+    border-radius: 2px;
+    padding: 4px 8px;
+    font-family: "Special Elite", "Courier New", monospace;
+}
+
+/* Corrigir sidebarDivider no Windows */
+QFrame#sidebarDivider {
+    border: none;
+    border-bottom: 1px solid #9900ff;
+    max-height: 1px;
+    margin: 0 6px;
+    background-color: transparent;
+}
