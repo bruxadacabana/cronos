@@ -28,11 +28,23 @@ FONT_URLS = {
 }
 
 
+
+def _is_valid_ttf(path) -> bool:
+    """Verifica se o arquivo é um TTF/OTF real (não um HTML de erro)."""
+    try:
+        with open(path, "rb") as f:
+            header = f.read(4)
+        return header in (b"\x00\x01\x00\x00", b"OTTO", b"true", b"ttcf",
+                          b"\x00\x02\x00\x00")
+    except Exception:
+        return False
+
 def download_fonts() -> bool:
     """Baixa as fontes se ainda não existirem. Retorna True se ok."""
     FONTS_DIR.mkdir(parents=True, exist_ok=True)
-    missing = [name for name in FONT_URLS if not (FONTS_DIR / name).exists()
-               or (FONTS_DIR / name).stat().st_size < 1000]
+    missing = [name for name in FONT_URLS
+               if not (FONTS_DIR / name).exists()
+               or not _is_valid_ttf(FONTS_DIR / name)]
     if not missing:
         return True
 
@@ -54,8 +66,7 @@ def download_fonts() -> bool:
         logger.warning("httpx não disponível para download de fontes")
 
     # Verifica se pelo menos baixou algo
-    ok = any((FONTS_DIR / n).exists() and (FONTS_DIR / n).stat().st_size > 1000
-             for n in FONT_URLS)
+    ok = any(_is_valid_ttf(FONTS_DIR / n) for n in FONT_URLS)
     return ok
 
 
@@ -73,7 +84,7 @@ def register_fonts() -> dict:
     registered = {}
 
     for ttf in FONTS_DIR.glob("*.ttf"):
-        if ttf.stat().st_size > 1000:
+        if _is_valid_ttf(ttf):
             fid = QFontDatabase.addApplicationFont(str(ttf))
             if fid >= 0:
                 families = QFontDatabase.applicationFontFamilies(fid)

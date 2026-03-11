@@ -5,7 +5,7 @@ Dispara alertas por palavras-chave e por fonte específica.
 
 import logging
 from PyQt6.QtWidgets import QSystemTrayIcon, QMenu, QApplication
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon, QColor, QPixmap
 from PyQt6.QtCore import QObject, pyqtSignal
 from pathlib import Path
 from .database import get_alert_rules, get_connection
@@ -74,6 +74,17 @@ class NotificationManager(QObject):
         # Ícone (fallback para ícone padrão se não existir)
         if ICON_PATH.exists():
             self.tray.setIcon(QIcon(str(ICON_PATH)))
+        else:
+            # Fallback: ícone embutido
+            try:
+                from assets.icon_data import get_icon_path
+                self.tray.setIcon(QIcon(get_icon_path("png")))
+            except Exception:
+                # Ícone genérico do sistema
+                from PyQt6.QtGui import QPixmap
+                px = QPixmap(32, 32)
+                px.fill(QColor(176, 160, 106))
+                self.tray.setIcon(QIcon(px))
 
         self.tray.setToolTip("Cronos — Leitor de Notícias")
         self.tray.activated.connect(self._on_tray_activated)
