@@ -11,3 +11,42 @@ Traceback (most recent call last):
     self.scroll = QScrollArea()
                   ^^^^^^^^^^^
 NameError: name 'QScrollArea' is not defined
+
+==================================================
+CRASH EM: 2026-03-11 07:36:25.007270
+Traceback (most recent call last):
+  File "/home/spacewitch/Documents/cronos/src/ui/reader_view.py", line 429, in _show_pov
+    dlg = PointsOfViewDialog(self.current_article, self.night_mode, self)
+  File "/home/spacewitch/Documents/cronos/src/ui/reader_view.py", line 173, in __init__
+    self._build()
+    ~~~~~~~~~~~^^
+  File "/home/spacewitch/Documents/cronos/src/ui/reader_view.py", line 198, in _build
+    self.scroll = QScrollArea()
+                  ^^^^^^^^^^^
+NameError: name 'QScrollArea' is not defined
+
+==================================================
+CRASH EM: 2026-03-11 07:36:25.750681
+Traceback (most recent call last):
+  File "/home/spacewitch/Documents/cronos/src/ui/reader_view.py", line 429, in _show_pov
+    dlg = PointsOfViewDialog(self.current_article, self.night_mode, self)
+  File "/home/spacewitch/Documents/cronos/src/ui/reader_view.py", line 173, in __init__
+    self._build()
+    ~~~~~~~~~~~^^
+  File "/home/spacewitch/Documents/cronos/src/ui/reader_view.py", line 198, in _build
+    self.scroll = QScrollArea()
+                  ^^^^^^^^^^^
+NameError: name 'QScrollArea' is not defined
+
+==================================================
+CRASH EM: 2026-03-11 07:36:26.319050
+Traceback (most recent call last):
+  File "/home/spacewitch/Documents/cronos/src/ui/reader_view.py", line 429, in _show_pov
+    dlg = PointsOfViewDialog(self.current_article, self.night_mode, self)
+  File "/home/spacewitch/Documents/cronos/src/ui/reader_view.py", line 173, in __init__
+    self._build()
+    ~~~~~~~~~~~^^
+  File "/home/spacewitch/Documents/cronos/src/ui/reader_view.py", line 198, in _build
+    self.scroll = QScrollArea()
+                  ^^^^^^^^^^^
+NameError: name 'QScrollArea' is not defined
