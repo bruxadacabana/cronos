@@ -1,13 +1,11 @@
 """
-Cronos — Sidebar
-Logo sempre visível no topo (fixo, separado).
-Menu recolhido (só ícones) → expande ao hover.
-Compatível com Windows 10+, Linux, CachyOS.
+Cronos — Sidebar Corrigida
+Sincronizada com MainWindow v1.2
 """
 import math
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QLabel,
-    QFrame, QSizePolicy
+    QFrame, QSizePolicy, QPushButton
 )
 from PyQt6.QtCore import (
     Qt, QTimer, QPropertyAnimation, QEasingCurve,
@@ -182,7 +180,8 @@ class _OllamaDot(QWidget):
 
 
 class Sidebar(QWidget):
-    nav_changed = pyqtSignal(str)
+    # Sinal renomeado de nav_changed para navigate para alinhar com main_window.py
+    navigate = pyqtSignal(str) 
 
     def __init__(self, night_mode=False, parent=None):
         super().__init__(parent)
@@ -201,7 +200,6 @@ class Sidebar(QWidget):
         self._leave_timer.setSingleShot(True)
         self._leave_timer.timeout.connect(self._do_collapse)
 
-        # Dois animadores sincronizados (min + max width)
         self._anim_min = QPropertyAnimation(self, b"minimumWidth")
         self._anim_max = QPropertyAnimation(self, b"maximumWidth")
         for a in (self._anim_min, self._anim_max):
@@ -217,13 +215,12 @@ class Sidebar(QWidget):
         self._logo = _LogoWidget(self.night_mode)
         layout.addWidget(self._logo)
 
-        # Divisor visual explícito
         div = QFrame()
         div.setFrameShape(QFrame.Shape.HLine)
         div.setObjectName("sidebarDivider")
         layout.addWidget(div)
 
-        # Nav
+        # Navegação
         self._buttons: dict[str, _NavButton] = {}
         for key, icon, label in NAV_ITEMS:
             btn = _NavButton(key, icon, label, self.night_mode)
@@ -233,13 +230,38 @@ class Sidebar(QWidget):
 
         layout.addStretch()
 
+        # Adição do botão de refresh esperado pela MainWindow na linha 70
+        self.refresh_btn = QPushButton("🔄") 
+        self.refresh_btn.setFlat(True) 
+        self.refresh_btn.setFixedSize(W_COLLAPSED, 40) 
+        self.refresh_btn.setStyleSheet("color: #cc88ff; border: none; font-size: 16px;") 
+        layout.addWidget(self.refresh_btn) 
+
         # Status Ollama
         self._dot = _OllamaDot(self.night_mode)
         layout.addWidget(self._dot)
 
         self._set_active("feed")
 
-    # ── Hover ──────────────────────────────────────────────────────────────
+    # Método para retornar o botão de atualização solicitado pela MainWindow
+    def get_refresh_btn(self): 
+        return self.refresh_btn
+
+    # Método para atualizar o status da IA via timer da MainWindow (linha 307)
+    def set_ollama_status(self, online, model_name): 
+        self._dot.online = online
+        self._dot.update()
+
+    def _on_nav(self, key):
+        self._set_active(key)
+        self.navigate.emit(key) # Emite o sinal renomeado
+
+    def _set_active(self, key):
+        for k, btn in self._buttons.items():
+            btn.set_active(k == key)
+
+    def set_active(self, key):
+        self._set_active(key)
 
     def enterEvent(self, event):
         self._leave_timer.stop()
@@ -274,21 +296,6 @@ class Sidebar(QWidget):
             a.setStartValue(cur)
             a.setEndValue(target)
             a.start()
-
-    # ── Nav ────────────────────────────────────────────────────────────────
-
-    def _on_nav(self, key):
-        self._set_active(key)
-        self.nav_changed.emit(key)
-
-    def _set_active(self, key):
-        for k, btn in self._buttons.items():
-            btn.set_active(k == key)
-
-    def set_active(self, key):
-        self._set_active(key)
-
-    # ── Tema ───────────────────────────────────────────────────────────────
 
     def set_night_mode(self, v):
         self.night_mode = v

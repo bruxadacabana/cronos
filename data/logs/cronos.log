@@ -2269,3 +2269,1727 @@ For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/St
 2026-03-10 15:57:54,933 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
 2026-03-10 15:58:04,995 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
 2026-03-10 15:58:34,768 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:21:23,412 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:21:23,419 [INFO] Scheduler iniciado: intervalo de 30 minutos
+2026-03-10 17:21:23,434 [INFO] Fetching: El Pa�s (https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada)
+2026-03-10 17:21:23,437 [INFO] System tray configurado
+2026-03-10 17:21:24,520 [INFO] HTTP Request: GET https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada "HTTP/1.1 200 OK"
+2026-03-10 17:21:25,209 [INFO] Fetched 50 articles from El Pa�s
+2026-03-10 17:21:25,230 [INFO] Fetching: Infobae (https://www.infobae.com/feeds/rss/)
+2026-03-10 17:21:26,175 [INFO] HTTP Request: GET https://www.infobae.com/feeds/rss/ "HTTP/1.1 404 Not Found"
+2026-03-10 17:21:26,176 [ERROR] HTTP error 404 for Infobae
+2026-03-10 17:21:26,195 [INFO] Fetching: Ag�ncia Brasil (https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml)
+2026-03-10 17:21:26,729 [INFO] HTTP Request: GET https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml "HTTP/1.1 200 OK"
+2026-03-10 17:21:26,794 [INFO] Fetched 10 articles from Ag�ncia Brasil
+2026-03-10 17:21:26,814 [INFO] Fetching: Brasil de Fato (https://www.brasildefato.com.br/rss)
+2026-03-10 17:21:29,039 [INFO] HTTP Request: GET https://www.brasildefato.com.br/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:21:29,181 [INFO] HTTP Request: GET https://www.brasildefato.com.br/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:21:29,309 [INFO] Fetched 50 articles from Brasil de Fato
+2026-03-10 17:21:29,330 [INFO] Fetching: Folha de S.Paulo (https://feeds.folha.uol.com.br/emcimadahora/rss091.xml)
+2026-03-10 17:21:29,948 [INFO] HTTP Request: GET https://feeds.folha.uol.com.br/emcimadahora/rss091.xml "HTTP/1.1 200 OK"
+2026-03-10 17:21:30,061 [INFO] Fetched 50 articles from Folha de S.Paulo
+2026-03-10 17:21:30,084 [INFO] Fetching: G1 / Globo (https://g1.globo.com/rss/g1/)
+2026-03-10 17:21:30,329 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:21:30,329 [INFO] A analisar parte 1/1 do artigo 25
+2026-03-10 17:21:30,615 [INFO] HTTP Request: GET https://g1.globo.com/rss/g1/ "HTTP/1.1 200 OK"
+2026-03-10 17:21:30,773 [INFO] Fetched 50 articles from G1 / Globo
+2026-03-10 17:21:30,802 [INFO] Fetching: UOL Not�cias (https://rss.uol.com.br/feed/noticias.xml)
+2026-03-10 17:21:31,364 [INFO] HTTP Request: GET https://rss.uol.com.br/feed/noticias.xml "HTTP/1.1 200 OK"
+2026-03-10 17:21:31,393 [INFO] Fetched 15 articles from UOL Not�cias
+2026-03-10 17:21:31,433 [INFO] Fetching: NASA News (https://www.nasa.gov/rss/dyn/breaking_news.rss)
+2026-03-10 17:21:31,961 [INFO] HTTP Request: GET https://www.nasa.gov/rss/dyn/breaking_news.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:21:31,992 [INFO] HTTP Request: GET https://www.nasa.gov/news-release/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:21:32,149 [INFO] Fetched 10 articles from NASA News
+2026-03-10 17:21:32,168 [INFO] Fetching: Nature (https://www.nature.com/nature.rss)
+2026-03-10 17:21:32,832 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:21:32,914 [INFO] HTTP Request: GET https://www.nature.com/nature.rss "HTTP/1.1 303 See Other"
+2026-03-10 17:21:33,215 [INFO] HTTP Request: GET https://idp.nature.com/authorize?response_type=cookie&client_id=grover&redirect_uri=https%3A%2F%2Fwww.nature.com%2Fnature.rss "HTTP/1.1 302 Found"
+2026-03-10 17:21:33,438 [INFO] HTTP Request: GET https://idp.nature.com/transit?redirect_uri=https%3A%2F%2Fwww.nature.com%2Fnature.rss&code=9e62bb34-a3f5-4f8c-81e8-d1ba3606be2a "HTTP/1.1 302 Found"
+2026-03-10 17:21:33,729 [INFO] HTTP Request: GET https://www.nature.com/nature.rss "HTTP/1.1 200 OK"
+2026-03-10 17:21:34,450 [INFO] Fetched 50 articles from Nature
+2026-03-10 17:21:34,473 [INFO] Fetching: Scientific American (http://rss.sciam.com/ScientificAmerican-Global)
+2026-03-10 17:21:35,176 [INFO] HTTP Request: GET http://rss.sciam.com/ScientificAmerican-Global "HTTP/1.1 200 OK"
+2026-03-10 17:21:35,220 [INFO] Fetched 50 articles from Scientific American
+2026-03-10 17:21:35,241 [INFO] Fetching: Bloomberg (https://feeds.bloomberg.com/markets/news.rss)
+2026-03-10 17:21:36,298 [INFO] HTTP Request: GET https://feeds.bloomberg.com/markets/news.rss "HTTP/1.1 200 OK"
+2026-03-10 17:21:36,481 [INFO] Fetched 30 articles from Bloomberg
+2026-03-10 17:21:36,501 [INFO] Fetching: Financial Times (https://www.ft.com/rss/home)
+2026-03-10 17:21:37,680 [INFO] HTTP Request: GET https://www.ft.com/rss/home "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:21:37,958 [INFO] HTTP Request: GET https://www.ft.com/rss/home/international "HTTP/1.1 200 OK"
+2026-03-10 17:21:37,987 [INFO] Fetched 12 articles from Financial Times
+2026-03-10 17:21:38,007 [INFO] Fetching: Al Jazeera (https://www.aljazeera.com/xml/rss/all.xml)
+2026-03-10 17:21:38,566 [INFO] HTTP Request: GET https://www.aljazeera.com/xml/rss/all.xml "HTTP/1.1 200 OK"
+2026-03-10 17:21:38,604 [INFO] Fetched 25 articles from Al Jazeera
+2026-03-10 17:21:38,623 [INFO] Fetching: Associated Press (https://rsshub.app/apnews/topics/apf-topnews)
+2026-03-10 17:21:39,223 [INFO] HTTP Request: GET https://rsshub.app/apnews/topics/apf-topnews "HTTP/1.1 403 Forbidden"
+2026-03-10 17:21:39,224 [ERROR] HTTP error 403 for Associated Press
+2026-03-10 17:21:39,244 [INFO] Fetching: BBC News (http://feeds.bbci.co.uk/news/rss.xml)
+2026-03-10 17:21:39,768 [INFO] HTTP Request: GET http://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 302 Moved Temporarily"
+2026-03-10 17:21:39,872 [INFO] HTTP Request: GET https://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 200 OK"
+2026-03-10 17:21:39,916 [INFO] Fetched 36 articles from BBC News
+2026-03-10 17:21:39,937 [INFO] Fetching: DW Brasil (https://rss.dw.com/rdf/rss-br-todas)
+2026-03-10 17:21:41,382 [INFO] HTTP Request: GET https://rss.dw.com/rdf/rss-br-todas "HTTP/1.1 200 OK"
+2026-03-10 17:21:41,384 [WARNING] Feed bozo error for DW Brasil: <unknown>:2:0: syntax error
+2026-03-10 17:21:41,384 [INFO] Fetching: Fox News (https://moxie.foxnews.com/google-publisher/world.xml)
+2026-03-10 17:21:42,143 [INFO] HTTP Request: GET https://moxie.foxnews.com/google-publisher/world.xml "HTTP/1.1 200 OK"
+2026-03-10 17:21:42,287 [INFO] Fetched 25 articles from Fox News
+2026-03-10 17:21:42,307 [INFO] Fetching: France 24 PT (https://www.france24.com/pt/rss)
+2026-03-10 17:21:44,025 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:21:44,678 [INFO] HTTP Request: GET https://www.france24.com/pt/rss "HTTP/1.1 404 Not Found"
+2026-03-10 17:21:44,681 [ERROR] HTTP error 404 for France 24 PT
+2026-03-10 17:21:44,704 [INFO] Fetching: Reuters (https://feeds.reuters.com/reuters/topNews)
+2026-03-10 17:21:45,154 [ERROR] Error fetching Reuters: [Errno 11001] getaddrinfo failed
+2026-03-10 17:21:45,181 [INFO] Fetching: The Guardian (https://www.theguardian.com/world/rss)
+2026-03-10 17:21:45,910 [INFO] HTTP Request: GET https://www.theguardian.com/world/rss "HTTP/1.1 200 OK"
+2026-03-10 17:21:46,025 [INFO] Fetched 45 articles from The Guardian
+2026-03-10 17:21:46,048 [INFO] Fetching: Ars Technica (https://feeds.arstechnica.com/arstechnica/index)
+2026-03-10 17:21:46,586 [INFO] HTTP Request: GET https://feeds.arstechnica.com/arstechnica/index "HTTP/1.1 200 OK"
+2026-03-10 17:21:46,656 [INFO] Fetched 20 articles from Ars Technica
+2026-03-10 17:21:46,677 [INFO] Fetching: Hacker News (https://hnrss.org/frontpage)
+2026-03-10 17:21:48,910 [INFO] HTTP Request: GET https://hnrss.org/frontpage "HTTP/1.1 200 OK"
+2026-03-10 17:21:48,959 [INFO] Fetched 20 articles from Hacker News
+2026-03-10 17:21:48,982 [INFO] Fetching: MIT Tech Review (https://www.technologyreview.com/feed/)
+2026-03-10 17:21:49,495 [INFO] HTTP Request: GET https://www.technologyreview.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:21:49,620 [INFO] Fetched 10 articles from MIT Tech Review
+2026-03-10 17:21:49,640 [INFO] Fetching: TechCrunch (https://techcrunch.com/feed/)
+2026-03-10 17:21:50,165 [INFO] HTTP Request: GET https://techcrunch.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:21:50,204 [INFO] Fetched 20 articles from TechCrunch
+2026-03-10 17:21:50,224 [INFO] Fetching: The Verge (https://www.theverge.com/rss/index.xml)
+2026-03-10 17:21:50,849 [INFO] HTTP Request: GET https://www.theverge.com/rss/index.xml "HTTP/1.1 200 OK"
+2026-03-10 17:21:50,900 [INFO] Fetched 10 articles from The Verge
+2026-03-10 17:21:50,917 [INFO] Fetch completo: 588 artigos novos
+2026-03-10 17:21:53,375 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:21:53,376 [INFO] Fetch conclu�do: 588 artigos novos
+2026-03-10 17:22:23,354 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:22:23,977 [INFO] HTTP Request: GET https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/equilibrioesaude/2026/03/mortes-e-internacoes-por-uso-de-alcool-crescem-20-entre-brasileiras-em-dez-anos.shtml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:22:24,071 [INFO] HTTP Request: GET https://www1.folha.uol.com.br/equilibrioesaude/2026/03/mortes-e-internacoes-por-uso-de-alcool-crescem-20-entre-brasileiras-em-dez-anos.shtml "HTTP/1.1 200 OK"
+2026-03-10 17:22:25,974 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:22:26,496 [INFO] Analisado artigo 25 completo
+2026-03-10 17:22:28,976 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:22:28,976 [INFO] A analisar parte 1/1 do artigo 115
+2026-03-10 17:22:31,440 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:22:53,336 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:23:14,855 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:23:15,381 [INFO] Analisado artigo 115 completo
+2026-03-10 17:23:17,849 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:23:17,849 [INFO] A analisar parte 1/1 do artigo 12
+2026-03-10 17:23:20,335 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:23:23,377 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:23:53,333 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:24:02,850 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:24:03,376 [INFO] Analisado artigo 12 completo
+2026-03-10 17:24:05,857 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:24:05,857 [INFO] A analisar parte 1/1 do artigo 11
+2026-03-10 17:24:08,346 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:24:14,808 [INFO] HTTP Request: GET https://www.theguardian.com/world/live/2026/mar/10/iran-war-live-updates-iranian-supreme-leader-mojtaba-khamenei-middle-east-tehran-oil-prices-latest-news "HTTP/1.1 200 OK"
+2026-03-10 17:24:23,371 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:24:40,033 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:24:40,554 [INFO] Analisado artigo 11 completo
+2026-03-10 17:24:43,025 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:24:43,025 [INFO] A analisar parte 1/1 do artigo 489
+2026-03-10 17:24:45,486 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:24:53,329 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:25:23,370 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:25:26,709 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:25:27,233 [INFO] Analisado artigo 489 completo
+2026-03-10 17:25:29,719 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:25:29,720 [INFO] A analisar parte 1/1 do artigo 1
+2026-03-10 17:25:32,189 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:25:53,335 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:25:59,518 [INFO] HTTP Request: GET https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/mercado/2026/03/custo-da-reducao-de-jornada-nao-pode-virar-neura-diz-minsitro-de-lula-que-descarta-compensacao.shtml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:25:59,621 [INFO] HTTP Request: GET https://www1.folha.uol.com.br/mercado/2026/03/custo-da-reducao-de-jornada-nao-pode-virar-neura-diz-minsitro-de-lula-que-descarta-compensacao.shtml "HTTP/1.1 200 OK"
+2026-03-10 17:26:01,462 [INFO] HTTP Request: GET https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/mercado/2026/03/custo-da-reducao-de-jornada-nao-pode-virar-neura-diz-minsitro-de-lula-que-descarta-compensacao.shtml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:26:01,535 [INFO] HTTP Request: GET https://www1.folha.uol.com.br/mercado/2026/03/custo-da-reducao-de-jornada-nao-pode-virar-neura-diz-minsitro-de-lula-que-descarta-compensacao.shtml "HTTP/1.1 200 OK"
+2026-03-10 17:26:19,481 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:26:20,007 [INFO] Analisado artigo 1 completo
+2026-03-10 17:26:22,468 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:26:22,468 [INFO] A analisar parte 1/1 do artigo 117
+2026-03-10 17:26:23,365 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:26:24,955 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:26:53,358 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:26:54,745 [INFO] HTTP Request: GET https://arstechnica.com/ai/2026/03/meta-acquires-moltbook-the-ai-agent-social-network/ "HTTP/1.1 200 OK"
+2026-03-10 17:26:55,353 [INFO] HTTP Request: GET https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/colunas/monicabergamo/2026/03/antonio-fagundes-dirige-sete-minutos-24-anos-apos-estrear-a-peca-em-sp.shtml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:26:55,447 [INFO] HTTP Request: GET https://www1.folha.uol.com.br/colunas/monicabergamo/2026/03/antonio-fagundes-dirige-sete-minutos-24-anos-apos-estrear-a-peca-em-sp.shtml "HTTP/1.1 200 OK"
+2026-03-10 17:26:56,133 [INFO] HTTP Request: GET https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/colunas/monicabergamo/2026/03/antonio-fagundes-dirige-sete-minutos-24-anos-apos-estrear-a-peca-em-sp.shtml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:26:56,205 [INFO] HTTP Request: GET https://www1.folha.uol.com.br/colunas/monicabergamo/2026/03/antonio-fagundes-dirige-sete-minutos-24-anos-apos-estrear-a-peca-em-sp.shtml "HTTP/1.1 200 OK"
+2026-03-10 17:27:03,548 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:27:04,073 [INFO] Analisado artigo 117 completo
+2026-03-10 17:27:05,896 [INFO] Fetching: El Pa�s (https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada)
+2026-03-10 17:27:06,543 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:27:06,543 [INFO] A analisar parte 1/1 do artigo 113
+2026-03-10 17:27:06,893 [INFO] HTTP Request: GET https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada "HTTP/1.1 200 OK"
+2026-03-10 17:27:07,584 [INFO] Fetched 50 articles from El Pa�s
+2026-03-10 17:27:07,600 [INFO] Fetching: Infobae (https://www.infobae.com/feeds/rss/)
+2026-03-10 17:27:08,245 [INFO] HTTP Request: GET https://www.infobae.com/feeds/rss/ "HTTP/1.1 404 Not Found"
+2026-03-10 17:27:08,246 [ERROR] HTTP error 404 for Infobae
+2026-03-10 17:27:08,267 [INFO] Fetching: Ag�ncia Brasil (https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml)
+2026-03-10 17:27:08,812 [INFO] HTTP Request: GET https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml "HTTP/1.1 200 OK"
+2026-03-10 17:27:08,877 [INFO] Fetched 10 articles from Ag�ncia Brasil
+2026-03-10 17:27:08,894 [INFO] Fetching: Brasil de Fato (https://www.brasildefato.com.br/rss)
+2026-03-10 17:27:09,017 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:27:10,964 [INFO] HTTP Request: GET https://www.brasildefato.com.br/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:27:11,120 [INFO] HTTP Request: GET https://www.brasildefato.com.br/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:27:11,247 [INFO] Fetched 50 articles from Brasil de Fato
+2026-03-10 17:27:11,265 [INFO] Fetching: Folha de S.Paulo (https://feeds.folha.uol.com.br/emcimadahora/rss091.xml)
+2026-03-10 17:27:11,946 [INFO] HTTP Request: GET https://feeds.folha.uol.com.br/emcimadahora/rss091.xml "HTTP/1.1 200 OK"
+2026-03-10 17:27:12,063 [INFO] Fetched 50 articles from Folha de S.Paulo
+2026-03-10 17:27:12,081 [INFO] Fetching: G1 / Globo (https://g1.globo.com/rss/g1/)
+2026-03-10 17:27:12,591 [INFO] HTTP Request: GET https://g1.globo.com/rss/g1/ "HTTP/1.1 200 OK"
+2026-03-10 17:27:12,757 [INFO] Fetched 50 articles from G1 / Globo
+2026-03-10 17:27:12,778 [INFO] Fetching: UOL Not�cias (https://rss.uol.com.br/feed/noticias.xml)
+2026-03-10 17:27:13,298 [INFO] HTTP Request: GET https://rss.uol.com.br/feed/noticias.xml "HTTP/1.1 200 OK"
+2026-03-10 17:27:13,326 [INFO] Fetched 15 articles from UOL Not�cias
+2026-03-10 17:27:13,344 [INFO] Fetching: NASA News (https://www.nasa.gov/rss/dyn/breaking_news.rss)
+2026-03-10 17:27:13,902 [INFO] HTTP Request: GET https://www.nasa.gov/rss/dyn/breaking_news.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:27:13,928 [INFO] HTTP Request: GET https://www.nasa.gov/news-release/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:27:14,084 [INFO] Fetched 10 articles from NASA News
+2026-03-10 17:27:14,101 [INFO] Fetching: Nature (https://www.nature.com/nature.rss)
+2026-03-10 17:27:14,609 [INFO] HTTP Request: GET https://www.nature.com/nature.rss "HTTP/1.1 200 OK"
+2026-03-10 17:27:14,858 [INFO] Fetched 50 articles from Nature
+2026-03-10 17:27:14,873 [INFO] Fetching: Scientific American (http://rss.sciam.com/ScientificAmerican-Global)
+2026-03-10 17:27:15,728 [INFO] HTTP Request: GET http://rss.sciam.com/ScientificAmerican-Global "HTTP/1.1 200 OK"
+2026-03-10 17:27:15,779 [INFO] Fetched 50 articles from Scientific American
+2026-03-10 17:27:15,795 [INFO] Fetching: Bloomberg (https://feeds.bloomberg.com/markets/news.rss)
+2026-03-10 17:27:16,714 [INFO] HTTP Request: GET https://feeds.bloomberg.com/markets/news.rss "HTTP/1.1 200 OK"
+2026-03-10 17:27:16,896 [INFO] Fetched 30 articles from Bloomberg
+2026-03-10 17:27:16,912 [INFO] Fetching: Financial Times (https://www.ft.com/rss/home)
+2026-03-10 17:27:17,982 [INFO] HTTP Request: GET https://www.ft.com/rss/home "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:27:18,526 [INFO] HTTP Request: GET https://www.ft.com/rss/home/international "HTTP/1.1 200 OK"
+2026-03-10 17:27:18,559 [INFO] Fetched 12 articles from Financial Times
+2026-03-10 17:27:18,574 [INFO] Fetching: Al Jazeera (https://www.aljazeera.com/xml/rss/all.xml)
+2026-03-10 17:27:19,109 [INFO] HTTP Request: GET https://www.aljazeera.com/xml/rss/all.xml "HTTP/1.1 200 OK"
+2026-03-10 17:27:19,145 [INFO] Fetched 25 articles from Al Jazeera
+2026-03-10 17:27:19,160 [INFO] Fetching: Associated Press (https://rsshub.app/apnews/topics/apf-topnews)
+2026-03-10 17:27:19,700 [INFO] HTTP Request: GET https://rsshub.app/apnews/topics/apf-topnews "HTTP/1.1 403 Forbidden"
+2026-03-10 17:27:19,701 [ERROR] HTTP error 403 for Associated Press
+2026-03-10 17:27:19,722 [INFO] Fetching: BBC News (http://feeds.bbci.co.uk/news/rss.xml)
+2026-03-10 17:27:20,210 [INFO] HTTP Request: GET http://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 302 Moved Temporarily"
+2026-03-10 17:27:20,501 [INFO] HTTP Request: GET https://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 200 OK"
+2026-03-10 17:27:20,551 [INFO] Fetched 36 articles from BBC News
+2026-03-10 17:27:20,565 [INFO] Fetching: DW Brasil (https://rss.dw.com/rdf/rss-br-todas)
+2026-03-10 17:27:21,389 [INFO] HTTP Request: GET https://rss.dw.com/rdf/rss-br-todas "HTTP/1.1 200 OK"
+2026-03-10 17:27:21,391 [WARNING] Feed bozo error for DW Brasil: <unknown>:2:0: syntax error
+2026-03-10 17:27:21,391 [INFO] Fetching: Fox News (https://moxie.foxnews.com/google-publisher/world.xml)
+2026-03-10 17:27:21,934 [INFO] HTTP Request: GET https://moxie.foxnews.com/google-publisher/world.xml "HTTP/1.1 200 OK"
+2026-03-10 17:27:22,075 [INFO] Fetched 25 articles from Fox News
+2026-03-10 17:27:22,089 [INFO] Fetching: France 24 PT (https://www.france24.com/pt/rss)
+2026-03-10 17:27:23,392 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:27:23,977 [INFO] HTTP Request: GET https://www.france24.com/pt/rss "HTTP/1.1 404 Not Found"
+2026-03-10 17:27:24,185 [ERROR] HTTP error 404 for France 24 PT
+2026-03-10 17:27:24,205 [INFO] Fetching: Reuters (https://feeds.reuters.com/reuters/topNews)
+2026-03-10 17:27:24,647 [ERROR] Error fetching Reuters: [Errno 11001] getaddrinfo failed
+2026-03-10 17:27:24,668 [INFO] Fetching: The Guardian (https://www.theguardian.com/world/rss)
+2026-03-10 17:27:25,388 [INFO] HTTP Request: GET https://www.theguardian.com/world/rss "HTTP/1.1 200 OK"
+2026-03-10 17:27:25,506 [INFO] Fetched 45 articles from The Guardian
+2026-03-10 17:27:25,522 [INFO] Fetching: Ars Technica (https://feeds.arstechnica.com/arstechnica/index)
+2026-03-10 17:27:26,042 [INFO] HTTP Request: GET https://feeds.arstechnica.com/arstechnica/index "HTTP/1.1 200 OK"
+2026-03-10 17:27:26,106 [INFO] Fetched 20 articles from Ars Technica
+2026-03-10 17:27:26,121 [INFO] Fetching: Hacker News (https://hnrss.org/frontpage)
+2026-03-10 17:27:28,162 [INFO] HTTP Request: GET https://hnrss.org/frontpage "HTTP/1.1 200 OK"
+2026-03-10 17:27:28,212 [INFO] Fetched 20 articles from Hacker News
+2026-03-10 17:27:28,227 [INFO] Fetching: MIT Tech Review (https://www.technologyreview.com/feed/)
+2026-03-10 17:27:28,755 [INFO] HTTP Request: GET https://www.technologyreview.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:27:28,877 [INFO] Fetched 10 articles from MIT Tech Review
+2026-03-10 17:27:28,892 [INFO] Fetching: TechCrunch (https://techcrunch.com/feed/)
+2026-03-10 17:27:29,456 [INFO] HTTP Request: GET https://techcrunch.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:27:29,495 [INFO] Fetched 20 articles from TechCrunch
+2026-03-10 17:27:29,509 [INFO] Fetching: The Verge (https://www.theverge.com/rss/index.xml)
+2026-03-10 17:27:30,046 [INFO] HTTP Request: GET https://www.theverge.com/rss/index.xml "HTTP/1.1 200 OK"
+2026-03-10 17:27:30,101 [INFO] Fetched 10 articles from The Verge
+2026-03-10 17:27:30,117 [INFO] Fetch completo: 588 artigos novos
+2026-03-10 17:27:30,505 [INFO] HTTP Request: GET https://cloud.feedly.com/v3/search/feeds?query=brasil&count=100 "HTTP/1.1 200 OK"
+2026-03-10 17:27:30,694 [INFO] Fetch conclu�do: 588 artigos novos
+2026-03-10 17:27:39,221 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:27:39,752 [INFO] Analisado artigo 113 completo
+2026-03-10 17:27:41,362 [INFO] HTTP Request: GET http://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:27:41,421 [INFO] HTTP Request: GET https://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:27:41,475 [INFO] HTTP Request: GET https://www.correiobraziliense.com.br/brasil/rss.xml "HTTP/1.1 200 OK"
+2026-03-10 17:27:42,237 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:27:42,237 [INFO] A analisar parte 1/1 do artigo 509
+2026-03-10 17:27:44,717 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:27:53,341 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:28:23,127 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:28:23,381 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:28:23,651 [INFO] Analisado artigo 509 completo
+2026-03-10 17:28:26,123 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:28:26,124 [INFO] A analisar parte 1/1 do artigo 2
+2026-03-10 17:28:28,613 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:28:39,119 [INFO] HTTP Request: GET http://br.ign.com/feed.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:28:39,228 [INFO] HTTP Request: GET https://br.ign.com/feed.xml "HTTP/1.1 200 OK"
+2026-03-10 17:28:42,893 [INFO] HTTP Request: GET http://rollingstone.com.br/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:28:42,971 [INFO] HTTP Request: GET https://rollingstone.com.br/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:28:46,458 [INFO] HTTP Request: GET http://www.archdaily.com.br/feed/rss/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:28:46,590 [INFO] HTTP Request: GET http://www.archdaily.com.br/feed/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:28:47,587 [INFO] HTTP Request: GET https://feeds.feedburner.com/ArchdailyBR "HTTP/1.1 200 OK"
+2026-03-10 17:28:53,324 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:28:56,092 [INFO] HTTP Request: GET http://concursosnobrasil.com.br/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:28:56,567 [INFO] HTTP Request: GET https://concursosnobrasil.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:29:18,418 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:29:18,941 [INFO] Analisado artigo 2 completo
+2026-03-10 17:29:21,388 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:29:21,389 [INFO] A analisar parte 1/1 do artigo 14
+2026-03-10 17:29:23,507 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:29:23,888 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:29:53,396 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:29:53,510 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:29:54,033 [INFO] Analisado artigo 14 completo
+2026-03-10 17:29:56,523 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:29:56,523 [INFO] A analisar parte 1/1 do artigo 13
+2026-03-10 17:29:58,988 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:30:23,439 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:30:53,326 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:30:56,491 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:30:57,016 [INFO] Analisado artigo 13 completo
+2026-03-10 17:30:59,488 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:30:59,488 [INFO] A analisar parte 1/1 do artigo 46
+2026-03-10 17:31:01,970 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:31:23,406 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:31:34,592 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:31:35,116 [INFO] Analisado artigo 46 completo
+2026-03-10 17:31:37,583 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:31:37,584 [INFO] A analisar parte 1/1 do artigo 22
+2026-03-10 17:31:40,128 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:31:53,348 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:32:16,312 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:32:16,848 [INFO] Analisado artigo 22 completo
+2026-03-10 17:32:19,318 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:32:19,318 [INFO] A analisar parte 1/1 do artigo 51
+2026-03-10 17:32:21,792 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:32:23,381 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:32:53,358 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:33:01,699 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:33:02,220 [INFO] Analisado artigo 51 completo
+2026-03-10 17:33:04,687 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:33:04,688 [INFO] A analisar parte 1/1 do artigo 52
+2026-03-10 17:33:07,182 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:33:23,380 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:33:44,851 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:33:45,375 [INFO] Analisado artigo 52 completo
+2026-03-10 17:33:47,842 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:33:47,842 [INFO] A analisar parte 1/1 do artigo 9
+2026-03-10 17:33:50,354 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:33:53,320 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:34:16,574 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:34:17,121 [INFO] Analisado artigo 9 completo
+2026-03-10 17:34:19,596 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:34:19,596 [INFO] A analisar parte 1/1 do artigo 53
+2026-03-10 17:34:22,098 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:34:23,410 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:34:53,342 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:35:23,181 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:35:23,439 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:35:23,704 [INFO] Analisado artigo 53 completo
+2026-03-10 17:35:26,178 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:35:26,178 [INFO] A analisar parte 1/1 do artigo 54
+2026-03-10 17:35:28,668 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:35:53,347 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:36:02,944 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:36:03,469 [INFO] Analisado artigo 54 completo
+2026-03-10 17:36:05,935 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:36:05,936 [INFO] A analisar parte 1/1 do artigo 10
+2026-03-10 17:36:07,740 [INFO] Fetching: El Pa�s (https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada)
+2026-03-10 17:36:08,421 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:36:08,769 [INFO] HTTP Request: GET https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada "HTTP/1.1 200 OK"
+2026-03-10 17:36:09,482 [INFO] Fetched 50 articles from El Pa�s
+2026-03-10 17:36:09,500 [INFO] Fetching: Infobae (https://www.infobae.com/feeds/rss/)
+2026-03-10 17:36:10,443 [INFO] HTTP Request: GET https://www.infobae.com/feeds/rss/ "HTTP/1.1 404 Not Found"
+2026-03-10 17:36:10,444 [ERROR] HTTP error 404 for Infobae
+2026-03-10 17:36:10,458 [INFO] Fetching: Ag�ncia Brasil (https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml)
+2026-03-10 17:36:11,072 [INFO] HTTP Request: GET https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml "HTTP/1.1 200 OK"
+2026-03-10 17:36:11,129 [INFO] Fetched 10 articles from Ag�ncia Brasil
+2026-03-10 17:36:11,144 [INFO] Fetching: ArchDaily Brasil (http://www.archdaily.com.br/feed/rss/)
+2026-03-10 17:36:11,246 [INFO] HTTP Request: GET https://www.theguardian.com/world/2026/mar/04/us-submarine-torpedo-iran-warship-sri-lanka-coast-pete-hegseth "HTTP/1.1 200 OK"
+2026-03-10 17:36:11,884 [INFO] HTTP Request: GET http://www.archdaily.com.br/feed/rss/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:36:12,022 [INFO] HTTP Request: GET http://www.archdaily.com.br/feed/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:36:13,008 [INFO] HTTP Request: GET https://feeds.feedburner.com/ArchdailyBR "HTTP/1.1 200 OK"
+2026-03-10 17:36:13,088 [INFO] Fetched 18 articles from ArchDaily Brasil
+2026-03-10 17:36:13,109 [INFO] Fetching: Brasil - Correio Braziliense (http://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml)
+2026-03-10 17:36:13,597 [INFO] HTTP Request: GET http://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:36:13,663 [INFO] HTTP Request: GET https://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:36:13,731 [INFO] HTTP Request: GET https://www.correiobraziliense.com.br/brasil/rss.xml "HTTP/1.1 200 OK"
+2026-03-10 17:36:13,942 [INFO] Fetched 30 articles from Brasil - Correio Braziliense
+2026-03-10 17:36:13,963 [INFO] Fetching: Brasil de Fato (https://www.brasildefato.com.br/rss)
+2026-03-10 17:36:16,249 [INFO] HTTP Request: GET https://www.brasildefato.com.br/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:36:16,405 [INFO] HTTP Request: GET https://www.brasildefato.com.br/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:36:16,522 [INFO] Fetched 50 articles from Brasil de Fato
+2026-03-10 17:36:16,541 [INFO] Fetching: Concursos no Brasil (http://concursosnobrasil.com.br/feed/)
+2026-03-10 17:36:17,025 [INFO] HTTP Request: GET http://concursosnobrasil.com.br/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:36:17,542 [INFO] HTTP Request: GET https://concursosnobrasil.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:36:17,586 [INFO] Fetched 15 articles from Concursos no Brasil
+2026-03-10 17:36:17,606 [INFO] Fetching: Folha de S.Paulo (https://feeds.folha.uol.com.br/emcimadahora/rss091.xml)
+2026-03-10 17:36:18,233 [INFO] HTTP Request: GET https://feeds.folha.uol.com.br/emcimadahora/rss091.xml "HTTP/1.1 200 OK"
+2026-03-10 17:36:18,351 [INFO] Fetched 50 articles from Folha de S.Paulo
+2026-03-10 17:36:18,371 [INFO] Fetching: G1 / Globo (https://g1.globo.com/rss/g1/)
+2026-03-10 17:36:18,879 [INFO] HTTP Request: GET https://g1.globo.com/rss/g1/ "HTTP/1.1 200 OK"
+2026-03-10 17:36:19,038 [INFO] Fetched 50 articles from G1 / Globo
+2026-03-10 17:36:19,055 [INFO] Fetching: IGN Brasil (http://br.ign.com/feed.xml)
+2026-03-10 17:36:19,548 [INFO] HTTP Request: GET http://br.ign.com/feed.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:36:19,647 [INFO] HTTP Request: GET https://br.ign.com/feed.xml "HTTP/1.1 200 OK"
+2026-03-10 17:36:19,708 [INFO] Fetched 40 articles from IGN Brasil
+2026-03-10 17:36:19,729 [INFO] Fetching: Rolling Stone Brasil (http://rollingstone.com.br/feed/)
+2026-03-10 17:36:20,222 [INFO] HTTP Request: GET http://rollingstone.com.br/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:36:20,419 [INFO] HTTP Request: GET https://rollingstone.com.br/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:36:20,536 [INFO] Fetched 10 articles from Rolling Stone Brasil
+2026-03-10 17:36:20,556 [INFO] Fetching: UOL Not�cias (https://rss.uol.com.br/feed/noticias.xml)
+2026-03-10 17:36:21,142 [INFO] HTTP Request: GET https://rss.uol.com.br/feed/noticias.xml "HTTP/1.1 200 OK"
+2026-03-10 17:36:21,171 [INFO] Fetched 15 articles from UOL Not�cias
+2026-03-10 17:36:21,187 [INFO] Fetching: NASA News (https://www.nasa.gov/rss/dyn/breaking_news.rss)
+2026-03-10 17:36:21,756 [INFO] HTTP Request: GET https://www.nasa.gov/rss/dyn/breaking_news.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:36:21,781 [INFO] HTTP Request: GET https://www.nasa.gov/news-release/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:36:21,927 [INFO] Fetched 10 articles from NASA News
+2026-03-10 17:36:21,942 [INFO] Fetching: Nature (https://www.nature.com/nature.rss)
+2026-03-10 17:36:22,431 [INFO] HTTP Request: GET https://www.nature.com/nature.rss "HTTP/1.1 200 OK"
+2026-03-10 17:36:22,699 [INFO] Fetched 50 articles from Nature
+2026-03-10 17:36:22,715 [INFO] Fetching: Scientific American (http://rss.sciam.com/ScientificAmerican-Global)
+2026-03-10 17:36:23,436 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:36:24,058 [INFO] HTTP Request: GET http://rss.sciam.com/ScientificAmerican-Global "HTTP/1.1 200 OK"
+2026-03-10 17:36:24,105 [INFO] Fetched 50 articles from Scientific American
+2026-03-10 17:36:24,121 [INFO] Fetching: Bloomberg (https://feeds.bloomberg.com/markets/news.rss)
+2026-03-10 17:36:25,079 [INFO] HTTP Request: GET https://feeds.bloomberg.com/markets/news.rss "HTTP/1.1 200 OK"
+2026-03-10 17:36:25,119 [INFO] Fetched 30 articles from Bloomberg
+2026-03-10 17:36:25,136 [INFO] Fetching: Financial Times (https://www.ft.com/rss/home)
+2026-03-10 17:36:26,193 [INFO] HTTP Request: GET https://www.ft.com/rss/home "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:36:26,447 [INFO] HTTP Request: GET https://www.ft.com/rss/home/international "HTTP/1.1 200 OK"
+2026-03-10 17:36:26,476 [INFO] Fetched 12 articles from Financial Times
+2026-03-10 17:36:26,491 [INFO] Fetching: Al Jazeera (https://www.aljazeera.com/xml/rss/all.xml)
+2026-03-10 17:36:27,007 [INFO] HTTP Request: GET https://www.aljazeera.com/xml/rss/all.xml "HTTP/1.1 200 OK"
+2026-03-10 17:36:27,043 [INFO] Fetched 25 articles from Al Jazeera
+2026-03-10 17:36:27,058 [INFO] Fetching: Associated Press (https://rsshub.app/apnews/topics/apf-topnews)
+2026-03-10 17:36:27,590 [INFO] HTTP Request: GET https://rsshub.app/apnews/topics/apf-topnews "HTTP/1.1 403 Forbidden"
+2026-03-10 17:36:27,591 [ERROR] HTTP error 403 for Associated Press
+2026-03-10 17:36:27,607 [INFO] Fetching: BBC News (http://feeds.bbci.co.uk/news/rss.xml)
+2026-03-10 17:36:28,101 [INFO] HTTP Request: GET http://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 302 Moved Temporarily"
+2026-03-10 17:36:28,190 [INFO] HTTP Request: GET https://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 200 OK"
+2026-03-10 17:36:28,231 [INFO] Fetched 36 articles from BBC News
+2026-03-10 17:36:28,248 [INFO] Fetching: DW Brasil (https://rss.dw.com/rdf/rss-br-todas)
+2026-03-10 17:36:29,442 [INFO] HTTP Request: GET https://rss.dw.com/rdf/rss-br-todas "HTTP/1.1 200 OK"
+2026-03-10 17:36:29,444 [WARNING] Feed bozo error for DW Brasil: <unknown>:2:0: syntax error
+2026-03-10 17:36:29,444 [INFO] Fetching: Fox News (https://moxie.foxnews.com/google-publisher/world.xml)
+2026-03-10 17:36:30,139 [INFO] HTTP Request: GET https://moxie.foxnews.com/google-publisher/world.xml "HTTP/1.1 200 OK"
+2026-03-10 17:36:30,285 [INFO] Fetched 25 articles from Fox News
+2026-03-10 17:36:30,302 [INFO] Fetching: France 24 PT (https://www.france24.com/pt/rss)
+2026-03-10 17:36:30,862 [INFO] HTTP Request: GET https://www.france24.com/pt/rss "HTTP/1.1 404 Not Found"
+2026-03-10 17:36:30,885 [ERROR] HTTP error 404 for France 24 PT
+2026-03-10 17:36:30,906 [INFO] Fetching: Reuters (https://feeds.reuters.com/reuters/topNews)
+2026-03-10 17:36:31,348 [ERROR] Error fetching Reuters: [Errno 11001] getaddrinfo failed
+2026-03-10 17:36:31,369 [INFO] Fetching: The Guardian (https://www.theguardian.com/world/rss)
+2026-03-10 17:36:32,059 [INFO] HTTP Request: GET https://www.theguardian.com/world/rss "HTTP/1.1 200 OK"
+2026-03-10 17:36:32,199 [INFO] Fetched 45 articles from The Guardian
+2026-03-10 17:36:32,214 [INFO] Fetching: Ars Technica (https://feeds.arstechnica.com/arstechnica/index)
+2026-03-10 17:36:32,729 [INFO] HTTP Request: GET https://feeds.arstechnica.com/arstechnica/index "HTTP/1.1 200 OK"
+2026-03-10 17:36:32,796 [INFO] Fetched 20 articles from Ars Technica
+2026-03-10 17:36:32,811 [INFO] Fetching: Hacker News (https://hnrss.org/frontpage)
+2026-03-10 17:36:33,928 [INFO] HTTP Request: GET https://hnrss.org/frontpage "HTTP/1.1 200 OK"
+2026-03-10 17:36:33,982 [INFO] Fetched 20 articles from Hacker News
+2026-03-10 17:36:33,999 [INFO] Fetching: MIT Tech Review (https://www.technologyreview.com/feed/)
+2026-03-10 17:36:34,510 [INFO] HTTP Request: GET https://www.technologyreview.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:36:34,622 [INFO] Fetched 10 articles from MIT Tech Review
+2026-03-10 17:36:34,638 [INFO] Fetching: TechCrunch (https://techcrunch.com/feed/)
+2026-03-10 17:36:35,180 [INFO] HTTP Request: GET https://techcrunch.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:36:35,221 [INFO] Fetched 20 articles from TechCrunch
+2026-03-10 17:36:35,237 [INFO] Fetching: The Verge (https://www.theverge.com/rss/index.xml)
+2026-03-10 17:36:35,740 [INFO] HTTP Request: GET https://www.theverge.com/rss/index.xml "HTTP/1.1 200 OK"
+2026-03-10 17:36:35,791 [INFO] Fetched 10 articles from The Verge
+2026-03-10 17:36:35,805 [INFO] Fetch completo: 701 artigos novos
+2026-03-10 17:36:35,898 [INFO] Fetch conclu�do: 701 artigos novos
+2026-03-10 17:36:47,985 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:36:48,509 [INFO] Analisado artigo 10 completo
+2026-03-10 17:36:50,986 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:36:50,987 [INFO] A analisar parte 1/1 do artigo 498
+2026-03-10 17:36:53,390 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:36:53,485 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:37:11,775 [INFO] HTTP Request: GET https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/cotidiano/2026/03/goleiro-bruno-e-considerado-foragido-pela-justica-do-rio-de-janeiro.shtml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:37:11,898 [INFO] HTTP Request: GET https://www1.folha.uol.com.br/cotidiano/2026/03/goleiro-bruno-e-considerado-foragido-pela-justica-do-rio-de-janeiro.shtml "HTTP/1.1 200 OK"
+2026-03-10 17:37:23,383 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:37:36,431 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:37:37,035 [INFO] Analisado artigo 498 completo
+2026-03-10 17:37:39,507 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:37:39,507 [INFO] A analisar parte 1/1 do artigo 1351
+2026-03-10 17:37:41,981 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:37:53,349 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:38:10,662 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:38:11,192 [INFO] Analisado artigo 1351 completo
+2026-03-10 17:38:13,683 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:38:13,684 [INFO] A analisar parte 1/1 do artigo 55
+2026-03-10 17:38:16,149 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:38:23,394 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:38:44,245 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:38:44,275 [INFO] HTTP Request: GET https://www.theguardian.com/world/2026/mar/04/us-submarine-torpedo-iran-warship-sri-lanka-coast-pete-hegseth "HTTP/1.1 200 OK"
+2026-03-10 17:38:44,792 [INFO] Analisado artigo 55 completo
+2026-03-10 17:38:47,251 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:38:47,251 [INFO] A analisar parte 1/1 do artigo 56
+2026-03-10 17:38:48,291 [INFO] HTTP Request: GET https://www.theguardian.com/world/2026/mar/04/us-submarine-torpedo-iran-warship-sri-lanka-coast-pete-hegseth "HTTP/1.1 200 OK"
+2026-03-10 17:38:49,731 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:38:53,363 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:39:23,407 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:39:34,088 [INFO] HTTP Request: GET https://noticias.uol.com.br/internacional/ultimas-noticias/2026/03/10/trump-exige-remocao-de-supostas-minas-navais-no-estreito-de-ormuz.htm "HTTP/1.1 403 Forbidden"
+2026-03-10 17:39:34,088 [ERROR] Error fetching content from https://noticias.uol.com.br/internacional/ultimas-noticias/2026/03/10/trump-exige-remocao-de-supostas-minas-navais-no-estreito-de-ormuz.htm: Client error '403 Forbidden' for url 'https://noticias.uol.com.br/internacional/ultimas-noticias/2026/03/10/trump-exige-remocao-de-supostas-minas-navais-no-estreito-de-ormuz.htm'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+2026-03-10 17:39:40,189 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:39:40,715 [INFO] Analisado artigo 56 completo
+2026-03-10 17:39:43,206 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:39:43,206 [INFO] A analisar parte 1/1 do artigo 1500
+2026-03-10 17:39:45,683 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:39:53,408 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:40:12,729 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:40:13,521 [INFO] Analisado artigo 1500 completo
+2026-03-10 17:40:16,775 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:40:16,776 [INFO] A analisar parte 1/1 do artigo 57
+2026-03-10 17:40:19,476 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:40:23,953 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:40:51,947 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:40:52,483 [INFO] Analisado artigo 57 completo
+2026-03-10 17:40:53,450 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:40:54,959 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:40:54,960 [INFO] A analisar parte 1/1 do artigo 24
+2026-03-10 17:40:57,686 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:41:23,525 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:41:42,544 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:41:43,069 [INFO] Analisado artigo 24 completo
+2026-03-10 17:41:45,605 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:41:45,606 [INFO] A analisar parte 1/1 do artigo 47
+2026-03-10 17:41:48,125 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:41:53,413 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:42:11,903 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:42:12,430 [INFO] Analisado artigo 47 completo
+2026-03-10 17:42:15,010 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:42:15,010 [INFO] A analisar parte 1/1 do artigo 58
+2026-03-10 17:42:17,480 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:42:23,476 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:42:53,416 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:43:05,670 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:43:06,195 [INFO] Analisado artigo 58 completo
+2026-03-10 17:43:08,684 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:43:08,685 [INFO] A analisar parte 1/1 do artigo 26
+2026-03-10 17:43:11,178 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:43:23,493 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:43:53,450 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:44:03,033 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:44:03,559 [INFO] Analisado artigo 26 completo
+2026-03-10 17:44:06,042 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:44:06,042 [INFO] A analisar parte 1/1 do artigo 28
+2026-03-10 17:44:08,799 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:44:24,314 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:44:53,464 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:45:05,845 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:45:06,371 [INFO] Analisado artigo 28 completo
+2026-03-10 17:45:08,836 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:45:08,837 [INFO] A analisar parte 1/1 do artigo 59
+2026-03-10 17:45:11,424 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:45:23,546 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:45:53,493 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:46:03,875 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:46:04,400 [INFO] Analisado artigo 59 completo
+2026-03-10 17:46:06,859 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:46:06,860 [INFO] A analisar parte 1/1 do artigo 60
+2026-03-10 17:46:09,321 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:46:23,583 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:46:53,502 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:46:56,798 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:46:57,320 [INFO] Analisado artigo 60 completo
+2026-03-10 17:46:59,796 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:46:59,797 [INFO] A analisar parte 1/1 do artigo 4
+2026-03-10 17:47:02,292 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:47:23,621 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:47:25,825 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:47:26,344 [INFO] Analisado artigo 4 completo
+2026-03-10 17:47:28,872 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:47:28,872 [INFO] A analisar parte 1/1 do artigo 29
+2026-03-10 17:47:31,324 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:47:53,571 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:48:17,631 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:48:18,154 [INFO] Analisado artigo 29 completo
+2026-03-10 17:48:20,641 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:48:20,641 [INFO] A analisar parte 1/1 do artigo 17
+2026-03-10 17:48:23,139 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:48:23,586 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:48:53,545 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:49:12,029 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:49:12,551 [INFO] Analisado artigo 17 completo
+2026-03-10 17:49:15,061 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:49:15,061 [INFO] A analisar parte 1/1 do artigo 23
+2026-03-10 17:49:17,541 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:49:23,563 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:49:53,532 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:50:20,019 [ERROR] Ollama timeout
+2026-03-10 17:50:23,001 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:50:23,001 [INFO] A analisar parte 1/1 do artigo 20
+2026-03-10 17:50:23,581 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:50:25,518 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:50:53,570 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:51:00,460 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:51:00,983 [INFO] Analisado artigo 20 completo
+2026-03-10 17:51:03,479 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:51:03,480 [INFO] A analisar parte 1/1 do artigo 439
+2026-03-10 17:51:05,956 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:51:23,695 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:51:23,705 [INFO] Fetching: El Pa�s (https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada)
+2026-03-10 17:51:24,676 [INFO] HTTP Request: GET https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada "HTTP/1.1 200 OK"
+2026-03-10 17:51:25,353 [INFO] Fetched 50 articles from El Pa�s
+2026-03-10 17:51:25,371 [INFO] Fetching: Infobae (https://www.infobae.com/feeds/rss/)
+2026-03-10 17:51:26,365 [INFO] HTTP Request: GET https://www.infobae.com/feeds/rss/ "HTTP/1.1 404 Not Found"
+2026-03-10 17:51:26,365 [ERROR] HTTP error 404 for Infobae
+2026-03-10 17:51:26,385 [INFO] Fetching: Ag�ncia Brasil (https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml)
+2026-03-10 17:51:26,967 [INFO] HTTP Request: GET https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml "HTTP/1.1 200 OK"
+2026-03-10 17:51:27,033 [INFO] Fetched 10 articles from Ag�ncia Brasil
+2026-03-10 17:51:27,053 [INFO] Fetching: ArchDaily Brasil (http://www.archdaily.com.br/feed/rss/)
+2026-03-10 17:51:27,776 [INFO] HTTP Request: GET http://www.archdaily.com.br/feed/rss/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:51:27,916 [INFO] HTTP Request: GET http://www.archdaily.com.br/feed/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:51:28,930 [INFO] HTTP Request: GET https://feeds.feedburner.com/ArchdailyBR "HTTP/1.1 200 OK"
+2026-03-10 17:51:29,008 [INFO] Fetched 18 articles from ArchDaily Brasil
+2026-03-10 17:51:29,023 [INFO] Fetching: Brasil - Correio Braziliense (http://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml)
+2026-03-10 17:51:29,499 [INFO] HTTP Request: GET http://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:51:29,567 [INFO] HTTP Request: GET https://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:51:29,632 [INFO] HTTP Request: GET https://www.correiobraziliense.com.br/brasil/rss.xml "HTTP/1.1 200 OK"
+2026-03-10 17:51:29,843 [INFO] Fetched 30 articles from Brasil - Correio Braziliense
+2026-03-10 17:51:29,861 [INFO] Fetching: Brasil de Fato (https://www.brasildefato.com.br/rss)
+2026-03-10 17:51:32,181 [INFO] HTTP Request: GET https://www.brasildefato.com.br/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:51:34,864 [INFO] HTTP Request: GET https://www.brasildefato.com.br/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:51:35,039 [INFO] Fetched 50 articles from Brasil de Fato
+2026-03-10 17:51:35,060 [INFO] Fetching: Concursos no Brasil (http://concursosnobrasil.com.br/feed/)
+2026-03-10 17:51:35,565 [INFO] HTTP Request: GET http://concursosnobrasil.com.br/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:51:36,028 [INFO] HTTP Request: GET https://concursosnobrasil.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:51:36,067 [INFO] Fetched 15 articles from Concursos no Brasil
+2026-03-10 17:51:36,083 [INFO] Fetching: Folha de S.Paulo (https://feeds.folha.uol.com.br/emcimadahora/rss091.xml)
+2026-03-10 17:51:36,680 [INFO] HTTP Request: GET https://feeds.folha.uol.com.br/emcimadahora/rss091.xml "HTTP/1.1 200 OK"
+2026-03-10 17:51:36,790 [INFO] Fetched 50 articles from Folha de S.Paulo
+2026-03-10 17:51:36,810 [INFO] Fetching: G1 / Globo (https://g1.globo.com/rss/g1/)
+2026-03-10 17:51:37,324 [INFO] HTTP Request: GET https://g1.globo.com/rss/g1/ "HTTP/1.1 200 OK"
+2026-03-10 17:51:37,477 [INFO] Fetched 50 articles from G1 / Globo
+2026-03-10 17:51:37,501 [INFO] Fetching: IGN Brasil (http://br.ign.com/feed.xml)
+2026-03-10 17:51:38,011 [INFO] HTTP Request: GET http://br.ign.com/feed.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:51:38,114 [INFO] HTTP Request: GET https://br.ign.com/feed.xml "HTTP/1.1 200 OK"
+2026-03-10 17:51:38,173 [INFO] Fetched 40 articles from IGN Brasil
+2026-03-10 17:51:38,189 [INFO] Fetching: Rolling Stone Brasil (http://rollingstone.com.br/feed/)
+2026-03-10 17:51:38,668 [INFO] HTTP Request: GET http://rollingstone.com.br/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:51:38,760 [INFO] HTTP Request: GET https://rollingstone.com.br/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:51:38,853 [INFO] Fetched 10 articles from Rolling Stone Brasil
+2026-03-10 17:51:38,868 [INFO] Fetching: UOL Not�cias (https://rss.uol.com.br/feed/noticias.xml)
+2026-03-10 17:51:39,421 [INFO] HTTP Request: GET https://rss.uol.com.br/feed/noticias.xml "HTTP/1.1 200 OK"
+2026-03-10 17:51:39,450 [INFO] Fetched 15 articles from UOL Not�cias
+2026-03-10 17:51:39,472 [INFO] Fetching: NASA News (https://www.nasa.gov/rss/dyn/breaking_news.rss)
+2026-03-10 17:51:40,075 [INFO] HTTP Request: GET https://www.nasa.gov/rss/dyn/breaking_news.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:51:40,100 [INFO] HTTP Request: GET https://www.nasa.gov/news-release/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:51:40,251 [INFO] Fetched 10 articles from NASA News
+2026-03-10 17:51:40,266 [INFO] Fetching: Nature (https://www.nature.com/nature.rss)
+2026-03-10 17:51:40,808 [INFO] HTTP Request: GET https://www.nature.com/nature.rss "HTTP/1.1 200 OK"
+2026-03-10 17:51:41,289 [INFO] Fetched 50 articles from Nature
+2026-03-10 17:51:41,305 [INFO] Fetching: Scientific American (http://rss.sciam.com/ScientificAmerican-Global)
+2026-03-10 17:51:42,720 [INFO] HTTP Request: GET http://rss.sciam.com/ScientificAmerican-Global "HTTP/1.1 200 OK"
+2026-03-10 17:51:42,763 [INFO] Fetched 50 articles from Scientific American
+2026-03-10 17:51:42,780 [INFO] Fetching: Bloomberg (https://feeds.bloomberg.com/markets/news.rss)
+2026-03-10 17:51:43,786 [INFO] HTTP Request: GET https://feeds.bloomberg.com/markets/news.rss "HTTP/1.1 200 OK"
+2026-03-10 17:51:43,827 [INFO] Fetched 30 articles from Bloomberg
+2026-03-10 17:51:43,848 [INFO] Fetching: Financial Times (https://www.ft.com/rss/home)
+2026-03-10 17:51:45,248 [INFO] HTTP Request: GET https://www.ft.com/rss/home "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:51:45,537 [INFO] HTTP Request: GET https://www.ft.com/rss/home/international "HTTP/1.1 200 OK"
+2026-03-10 17:51:45,571 [INFO] Fetched 12 articles from Financial Times
+2026-03-10 17:51:45,587 [INFO] Fetching: Al Jazeera (https://www.aljazeera.com/xml/rss/all.xml)
+2026-03-10 17:51:46,141 [INFO] HTTP Request: GET https://www.aljazeera.com/xml/rss/all.xml "HTTP/1.1 200 OK"
+2026-03-10 17:51:46,179 [INFO] Fetched 25 articles from Al Jazeera
+2026-03-10 17:51:46,198 [INFO] Fetching: Associated Press (https://rsshub.app/apnews/topics/apf-topnews)
+2026-03-10 17:51:46,771 [INFO] HTTP Request: GET https://rsshub.app/apnews/topics/apf-topnews "HTTP/1.1 403 Forbidden"
+2026-03-10 17:51:46,772 [ERROR] HTTP error 403 for Associated Press
+2026-03-10 17:51:46,791 [INFO] Fetching: BBC News (http://feeds.bbci.co.uk/news/rss.xml)
+2026-03-10 17:51:47,291 [INFO] HTTP Request: GET http://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 302 Moved Temporarily"
+2026-03-10 17:51:47,587 [INFO] HTTP Request: GET https://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 200 OK"
+2026-03-10 17:51:47,627 [INFO] Fetched 36 articles from BBC News
+2026-03-10 17:51:47,643 [INFO] Fetching: DW Brasil (https://rss.dw.com/rdf/rss-br-todas)
+2026-03-10 17:51:48,905 [INFO] HTTP Request: GET https://rss.dw.com/rdf/rss-br-todas "HTTP/1.1 200 OK"
+2026-03-10 17:51:48,907 [WARNING] Feed bozo error for DW Brasil: <unknown>:2:0: syntax error
+2026-03-10 17:51:48,907 [INFO] Fetching: Fox News (https://moxie.foxnews.com/google-publisher/world.xml)
+2026-03-10 17:51:49,658 [INFO] HTTP Request: GET https://moxie.foxnews.com/google-publisher/world.xml "HTTP/1.1 200 OK"
+2026-03-10 17:51:49,791 [INFO] Fetched 25 articles from Fox News
+2026-03-10 17:51:49,805 [INFO] Fetching: France 24 PT (https://www.france24.com/pt/rss)
+2026-03-10 17:51:51,973 [INFO] HTTP Request: GET https://www.france24.com/pt/rss "HTTP/1.1 404 Not Found"
+2026-03-10 17:51:52,173 [ERROR] HTTP error 404 for France 24 PT
+2026-03-10 17:51:52,193 [INFO] Fetching: Reuters (https://feeds.reuters.com/reuters/topNews)
+2026-03-10 17:51:52,636 [ERROR] Error fetching Reuters: [Errno 11001] getaddrinfo failed
+2026-03-10 17:51:52,657 [INFO] Fetching: The Guardian (https://www.theguardian.com/world/rss)
+2026-03-10 17:51:53,387 [INFO] HTTP Request: GET https://www.theguardian.com/world/rss "HTTP/1.1 200 OK"
+2026-03-10 17:51:53,505 [INFO] Fetched 45 articles from The Guardian
+2026-03-10 17:51:53,524 [INFO] Fetching: Ars Technica (https://feeds.arstechnica.com/arstechnica/index)
+2026-03-10 17:51:53,571 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:51:54,939 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:51:55,070 [INFO] HTTP Request: GET https://feeds.arstechnica.com/arstechnica/index "HTTP/1.1 200 OK"
+2026-03-10 17:51:55,132 [INFO] Fetched 20 articles from Ars Technica
+2026-03-10 17:51:55,149 [INFO] Fetching: Hacker News (https://hnrss.org/frontpage)
+2026-03-10 17:51:55,462 [INFO] Analisado artigo 439 completo
+2026-03-10 17:51:57,276 [INFO] HTTP Request: GET https://hnrss.org/frontpage "HTTP/1.1 200 OK"
+2026-03-10 17:51:57,329 [INFO] Fetched 20 articles from Hacker News
+2026-03-10 17:51:57,346 [INFO] Fetching: MIT Tech Review (https://www.technologyreview.com/feed/)
+2026-03-10 17:51:57,845 [INFO] HTTP Request: GET https://www.technologyreview.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:51:57,960 [INFO] Fetched 10 articles from MIT Tech Review
+2026-03-10 17:51:57,976 [INFO] Fetching: TechCrunch (https://techcrunch.com/feed/)
+2026-03-10 17:51:57,987 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:51:57,987 [INFO] A analisar parte 1/1 do artigo 440
+2026-03-10 17:51:58,550 [INFO] HTTP Request: GET https://techcrunch.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:51:58,591 [INFO] Fetched 20 articles from TechCrunch
+2026-03-10 17:51:58,608 [INFO] Fetching: The Verge (https://www.theverge.com/rss/index.xml)
+2026-03-10 17:51:59,139 [INFO] HTTP Request: GET https://www.theverge.com/rss/index.xml "HTTP/1.1 200 OK"
+2026-03-10 17:51:59,212 [INFO] Fetched 10 articles from The Verge
+2026-03-10 17:51:59,229 [INFO] Fetch completo: 701 artigos novos
+2026-03-10 17:51:59,229 [INFO] Fetch conclu�do: 701 artigos novos
+2026-03-10 17:52:00,513 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:52:23,650 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:52:48,244 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:52:48,766 [INFO] Analisado artigo 440 completo
+2026-03-10 17:52:51,243 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:52:51,243 [INFO] A analisar parte 1/1 do artigo 479
+2026-03-10 17:52:53,650 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:52:53,805 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:53:23,710 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:53:46,166 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:53:46,690 [INFO] Analisado artigo 479 completo
+2026-03-10 17:53:49,576 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:53:49,576 [INFO] A analisar parte 1/1 do artigo 111
+2026-03-10 17:53:52,071 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:53:53,725 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:54:23,659 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:54:26,814 [INFO] HTTP Request: GET https://noticias.uol.com.br/ultimas-noticias/agencia-estado/2026/03/10/o-que-se-sabe-sobre-a-prisao-de-15-pms-que-faziam-seguranca-do-bicheiro-rogerio-de-andrade.htm "HTTP/1.1 403 Forbidden"
+2026-03-10 17:54:26,815 [ERROR] Error fetching content from https://noticias.uol.com.br/ultimas-noticias/agencia-estado/2026/03/10/o-que-se-sabe-sobre-a-prisao-de-15-pms-que-faziam-seguranca-do-bicheiro-rogerio-de-andrade.htm: Client error '403 Forbidden' for url 'https://noticias.uol.com.br/ultimas-noticias/agencia-estado/2026/03/10/o-que-se-sabe-sobre-a-prisao-de-15-pms-que-faziam-seguranca-do-bicheiro-rogerio-de-andrade.htm'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+2026-03-10 17:54:35,602 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:54:36,123 [INFO] Analisado artigo 111 completo
+2026-03-10 17:54:38,594 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:54:38,594 [INFO] A analisar parte 1/1 do artigo 2203
+2026-03-10 17:54:41,064 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:54:53,600 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:55:23,645 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:55:24,179 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:55:24,702 [INFO] Analisado artigo 2203 completo
+2026-03-10 17:55:27,193 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:55:27,193 [INFO] A analisar parte 1/1 do artigo 112
+2026-03-10 17:55:29,639 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:55:33,699 [INFO] HTTP Request: GET https://cloud.feedly.com/v3/search/feeds?query=fashion&count=100 "HTTP/1.1 200 OK"
+2026-03-10 17:55:47,922 [INFO] HTTP Request: GET http://fashiongonerogue.com/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:55:48,572 [INFO] HTTP Request: GET http://www.fashiongonerogue.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:55:53,625 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:55:55,610 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:55:56,129 [INFO] Analisado artigo 112 completo
+2026-03-10 17:55:58,595 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:55:58,596 [INFO] A analisar parte 1/1 do artigo 161
+2026-03-10 17:55:58,676 [INFO] HTTP Request: GET http://www.elle.com/rss/fashion.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:55:58,848 [INFO] HTTP Request: GET https://www.elle.com/rss/fashion.xml "HTTP/1.1 200 OK"
+2026-03-10 17:56:01,069 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:56:12,698 [INFO] HTTP Request: GET http://thefashionography.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:56:18,421 [INFO] HTTP Request: GET https://fashionunited.uk/rss-news "HTTP/1.1 200 OK"
+2026-03-10 17:56:23,652 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:56:33,016 [INFO] HTTP Request: GET https://cloud.feedly.com/v3/search/feeds?query=anarquismo&count=100 "HTTP/1.1 200 OK"
+2026-03-10 17:56:46,511 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:56:47,031 [INFO] Analisado artigo 161 completo
+2026-03-10 17:56:47,760 [INFO] HTTP Request: GET http://www.anarquista.net/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:56:47,852 [INFO] HTTP Request: GET https://www.anarquista.net/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:56:49,555 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:56:49,556 [INFO] A analisar parte 1/1 do artigo 114
+2026-03-10 17:56:52,010 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:56:53,618 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:56:57,600 [INFO] HTTP Request: GET http://periodicoellibertario.blogspot.com/feeds/posts/default "HTTP/1.1 200 OK"
+2026-03-10 17:57:08,075 [INFO] HTTP Request: GET http://anarquismoenpdf.tumblr.com/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:57:08,491 [INFO] HTTP Request: GET https://anarquismoenpdf.tumblr.com/rss "HTTP/1.1 429 Too Many Requests"
+2026-03-10 17:57:17,278 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:57:17,806 [INFO] Analisado artigo 114 completo
+2026-03-10 17:57:20,288 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:57:20,288 [INFO] A analisar parte 1/1 do artigo 162
+2026-03-10 17:57:22,719 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:57:23,652 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:57:26,495 [INFO] HTTP Request: GET https://cloud.feedly.com/v3/search/feeds?query=astronomia&count=100 "HTTP/1.1 200 OK"
+2026-03-10 17:57:49,409 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:57:49,936 [INFO] Analisado artigo 162 completo
+2026-03-10 17:57:52,394 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:57:52,395 [INFO] A analisar parte 1/1 do artigo 504
+2026-03-10 17:57:53,611 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:57:54,426 [INFO] HTTP Request: GET https://cloud.feedly.com/v3/search/feeds?query=antropologia&count=100 "HTTP/1.1 200 OK"
+2026-03-10 17:57:54,840 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:57:55,526 [INFO] HTTP Request: GET https://cloud.feedly.com/v3/search/feeds?query=antropologia&count=100 "HTTP/1.1 200 OK"
+2026-03-10 17:58:13,435 [INFO] HTTP Request: GET http://www.revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:58:13,521 [INFO] HTTP Request: GET https://www.revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:58:13,834 [INFO] HTTP Request: GET https://revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 302 Found"
+2026-03-10 17:58:15,632 [INFO] HTTP Request: GET https://revistas.usp.br/ra/pt_BR/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 200 OK"
+2026-03-10 17:58:23,659 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:58:34,713 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:58:35,238 [INFO] Analisado artigo 504 completo
+2026-03-10 17:58:37,721 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:58:37,721 [INFO] A analisar parte 1/1 do artigo 373
+2026-03-10 17:58:38,577 [INFO] HTTP Request: GET https://cloud.feedly.com/v3/search/feeds?query=socialismo&count=100 "HTTP/1.1 200 OK"
+2026-03-10 17:58:40,236 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:58:53,627 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:58:56,069 [INFO] HTTP Request: GET http://socialismoactual.blogspot.com/feeds/posts/default "HTTP/1.1 200 OK"
+2026-03-10 17:59:10,413 [INFO] HTTP Request: GET https://cloud.feedly.com/v3/search/feeds?query=china&count=100 "HTTP/1.1 200 OK"
+2026-03-10 17:59:13,990 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:59:14,517 [INFO] Analisado artigo 373 completo
+2026-03-10 17:59:16,989 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:59:16,990 [INFO] A analisar parte 1/1 do artigo 163
+2026-03-10 17:59:19,014 [INFO] HTTP Request: GET http://www.scmp.com/rss/china.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:59:19,466 [INFO] HTTP Request: GET https://www.scmp.com/rss/china.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:59:19,480 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:59:19,901 [INFO] HTTP Request: GET https://www.scmp.com/rss/4/feed "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:59:19,939 [INFO] HTTP Request: GET http://www.scmp.com/rss/4/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:59:20,314 [INFO] HTTP Request: GET https://www.scmp.com/rss/4/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:59:24,940 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:59:29,517 [INFO] HTTP Request: GET http://chinadigitaltimes.net/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 17:59:29,798 [INFO] HTTP Request: GET https://chinadigitaltimes.net/feed/ "HTTP/1.1 200 OK"
+2026-03-10 17:59:44,003 [INFO] HTTP Request: GET http://china-defense.blogspot.com/feeds/posts/default "HTTP/1.1 200 OK"
+2026-03-10 17:59:50,208 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 17:59:50,731 [INFO] Analisado artigo 163 completo
+2026-03-10 17:59:53,188 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:59:53,188 [INFO] A analisar parte 1/1 do artigo 559
+2026-03-10 17:59:53,592 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 17:59:54,431 [INFO] HTTP Request: GET https://cloud.feedly.com/v3/search/feeds?query=iran&count=100 "HTTP/1.1 200 OK"
+2026-03-10 17:59:55,668 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:00:04,289 [INFO] HTTP Request: GET http://news.google.com/news?hl=en&gl=us&q=iran&um=1&ie=UTF-8&output=rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:00:04,778 [INFO] HTTP Request: GET https://news.google.com/news?hl=en&gl=us&q=iran&um=1&ie=UTF-8&output=rss "HTTP/1.1 302 Found"
+2026-03-10 18:00:04,882 [INFO] HTTP Request: GET https://news.google.com/rss/search?hl=en&gl=us&q=iran&um=1&ie=UTF-8 "HTTP/1.1 302 Found"
+2026-03-10 18:00:05,855 [INFO] HTTP Request: GET https://news.google.com/rss/search?hl=en-US&gl=US&q=iran&um=1&ie=UTF-8&ceid=US:en "HTTP/1.1 200 OK"
+2026-03-10 18:00:11,906 [INFO] HTTP Request: GET http://iranwire.com/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:00:12,857 [INFO] HTTP Request: GET https://iranwire.com/feed/ "HTTP/1.1 302 Found"
+2026-03-10 18:00:17,438 [INFO] HTTP Request: GET https://iranwire.com/fa/feed/ "HTTP/1.1 200 OK"
+2026-03-10 18:00:23,688 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:00:41,420 [INFO] HTTP Request: GET https://cloud.feedly.com/v3/search/feeds?query=programming&count=100 "HTTP/1.1 200 OK"
+2026-03-10 18:00:48,825 [INFO] HTTP Request: GET http://www.reddit.com/r/programming/.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:00:49,500 [INFO] HTTP Request: GET https://www.reddit.com/r/programming/.rss "HTTP/1.1 200 OK"
+2026-03-10 18:00:54,189 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:00:57,176 [INFO] HTTP Request: GET https://medium.com/feed/topic/programming "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:00:57,403 [INFO] HTTP Request: GET https://medium.com/feed/tag/programming "HTTP/1.1 200 OK"
+2026-03-10 18:00:58,123 [ERROR] Ollama timeout
+2026-03-10 18:01:01,109 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:01:01,110 [INFO] A analisar parte 1/1 do artigo 116
+2026-03-10 18:01:02,332 [INFO] HTTP Request: GET http://programmingdigest.net/digests/feed.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:01:02,970 [INFO] HTTP Request: GET https://programmingdigest.net/digests/feed.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:01:02,992 [INFO] HTTP Request: GET https://programmingdigest.net/newsletters.rss "HTTP/1.1 200 OK"
+2026-03-10 18:01:03,586 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:01:12,739 [INFO] HTTP Request: GET http://programming-journal.org/feed.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:01:12,992 [INFO] HTTP Request: GET https://programming-journal.org/feed.rss "HTTP/1.1 200 OK"
+2026-03-10 18:01:23,666 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:01:25,945 [INFO] HTTP Request: GET https://www.programmingwithwolfgang.com/feed.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:01:26,735 [INFO] HTTP Request: GET https://programmingwithwolfgang.com/feed.xml "HTTP/1.1 200 OK"
+2026-03-10 18:01:31,690 [INFO] HTTP Request: GET http://programminghistorian.org/feed.xml "HTTP/1.1 200 OK"
+2026-03-10 18:01:40,423 [INFO] HTTP Request: GET https://cloud.feedly.com/v3/search/feeds?query=witchcraft&count=100 "HTTP/1.1 200 OK"
+2026-03-10 18:01:53,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:02:06,050 [ERROR] Ollama timeout
+2026-03-10 18:02:09,023 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:02:09,024 [INFO] A analisar parte 1/1 do artigo 560
+2026-03-10 18:02:11,504 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:02:17,866 [INFO] HTTP Request: GET https://noticias.uol.com.br/internacional/ultimas-noticias/2026/03/10/trump-exige-remocao-de-supostas-minas-navais-no-estreito-de-ormuz.htm "HTTP/1.1 403 Forbidden"
+2026-03-10 18:02:17,867 [ERROR] Error fetching content from https://noticias.uol.com.br/internacional/ultimas-noticias/2026/03/10/trump-exige-remocao-de-supostas-minas-navais-no-estreito-de-ormuz.htm: Client error '403 Forbidden' for url 'https://noticias.uol.com.br/internacional/ultimas-noticias/2026/03/10/trump-exige-remocao-de-supostas-minas-navais-no-estreito-de-ormuz.htm'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+2026-03-10 18:02:23,662 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:02:36,186 [INFO] Fetching: El Pa�s (https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada)
+2026-03-10 18:02:37,182 [INFO] HTTP Request: GET https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada "HTTP/1.1 200 OK"
+2026-03-10 18:02:37,875 [INFO] Fetched 50 articles from El Pa�s
+2026-03-10 18:02:37,892 [INFO] Fetching: Infobae (https://www.infobae.com/feeds/rss/)
+2026-03-10 18:02:38,816 [INFO] HTTP Request: GET https://www.infobae.com/feeds/rss/ "HTTP/1.1 404 Not Found"
+2026-03-10 18:02:38,817 [ERROR] HTTP error 404 for Infobae
+2026-03-10 18:02:38,838 [INFO] Fetching: Anarquia | Anarquista | Anarquismo � \u24b6narquista.net (http://www.anarquista.net/feed/)
+2026-03-10 18:02:39,421 [INFO] HTTP Request: GET http://www.anarquista.net/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:39,516 [INFO] HTTP Request: GET https://www.anarquista.net/feed/ "HTTP/1.1 200 OK"
+2026-03-10 18:02:39,988 [INFO] Fetched 50 articles from Anarquia | Anarquista | Anarquismo � \u24b6narquista.net
+2026-03-10 18:02:40,011 [INFO] Fetching: El Libertario: Anarquismo y movimientos sociales aut�nomos (http://periodicoellibertario.blogspot.com/feeds/posts/default)
+2026-03-10 18:02:41,415 [INFO] HTTP Request: GET http://periodicoellibertario.blogspot.com/feeds/posts/default "HTTP/1.1 200 OK"
+2026-03-10 18:02:43,219 [INFO] Fetched 25 articles from El Libertario: Anarquismo y movimientos sociales aut�nomos
+2026-03-10 18:02:43,245 [INFO] Fetching: Revista de Antropologia (http://www.revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom)
+2026-03-10 18:02:43,743 [INFO] HTTP Request: GET http://www.revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:43,833 [INFO] HTTP Request: GET https://www.revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:44,054 [INFO] HTTP Request: GET https://revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 302 Found"
+2026-03-10 18:02:45,443 [INFO] HTTP Request: GET https://revistas.usp.br/ra/pt_BR/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 200 OK"
+2026-03-10 18:02:45,541 [INFO] Fetched 30 articles from Revista de Antropologia
+2026-03-10 18:02:45,563 [INFO] Fetching: Ag�ncia Brasil (https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml)
+2026-03-10 18:02:46,072 [INFO] HTTP Request: GET https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml "HTTP/1.1 200 OK"
+2026-03-10 18:02:46,130 [INFO] Fetched 10 articles from Ag�ncia Brasil
+2026-03-10 18:02:46,145 [INFO] Fetching: ArchDaily Brasil (http://www.archdaily.com.br/feed/rss/)
+2026-03-10 18:02:46,865 [INFO] HTTP Request: GET http://www.archdaily.com.br/feed/rss/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:46,997 [INFO] HTTP Request: GET http://www.archdaily.com.br/feed/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:48,004 [INFO] HTTP Request: GET https://feeds.feedburner.com/ArchdailyBR "HTTP/1.1 200 OK"
+2026-03-10 18:02:48,085 [INFO] Fetched 18 articles from ArchDaily Brasil
+2026-03-10 18:02:48,099 [INFO] Fetching: Brasil - Correio Braziliense (http://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml)
+2026-03-10 18:02:48,567 [INFO] HTTP Request: GET http://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:48,620 [INFO] HTTP Request: GET https://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:48,694 [INFO] HTTP Request: GET https://www.correiobraziliense.com.br/brasil/rss.xml "HTTP/1.1 200 OK"
+2026-03-10 18:02:48,907 [INFO] Fetched 30 articles from Brasil - Correio Braziliense
+2026-03-10 18:02:48,922 [INFO] Fetching: Brasil de Fato (https://www.brasildefato.com.br/rss)
+2026-03-10 18:02:50,959 [INFO] HTTP Request: GET https://www.brasildefato.com.br/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:51,104 [INFO] HTTP Request: GET https://www.brasildefato.com.br/feed/ "HTTP/1.1 200 OK"
+2026-03-10 18:02:51,219 [INFO] Fetched 50 articles from Brasil de Fato
+2026-03-10 18:02:51,236 [INFO] Fetching: Concursos no Brasil (http://concursosnobrasil.com.br/feed/)
+2026-03-10 18:02:51,797 [INFO] HTTP Request: GET http://concursosnobrasil.com.br/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:52,290 [INFO] HTTP Request: GET https://concursosnobrasil.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 18:02:52,328 [INFO] Fetched 15 articles from Concursos no Brasil
+2026-03-10 18:02:52,345 [INFO] Fetching: Folha de S.Paulo (https://feeds.folha.uol.com.br/emcimadahora/rss091.xml)
+2026-03-10 18:02:52,961 [INFO] HTTP Request: GET https://feeds.folha.uol.com.br/emcimadahora/rss091.xml "HTTP/1.1 200 OK"
+2026-03-10 18:02:53,075 [INFO] Fetched 50 articles from Folha de S.Paulo
+2026-03-10 18:02:53,095 [INFO] Fetching: G1 / Globo (https://g1.globo.com/rss/g1/)
+2026-03-10 18:02:53,602 [INFO] HTTP Request: GET https://g1.globo.com/rss/g1/ "HTTP/1.1 200 OK"
+2026-03-10 18:02:53,748 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:02:53,762 [INFO] Fetched 50 articles from G1 / Globo
+2026-03-10 18:02:53,786 [INFO] Fetching: IGN Brasil (http://br.ign.com/feed.xml)
+2026-03-10 18:02:54,266 [INFO] HTTP Request: GET http://br.ign.com/feed.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:54,333 [INFO] HTTP Request: GET https://br.ign.com/feed.xml "HTTP/1.1 200 OK"
+2026-03-10 18:02:54,396 [INFO] Fetched 40 articles from IGN Brasil
+2026-03-10 18:02:54,411 [INFO] Fetching: Rolling Stone Brasil (http://rollingstone.com.br/feed/)
+2026-03-10 18:02:54,896 [INFO] HTTP Request: GET http://rollingstone.com.br/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:54,975 [INFO] HTTP Request: GET https://rollingstone.com.br/feed/ "HTTP/1.1 200 OK"
+2026-03-10 18:02:55,079 [INFO] Fetched 10 articles from Rolling Stone Brasil
+2026-03-10 18:02:55,094 [INFO] Fetching: UOL Not�cias (https://rss.uol.com.br/feed/noticias.xml)
+2026-03-10 18:02:55,634 [INFO] HTTP Request: GET https://rss.uol.com.br/feed/noticias.xml "HTTP/1.1 200 OK"
+2026-03-10 18:02:55,663 [INFO] Fetched 15 articles from UOL Not�cias
+2026-03-10 18:02:55,682 [INFO] Fetching: China - South China Morning Post (http://www.scmp.com/rss/china.xml)
+2026-03-10 18:02:56,202 [INFO] HTTP Request: GET http://www.scmp.com/rss/china.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:56,653 [INFO] HTTP Request: GET https://www.scmp.com/rss/china.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:57,000 [INFO] HTTP Request: GET https://www.scmp.com/rss/4/feed "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:57,069 [INFO] HTTP Request: GET http://www.scmp.com/rss/4/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:57,481 [INFO] HTTP Request: GET https://www.scmp.com/rss/4/feed/ "HTTP/1.1 200 OK"
+2026-03-10 18:02:57,565 [INFO] Fetched 50 articles from China - South China Morning Post
+2026-03-10 18:02:57,591 [INFO] Fetching: China Defense Blog (http://china-defense.blogspot.com/feeds/posts/default)
+2026-03-10 18:02:58,765 [INFO] HTTP Request: GET http://china-defense.blogspot.com/feeds/posts/default "HTTP/1.1 200 OK"
+2026-03-10 18:02:58,832 [INFO] Fetched 25 articles from China Defense Blog
+2026-03-10 18:02:58,852 [INFO] Fetching: China Digital Times (CDT) (http://chinadigitaltimes.net/feed/)
+2026-03-10 18:02:59,357 [INFO] HTTP Request: GET http://chinadigitaltimes.net/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:02:59,461 [INFO] HTTP Request: GET https://chinadigitaltimes.net/feed/ "HTTP/1.1 200 OK"
+2026-03-10 18:02:59,639 [INFO] Fetched 15 articles from China Digital Times (CDT)
+2026-03-10 18:02:59,656 [INFO] Fetching: NASA News (https://www.nasa.gov/rss/dyn/breaking_news.rss)
+2026-03-10 18:03:00,205 [INFO] HTTP Request: GET https://www.nasa.gov/rss/dyn/breaking_news.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:03:00,236 [INFO] HTTP Request: GET https://www.nasa.gov/news-release/feed/ "HTTP/1.1 200 OK"
+2026-03-10 18:03:00,395 [INFO] Fetched 10 articles from NASA News
+2026-03-10 18:03:00,409 [INFO] Fetching: Nature (https://www.nature.com/nature.rss)
+2026-03-10 18:03:01,159 [INFO] HTTP Request: GET https://www.nature.com/nature.rss "HTTP/1.1 303 See Other"
+2026-03-10 18:03:01,459 [INFO] HTTP Request: GET https://idp.nature.com/authorize?response_type=cookie&client_id=grover&redirect_uri=https%3A%2F%2Fwww.nature.com%2Fnature.rss "HTTP/1.1 302 Found"
+2026-03-10 18:03:01,680 [INFO] HTTP Request: GET https://idp.nature.com/transit?redirect_uri=https%3A%2F%2Fwww.nature.com%2Fnature.rss&code=7bc44c1c-daf8-4f10-8290-ed5a90f9927c "HTTP/1.1 302 Found"
+2026-03-10 18:03:01,941 [INFO] HTTP Request: GET https://www.nature.com/nature.rss "HTTP/1.1 200 OK"
+2026-03-10 18:03:02,923 [INFO] Fetched 50 articles from Nature
+2026-03-10 18:03:02,939 [INFO] Fetching: Scientific American (http://rss.sciam.com/ScientificAmerican-Global)
+2026-03-10 18:03:04,332 [INFO] HTTP Request: GET http://rss.sciam.com/ScientificAmerican-Global "HTTP/1.1 200 OK"
+2026-03-10 18:03:04,381 [INFO] Fetched 50 articles from Scientific American
+2026-03-10 18:03:04,396 [INFO] Fetching: Bloomberg (https://feeds.bloomberg.com/markets/news.rss)
+2026-03-10 18:03:07,008 [INFO] HTTP Request: GET https://feeds.bloomberg.com/markets/news.rss "HTTP/1.1 200 OK"
+2026-03-10 18:03:07,051 [INFO] Fetched 30 articles from Bloomberg
+2026-03-10 18:03:07,068 [INFO] Fetching: Financial Times (https://www.ft.com/rss/home)
+2026-03-10 18:03:08,144 [INFO] HTTP Request: GET https://www.ft.com/rss/home "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:03:08,389 [INFO] HTTP Request: GET https://www.ft.com/rss/home/international "HTTP/1.1 200 OK"
+2026-03-10 18:03:08,418 [INFO] Fetched 12 articles from Financial Times
+2026-03-10 18:03:08,435 [INFO] Fetching: Fashion - ELLE (http://www.elle.com/rss/fashion.xml)
+2026-03-10 18:03:08,945 [INFO] HTTP Request: GET http://www.elle.com/rss/fashion.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:03:09,117 [INFO] HTTP Request: GET https://www.elle.com/rss/fashion.xml "HTTP/1.1 200 OK"
+2026-03-10 18:03:09,171 [INFO] Fetched 50 articles from Fashion - ELLE
+2026-03-10 18:03:09,194 [INFO] Fetching: Fashion Gone Rogue (http://fashiongonerogue.com/feed/)
+2026-03-10 18:03:10,323 [INFO] HTTP Request: GET http://fashiongonerogue.com/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:03:11,022 [INFO] HTTP Request: GET http://www.fashiongonerogue.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 18:03:11,066 [INFO] Fetched 10 articles from Fashion Gone Rogue
+2026-03-10 18:03:11,088 [INFO] Fetching: The Fashionography (http://thefashionography.com/feed/)
+2026-03-10 18:03:12,095 [INFO] HTTP Request: GET http://thefashionography.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 18:03:12,143 [INFO] Fetched 30 articles from The Fashionography
+2026-03-10 18:03:12,164 [INFO] Fetching: fashionunited.uk (https://fashionunited.uk/rss-news)
+2026-03-10 18:03:12,516 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 18:03:12,935 [INFO] HTTP Request: GET https://fashionunited.uk/rss-news "HTTP/1.1 200 OK"
+2026-03-10 18:03:13,039 [INFO] Analisado artigo 560 completo
+2026-03-10 18:03:13,312 [INFO] Fetched 50 articles from fashionunited.uk
+2026-03-10 18:03:13,337 [INFO] Fetching: Al Jazeera (https://www.aljazeera.com/xml/rss/all.xml)
+2026-03-10 18:03:13,877 [INFO] HTTP Request: GET https://www.aljazeera.com/xml/rss/all.xml "HTTP/1.1 200 OK"
+2026-03-10 18:03:13,913 [INFO] Fetched 25 articles from Al Jazeera
+2026-03-10 18:03:13,928 [INFO] Fetching: Associated Press (https://rsshub.app/apnews/topics/apf-topnews)
+2026-03-10 18:03:14,504 [INFO] HTTP Request: GET https://rsshub.app/apnews/topics/apf-topnews "HTTP/1.1 403 Forbidden"
+2026-03-10 18:03:14,505 [ERROR] HTTP error 403 for Associated Press
+2026-03-10 18:03:14,522 [INFO] Fetching: BBC News (http://feeds.bbci.co.uk/news/rss.xml)
+2026-03-10 18:03:15,025 [INFO] HTTP Request: GET http://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 302 Moved Temporarily"
+2026-03-10 18:03:15,117 [INFO] HTTP Request: GET https://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 200 OK"
+2026-03-10 18:03:15,161 [INFO] Fetched 36 articles from BBC News
+2026-03-10 18:03:15,179 [INFO] Fetching: DW Brasil (https://rss.dw.com/rdf/rss-br-todas)
+2026-03-10 18:03:15,540 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:03:15,540 [INFO] A analisar parte 1/1 do artigo 164
+2026-03-10 18:03:15,978 [INFO] HTTP Request: GET https://rss.dw.com/rdf/rss-br-todas "HTTP/1.1 200 OK"
+2026-03-10 18:03:15,980 [WARNING] Feed bozo error for DW Brasil: <unknown>:2:0: syntax error
+2026-03-10 18:03:15,980 [INFO] Fetching: Fox News (https://moxie.foxnews.com/google-publisher/world.xml)
+2026-03-10 18:03:16,646 [INFO] HTTP Request: GET https://moxie.foxnews.com/google-publisher/world.xml "HTTP/1.1 200 OK"
+2026-03-10 18:03:16,795 [INFO] Fetched 25 articles from Fox News
+2026-03-10 18:03:16,812 [INFO] Fetching: France 24 PT (https://www.france24.com/pt/rss)
+2026-03-10 18:03:18,032 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:03:18,746 [INFO] HTTP Request: GET https://www.france24.com/pt/rss "HTTP/1.1 404 Not Found"
+2026-03-10 18:03:18,957 [ERROR] HTTP error 404 for France 24 PT
+2026-03-10 18:03:18,977 [INFO] Fetching: Reuters (https://feeds.reuters.com/reuters/topNews)
+2026-03-10 18:03:19,418 [ERROR] Error fetching Reuters: [Errno 11001] getaddrinfo failed
+2026-03-10 18:03:19,438 [INFO] Fetching: The Guardian (https://www.theguardian.com/world/rss)
+2026-03-10 18:03:20,148 [INFO] HTTP Request: GET https://www.theguardian.com/world/rss "HTTP/1.1 200 OK"
+2026-03-10 18:03:20,260 [INFO] Fetched 45 articles from The Guardian
+2026-03-10 18:03:20,276 [INFO] Fetching: "iran" - Google News (http://news.google.com/news?hl=en&gl=us&q=iran&um=1&ie=UTF-8&output=rss)
+2026-03-10 18:03:21,164 [INFO] HTTP Request: GET http://news.google.com/news?hl=en&gl=us&q=iran&um=1&ie=UTF-8&output=rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:03:21,350 [INFO] HTTP Request: GET https://news.google.com/news?hl=en&gl=us&q=iran&um=1&ie=UTF-8&output=rss "HTTP/1.1 302 Found"
+2026-03-10 18:03:21,452 [INFO] HTTP Request: GET https://news.google.com/rss/search?hl=en&gl=us&q=iran&um=1&ie=UTF-8 "HTTP/1.1 302 Found"
+2026-03-10 18:03:22,015 [INFO] HTTP Request: GET https://news.google.com/rss/search?hl=en-US&gl=US&q=iran&um=1&ie=UTF-8&ceid=US:en "HTTP/1.1 200 OK"
+2026-03-10 18:03:22,125 [INFO] Fetched 50 articles from "iran" - Google News
+2026-03-10 18:03:22,150 [INFO] Fetching: \u0635\u0641\u062d\u0647 \u0645\u0642\u0627\u0644\u0627\u062a \u0627\u06cc\u0631\u0627\u0646\u200c\u0648\u0627\u06cc\u0631 (http://iranwire.com/feed/)
+2026-03-10 18:03:22,635 [INFO] HTTP Request: GET http://iranwire.com/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:03:23,666 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:03:23,715 [INFO] HTTP Request: GET https://iranwire.com/feed/ "HTTP/1.1 302 Found"
+2026-03-10 18:03:25,196 [INFO] HTTP Request: GET https://g1.globo.com/politica/blog/andreia-sadi/post/2026/03/10/delegado-trend-caso-ela-diga-nao.ghtml "HTTP/1.1 200 OK"
+2026-03-10 18:03:28,966 [INFO] HTTP Request: GET https://iranwire.com/fa/feed/ "HTTP/1.1 200 OK"
+2026-03-10 18:03:30,701 [INFO] Fetched 50 articles from \u0635\u0641\u062d\u0647 \u0645\u0642\u0627\u0644\u0627\u062a \u0627\u06cc\u0631\u0627\u0646\u200c\u0648\u0627\u06cc\u0631
+2026-03-10 18:03:30,730 [INFO] Fetching: Programming Digest (http://programmingdigest.net/digests/feed.rss)
+2026-03-10 18:03:31,207 [INFO] HTTP Request: GET http://programmingdigest.net/digests/feed.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:03:31,491 [INFO] HTTP Request: GET https://programmingdigest.net/digests/feed.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:03:31,515 [INFO] HTTP Request: GET https://programmingdigest.net/newsletters.rss "HTTP/1.1 200 OK"
+2026-03-10 18:03:31,554 [INFO] Fetched 5 articles from Programming Digest
+2026-03-10 18:03:31,571 [INFO] Fetching: Programming Historian (http://programminghistorian.org/feed.xml)
+2026-03-10 18:03:32,152 [INFO] HTTP Request: GET http://programminghistorian.org/feed.xml "HTTP/1.1 200 OK"
+2026-03-10 18:03:32,221 [INFO] Fetched 50 articles from Programming Historian
+2026-03-10 18:03:32,242 [INFO] Fetching: Programming With Wolfgang (https://www.programmingwithwolfgang.com/feed.xml)
+2026-03-10 18:03:33,268 [INFO] HTTP Request: GET https://www.programmingwithwolfgang.com/feed.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:03:33,802 [INFO] HTTP Request: GET https://programmingwithwolfgang.com/feed.xml "HTTP/1.1 200 OK"
+2026-03-10 18:03:33,829 [INFO] Fetched 5 articles from Programming With Wolfgang
+2026-03-10 18:03:33,845 [INFO] Fetching: Programming on Medium (https://medium.com/feed/topic/programming)
+2026-03-10 18:03:34,552 [INFO] HTTP Request: GET https://medium.com/feed/topic/programming "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:03:34,763 [INFO] HTTP Request: GET https://medium.com/feed/tag/programming "HTTP/1.1 200 OK"
+2026-03-10 18:03:34,801 [INFO] Fetched 10 articles from Programming on Medium
+2026-03-10 18:03:34,823 [INFO] Fetching: The Art, Science, and Engineering of Programming (http://programming-journal.org/feed.rss)
+2026-03-10 18:03:35,270 [INFO] HTTP Request: GET http://programming-journal.org/feed.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:03:35,463 [INFO] HTTP Request: GET https://programming-journal.org/feed.rss "HTTP/1.1 200 OK"
+2026-03-10 18:03:35,514 [INFO] Fetched 25 articles from The Art, Science, and Engineering of Programming
+2026-03-10 18:03:35,535 [INFO] Fetching: programming (http://www.reddit.com/r/programming/.rss)
+2026-03-10 18:03:36,011 [INFO] HTTP Request: GET http://www.reddit.com/r/programming/.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-10 18:03:36,684 [INFO] HTTP Request: GET https://www.reddit.com/r/programming/.rss "HTTP/1.1 200 OK"
+2026-03-10 18:03:36,867 [INFO] Fetched 25 articles from programming
+2026-03-10 18:03:36,889 [INFO] Fetching: Socialismo Actual (http://socialismoactual.blogspot.com/feeds/posts/default)
+2026-03-10 18:03:38,205 [INFO] HTTP Request: GET http://socialismoactual.blogspot.com/feeds/posts/default "HTTP/1.1 200 OK"
+2026-03-10 18:03:38,387 [INFO] Fetched 25 articles from Socialismo Actual
+2026-03-10 18:03:38,409 [INFO] Fetching: Ars Technica (https://feeds.arstechnica.com/arstechnica/index)
+2026-03-10 18:03:39,916 [INFO] HTTP Request: GET https://feeds.arstechnica.com/arstechnica/index "HTTP/1.1 200 OK"
+2026-03-10 18:03:39,980 [INFO] Fetched 20 articles from Ars Technica
+2026-03-10 18:03:39,998 [INFO] Fetching: Hacker News (https://hnrss.org/frontpage)
+2026-03-10 18:03:41,075 [INFO] HTTP Request: GET https://hnrss.org/frontpage "HTTP/1.1 200 OK"
+2026-03-10 18:03:41,126 [INFO] Fetched 20 articles from Hacker News
+2026-03-10 18:03:41,142 [INFO] Fetching: MIT Tech Review (https://www.technologyreview.com/feed/)
+2026-03-10 18:03:41,675 [INFO] HTTP Request: GET https://www.technologyreview.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 18:03:41,800 [INFO] Fetched 10 articles from MIT Tech Review
+2026-03-10 18:03:41,815 [INFO] Fetching: TechCrunch (https://techcrunch.com/feed/)
+2026-03-10 18:03:42,360 [INFO] HTTP Request: GET https://techcrunch.com/feed/ "HTTP/1.1 200 OK"
+2026-03-10 18:03:42,401 [INFO] Fetched 20 articles from TechCrunch
+2026-03-10 18:03:42,417 [INFO] Fetching: The Verge (https://www.theverge.com/rss/index.xml)
+2026-03-10 18:03:42,925 [INFO] HTTP Request: GET https://www.theverge.com/rss/index.xml "HTTP/1.1 200 OK"
+2026-03-10 18:03:42,995 [INFO] Fetched 10 articles from The Verge
+2026-03-10 18:03:43,011 [INFO] Fetch completo: 1281 artigos novos
+2026-03-10 18:03:43,011 [INFO] Fetch conclu�do: 1281 artigos novos
+2026-03-10 18:03:46,010 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 18:03:46,532 [INFO] Analisado artigo 164 completo
+2026-03-10 18:03:49,023 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:03:49,024 [INFO] A analisar parte 1/1 do artigo 165
+2026-03-10 18:03:51,477 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:03:53,618 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:04:23,663 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:04:41,460 [INFO] HTTP Request: GET https://noticias.uol.com.br/ultimas-noticias/reuters/2026/03/10/embaixador-do-ira-na-onu-diz-que-quase-10000-locais-civis-foram-destruidos-por-bombardeios-israelenses-e-norte-americanos.htm "HTTP/1.1 403 Forbidden"
+2026-03-10 18:04:41,460 [ERROR] Error fetching content from https://noticias.uol.com.br/ultimas-noticias/reuters/2026/03/10/embaixador-do-ira-na-onu-diz-que-quase-10000-locais-civis-foram-destruidos-por-bombardeios-israelenses-e-norte-americanos.htm: Client error '403 Forbidden' for url 'https://noticias.uol.com.br/ultimas-noticias/reuters/2026/03/10/embaixador-do-ira-na-onu-diz-que-quase-10000-locais-civis-foram-destruidos-por-bombardeios-israelenses-e-norte-americanos.htm'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+2026-03-10 18:04:44,838 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-10 18:04:45,363 [INFO] Analisado artigo 165 completo
+2026-03-10 18:04:47,833 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:04:47,833 [INFO] A analisar parte 1/1 do artigo 3008
+2026-03-10 18:04:50,318 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-10 18:04:53,615 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:36:43,849 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:36:43,852 [INFO] Scheduler iniciado: intervalo de 30 minutos
+2026-03-11 06:36:43,857 [INFO] System tray configurado
+2026-03-11 06:36:43,857 [INFO] Fetching: El País (https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada)
+2026-03-11 06:36:44,729 [INFO] HTTP Request: GET https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada "HTTP/1.1 200 OK"
+2026-03-11 06:36:45,304 [INFO] Fetched 50 articles from El País
+2026-03-11 06:36:45,319 [INFO] Fetching: Infobae (https://www.infobae.com/feeds/rss/)
+2026-03-11 06:36:45,893 [INFO] HTTP Request: GET https://www.infobae.com/feeds/rss/ "HTTP/1.1 404 Not Found"
+2026-03-11 06:36:45,894 [ERROR] HTTP error 404 for Infobae
+2026-03-11 06:36:45,907 [INFO] Fetching: Anarquia | Anarquista | Anarquismo – Ⓐnarquista.net (http://www.anarquista.net/feed/)
+2026-03-11 06:36:46,633 [INFO] HTTP Request: GET http://www.anarquista.net/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:36:47,076 [INFO] HTTP Request: GET https://www.anarquista.net/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:36:47,841 [INFO] Fetched 50 articles from Anarquia | Anarquista | Anarquismo – Ⓐnarquista.net
+2026-03-11 06:36:47,855 [INFO] Fetching: El Libertario: Anarquismo y movimientos sociales autónomos (http://periodicoellibertario.blogspot.com/feeds/posts/default)
+2026-03-11 06:36:48,146 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:36:48,146 [INFO] A analisar parte 1/1 do artigo 3860
+2026-03-11 06:36:48,154 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:36:48,259 [INFO] HTTP Request: GET http://periodicoellibertario.blogspot.com/feeds/posts/default "HTTP/1.1 200 OK"
+2026-03-11 06:36:49,402 [INFO] Fetched 25 articles from El Libertario: Anarquismo y movimientos sociales autónomos
+2026-03-11 06:36:49,426 [INFO] Fetching: Revista de Antropologia (http://www.revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom)
+2026-03-11 06:36:49,617 [INFO] HTTP Request: GET http://www.revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:36:49,734 [INFO] HTTP Request: GET https://www.revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:36:50,041 [INFO] HTTP Request: GET https://revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 302 Found"
+2026-03-11 06:36:52,014 [INFO] HTTP Request: GET https://revistas.usp.br/ra/pt_BR/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 200 OK"
+2026-03-11 06:36:52,101 [INFO] Fetched 30 articles from Revista de Antropologia
+2026-03-11 06:36:52,114 [INFO] Fetching: Agência Brasil (https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml)
+2026-03-11 06:36:52,297 [INFO] HTTP Request: GET https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml "HTTP/1.1 200 OK"
+2026-03-11 06:36:52,337 [INFO] Fetched 10 articles from Agência Brasil
+2026-03-11 06:36:52,352 [INFO] Fetching: ArchDaily Brasil (http://www.archdaily.com.br/feed/rss/)
+2026-03-11 06:36:52,712 [INFO] HTTP Request: GET http://www.archdaily.com.br/feed/rss/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:36:52,872 [INFO] HTTP Request: GET http://www.archdaily.com.br/feed/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:36:54,043 [INFO] HTTP Request: GET https://feeds.feedburner.com/ArchdailyBR "HTTP/1.1 200 OK"
+2026-03-11 06:36:54,091 [INFO] Fetched 18 articles from ArchDaily Brasil
+2026-03-11 06:36:54,105 [INFO] Fetching: Brasil - Correio Braziliense (http://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml)
+2026-03-11 06:36:54,171 [INFO] HTTP Request: GET http://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:36:54,200 [INFO] HTTP Request: GET https://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:36:54,249 [INFO] HTTP Request: GET https://www.correiobraziliense.com.br/brasil/rss.xml "HTTP/1.1 200 OK"
+2026-03-11 06:36:54,352 [INFO] Fetched 30 articles from Brasil - Correio Braziliense
+2026-03-11 06:36:54,366 [INFO] Fetching: Brasil de Fato (https://www.brasildefato.com.br/rss)
+2026-03-11 06:36:56,045 [INFO] HTTP Request: GET https://www.brasildefato.com.br/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:36:56,157 [INFO] HTTP Request: GET https://www.brasildefato.com.br/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:36:56,272 [INFO] Fetched 50 articles from Brasil de Fato
+2026-03-11 06:36:56,288 [INFO] Fetching: Concursos no Brasil (http://concursosnobrasil.com.br/feed/)
+2026-03-11 06:36:56,549 [INFO] HTTP Request: GET http://concursosnobrasil.com.br/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:36:57,063 [INFO] HTTP Request: GET https://concursosnobrasil.com/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:36:57,083 [INFO] Fetched 15 articles from Concursos no Brasil
+2026-03-11 06:36:57,111 [INFO] Fetching: Folha de S.Paulo (https://feeds.folha.uol.com.br/emcimadahora/rss091.xml)
+2026-03-11 06:36:57,491 [INFO] HTTP Request: GET https://feeds.folha.uol.com.br/emcimadahora/rss091.xml "HTTP/1.1 200 OK"
+2026-03-11 06:36:57,558 [INFO] Fetched 50 articles from Folha de S.Paulo
+2026-03-11 06:36:57,574 [INFO] Fetching: G1 / Globo (https://g1.globo.com/rss/g1/)
+2026-03-11 06:36:57,742 [INFO] HTTP Request: GET https://g1.globo.com/rss/g1/ "HTTP/1.1 200 OK"
+2026-03-11 06:36:57,898 [INFO] Fetched 50 articles from G1 / Globo
+2026-03-11 06:36:57,916 [INFO] Fetching: IGN Brasil (http://br.ign.com/feed.xml)
+2026-03-11 06:36:58,225 [INFO] HTTP Request: GET http://br.ign.com/feed.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:36:58,350 [INFO] HTTP Request: GET https://br.ign.com/feed.xml "HTTP/1.1 200 OK"
+2026-03-11 06:36:58,388 [INFO] Fetched 40 articles from IGN Brasil
+2026-03-11 06:36:58,403 [INFO] Fetching: Rolling Stone Brasil (http://rollingstone.com.br/feed/)
+2026-03-11 06:36:58,552 [INFO] HTTP Request: GET http://rollingstone.com.br/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:36:58,816 [INFO] HTTP Request: GET https://rollingstone.com.br/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:36:58,870 [INFO] Fetched 10 articles from Rolling Stone Brasil
+2026-03-11 06:36:58,886 [INFO] Fetching: UOL Notícias (https://rss.uol.com.br/feed/noticias.xml)
+2026-03-11 06:36:59,061 [INFO] HTTP Request: GET https://rss.uol.com.br/feed/noticias.xml "HTTP/1.1 200 OK"
+2026-03-11 06:36:59,081 [INFO] Fetched 15 articles from UOL Notícias
+2026-03-11 06:36:59,098 [INFO] Fetching: China - South China Morning Post (http://www.scmp.com/rss/china.xml)
+2026-03-11 06:36:59,246 [INFO] HTTP Request: GET http://www.scmp.com/rss/china.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:36:59,718 [INFO] HTTP Request: GET https://www.scmp.com/rss/china.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:00,067 [INFO] HTTP Request: GET https://www.scmp.com/rss/4/feed "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:00,106 [INFO] HTTP Request: GET http://www.scmp.com/rss/4/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:00,471 [INFO] HTTP Request: GET https://www.scmp.com/rss/4/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:37:00,543 [INFO] Fetched 50 articles from China - South China Morning Post
+2026-03-11 06:37:00,560 [INFO] Fetching: China Defense Blog (http://china-defense.blogspot.com/feeds/posts/default)
+2026-03-11 06:37:01,104 [INFO] HTTP Request: GET http://china-defense.blogspot.com/feeds/posts/default "HTTP/1.1 200 OK"
+2026-03-11 06:37:01,167 [INFO] Fetched 25 articles from China Defense Blog
+2026-03-11 06:37:01,182 [INFO] Fetching: China Digital Times (CDT) (http://chinadigitaltimes.net/feed/)
+2026-03-11 06:37:01,421 [INFO] HTTP Request: GET http://chinadigitaltimes.net/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:01,733 [INFO] HTTP Request: GET https://chinadigitaltimes.net/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:37:02,257 [INFO] Fetched 15 articles from China Digital Times (CDT)
+2026-03-11 06:37:02,272 [INFO] Fetching: NASA News (https://www.nasa.gov/rss/dyn/breaking_news.rss)
+2026-03-11 06:37:02,575 [INFO] HTTP Request: GET https://www.nasa.gov/rss/dyn/breaking_news.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:02,618 [INFO] HTTP Request: GET https://www.nasa.gov/news-release/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:37:02,801 [INFO] Fetched 10 articles from NASA News
+2026-03-11 06:37:02,818 [INFO] Fetching: Nature (https://www.nature.com/nature.rss)
+2026-03-11 06:37:02,985 [INFO] HTTP Request: GET https://www.nature.com/nature.rss "HTTP/1.1 200 OK"
+2026-03-11 06:37:03,163 [INFO] Fetched 50 articles from Nature
+2026-03-11 06:37:03,180 [INFO] Fetching: Scientific American (http://rss.sciam.com/ScientificAmerican-Global)
+2026-03-11 06:37:04,225 [INFO] HTTP Request: GET http://rss.sciam.com/ScientificAmerican-Global "HTTP/1.1 200 OK"
+2026-03-11 06:37:04,252 [INFO] Fetched 50 articles from Scientific American
+2026-03-11 06:37:04,267 [INFO] Fetching: Bloomberg (https://feeds.bloomberg.com/markets/news.rss)
+2026-03-11 06:37:04,889 [INFO] HTTP Request: GET https://feeds.bloomberg.com/markets/news.rss "HTTP/1.1 200 OK"
+2026-03-11 06:37:04,918 [INFO] Fetched 30 articles from Bloomberg
+2026-03-11 06:37:04,936 [INFO] Fetching: Financial Times (https://www.ft.com/rss/home)
+2026-03-11 06:37:06,116 [INFO] HTTP Request: GET https://www.ft.com/rss/home "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:06,396 [INFO] HTTP Request: GET https://www.ft.com/rss/home/international "HTTP/1.1 200 OK"
+2026-03-11 06:37:06,419 [INFO] Fetched 11 articles from Financial Times
+2026-03-11 06:37:06,438 [INFO] Fetching: Fashion - ELLE (http://www.elle.com/rss/fashion.xml)
+2026-03-11 06:37:06,614 [INFO] HTTP Request: GET http://www.elle.com/rss/fashion.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:06,854 [INFO] HTTP Request: GET https://www.elle.com/rss/fashion.xml "HTTP/1.1 200 OK"
+2026-03-11 06:37:06,886 [INFO] Fetched 50 articles from Fashion - ELLE
+2026-03-11 06:37:06,901 [INFO] Fetching: Fashion Gone Rogue (http://fashiongonerogue.com/feed/)
+2026-03-11 06:37:07,520 [INFO] HTTP Request: GET http://fashiongonerogue.com/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:08,323 [INFO] HTTP Request: GET http://www.fashiongonerogue.com/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:37:08,350 [INFO] Fetched 10 articles from Fashion Gone Rogue
+2026-03-11 06:37:08,364 [INFO] Fetching: The Fashionography (http://thefashionography.com/feed/)
+2026-03-11 06:37:09,326 [INFO] HTTP Request: GET http://thefashionography.com/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:37:09,358 [INFO] Fetched 30 articles from The Fashionography
+2026-03-11 06:37:09,375 [INFO] Fetching: fashionunited.uk (https://fashionunited.uk/rss-news)
+2026-03-11 06:37:09,736 [INFO] HTTP Request: GET https://fashionunited.uk/rss-news "HTTP/1.1 200 OK"
+2026-03-11 06:37:10,082 [INFO] Fetched 50 articles from fashionunited.uk
+2026-03-11 06:37:10,097 [INFO] Fetching: Al Jazeera (https://www.aljazeera.com/xml/rss/all.xml)
+2026-03-11 06:37:10,228 [INFO] HTTP Request: GET https://www.aljazeera.com/xml/rss/all.xml "HTTP/1.1 200 OK"
+2026-03-11 06:37:10,249 [INFO] Fetched 25 articles from Al Jazeera
+2026-03-11 06:37:10,265 [INFO] Fetching: Associated Press (https://rsshub.app/apnews/topics/apf-topnews)
+2026-03-11 06:37:10,458 [INFO] HTTP Request: GET https://rsshub.app/apnews/topics/apf-topnews "HTTP/1.1 403 Forbidden"
+2026-03-11 06:37:10,459 [ERROR] HTTP error 403 for Associated Press
+2026-03-11 06:37:10,472 [INFO] Fetching: BBC News (http://feeds.bbci.co.uk/news/rss.xml)
+2026-03-11 06:37:10,555 [INFO] HTTP Request: GET http://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 302 Moved Temporarily"
+2026-03-11 06:37:10,821 [INFO] HTTP Request: GET https://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 200 OK"
+2026-03-11 06:37:10,845 [INFO] Fetched 39 articles from BBC News
+2026-03-11 06:37:10,864 [INFO] Fetching: DW Brasil (https://rss.dw.com/rdf/rss-br-todas)
+2026-03-11 06:37:11,984 [INFO] HTTP Request: GET https://rss.dw.com/rdf/rss-br-todas "HTTP/1.1 200 OK"
+2026-03-11 06:37:11,985 [WARNING] Feed bozo error for DW Brasil: <unknown>:2:0: syntax error
+2026-03-11 06:37:11,985 [INFO] Fetching: Fox News (https://moxie.foxnews.com/google-publisher/world.xml)
+2026-03-11 06:37:12,198 [INFO] HTTP Request: GET https://moxie.foxnews.com/google-publisher/world.xml "HTTP/1.1 200 OK"
+2026-03-11 06:37:12,297 [INFO] Fetched 25 articles from Fox News
+2026-03-11 06:37:12,312 [INFO] Fetching: France 24 PT (https://www.france24.com/pt/rss)
+2026-03-11 06:37:13,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:37:14,434 [INFO] HTTP Request: GET https://www.france24.com/pt/rss "HTTP/1.1 404 Not Found"
+2026-03-11 06:37:14,447 [ERROR] HTTP error 404 for France 24 PT
+2026-03-11 06:37:14,459 [INFO] Fetching: Reuters (https://feeds.reuters.com/reuters/topNews)
+2026-03-11 06:37:14,501 [ERROR] Error fetching Reuters: [Errno -2] Name or service not known
+2026-03-11 06:37:14,519 [INFO] Fetching: The Guardian (https://www.theguardian.com/world/rss)
+2026-03-11 06:37:14,858 [INFO] HTTP Request: GET https://www.theguardian.com/world/rss "HTTP/1.1 200 OK"
+2026-03-11 06:37:14,938 [INFO] Fetched 45 articles from The Guardian
+2026-03-11 06:37:14,952 [INFO] Fetching: "iran" - Google News (http://news.google.com/news?hl=en&gl=us&q=iran&um=1&ie=UTF-8&output=rss)
+2026-03-11 06:37:15,141 [INFO] HTTP Request: GET http://news.google.com/news?hl=en&gl=us&q=iran&um=1&ie=UTF-8&output=rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:15,673 [INFO] HTTP Request: GET https://news.google.com/news?hl=en&gl=us&q=iran&um=1&ie=UTF-8&output=rss "HTTP/1.1 302 Found"
+2026-03-11 06:37:15,701 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:37:15,784 [INFO] HTTP Request: GET https://news.google.com/rss/search?hl=en&gl=us&q=iran&um=1&ie=UTF-8 "HTTP/1.1 302 Found"
+2026-03-11 06:37:16,216 [INFO] Analisado artigo 3860 completo
+2026-03-11 06:37:16,225 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:37:16,225 [INFO] A analisar parte 1/1 do artigo 3907
+2026-03-11 06:37:16,235 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:37:16,643 [INFO] HTTP Request: GET https://news.google.com/rss/search?hl=en-US&gl=US&q=iran&um=1&ie=UTF-8&ceid=US:en "HTTP/1.1 200 OK"
+2026-03-11 06:37:16,762 [INFO] Fetched 50 articles from "iran" - Google News
+2026-03-11 06:37:16,780 [INFO] Fetching: صفحه مقالات ایران‌وایر (http://iranwire.com/feed/)
+2026-03-11 06:37:16,991 [INFO] HTTP Request: GET http://iranwire.com/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:18,026 [INFO] HTTP Request: GET https://iranwire.com/feed/ "HTTP/1.1 302 Found"
+2026-03-11 06:37:22,496 [INFO] HTTP Request: GET https://iranwire.com/fa/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:37:23,984 [INFO] Fetched 50 articles from صفحه مقالات ایران‌وایر
+2026-03-11 06:37:24,001 [INFO] Fetching: Programming Digest (http://programmingdigest.net/digests/feed.rss)
+2026-03-11 06:37:24,216 [INFO] HTTP Request: GET http://programmingdigest.net/digests/feed.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:24,891 [INFO] HTTP Request: GET https://programmingdigest.net/digests/feed.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:24,932 [INFO] HTTP Request: GET https://programmingdigest.net/newsletters.rss "HTTP/1.1 200 OK"
+2026-03-11 06:37:24,961 [INFO] Fetched 5 articles from Programming Digest
+2026-03-11 06:37:24,973 [INFO] Fetching: Programming Historian (http://programminghistorian.org/feed.xml)
+2026-03-11 06:37:25,519 [INFO] HTTP Request: GET http://programminghistorian.org/feed.xml "HTTP/1.1 200 OK"
+2026-03-11 06:37:25,554 [INFO] Fetched 50 articles from Programming Historian
+2026-03-11 06:37:25,567 [INFO] Fetching: Programming With Wolfgang (https://www.programmingwithwolfgang.com/feed.xml)
+2026-03-11 06:37:26,357 [INFO] HTTP Request: GET https://www.programmingwithwolfgang.com/feed.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:27,142 [INFO] HTTP Request: GET https://programmingwithwolfgang.com/feed.xml "HTTP/1.1 200 OK"
+2026-03-11 06:37:27,158 [INFO] Fetched 5 articles from Programming With Wolfgang
+2026-03-11 06:37:27,173 [INFO] Fetching: Programming on Medium (https://medium.com/feed/topic/programming)
+2026-03-11 06:37:27,481 [INFO] HTTP Request: GET https://medium.com/feed/topic/programming "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:27,801 [INFO] HTTP Request: GET https://medium.com/feed/tag/programming "HTTP/1.1 200 OK"
+2026-03-11 06:37:27,825 [INFO] Fetched 10 articles from Programming on Medium
+2026-03-11 06:37:27,839 [INFO] Fetching: The Art, Science, and Engineering of Programming (http://programming-journal.org/feed.rss)
+2026-03-11 06:37:28,356 [INFO] HTTP Request: GET http://programming-journal.org/feed.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:28,859 [INFO] HTTP Request: GET https://programming-journal.org/feed.rss "HTTP/1.1 200 OK"
+2026-03-11 06:37:28,891 [INFO] Fetched 25 articles from The Art, Science, and Engineering of Programming
+2026-03-11 06:37:28,909 [INFO] Fetching: programming (http://www.reddit.com/r/programming/.rss)
+2026-03-11 06:37:29,087 [INFO] HTTP Request: GET http://www.reddit.com/r/programming/.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:37:29,909 [INFO] HTTP Request: GET https://www.reddit.com/r/programming/.rss "HTTP/1.1 200 OK"
+2026-03-11 06:37:30,130 [INFO] Fetched 25 articles from programming
+2026-03-11 06:37:30,145 [INFO] Fetching: Socialismo Actual (http://socialismoactual.blogspot.com/feeds/posts/default)
+2026-03-11 06:37:30,534 [INFO] HTTP Request: GET http://socialismoactual.blogspot.com/feeds/posts/default "HTTP/1.1 200 OK"
+2026-03-11 06:37:30,724 [INFO] Fetched 25 articles from Socialismo Actual
+2026-03-11 06:37:30,740 [INFO] Fetching: Ars Technica (https://feeds.arstechnica.com/arstechnica/index)
+2026-03-11 06:37:30,918 [INFO] HTTP Request: GET https://feeds.arstechnica.com/arstechnica/index "HTTP/1.1 200 OK"
+2026-03-11 06:37:30,953 [INFO] Fetched 20 articles from Ars Technica
+2026-03-11 06:37:30,968 [INFO] Fetching: Hacker News (https://hnrss.org/frontpage)
+2026-03-11 06:37:43,647 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:37:43,723 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:37:44,239 [INFO] Analisado artigo 3907 completo
+2026-03-11 06:37:44,248 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:37:44,249 [INFO] A analisar parte 1/1 do artigo 3884
+2026-03-11 06:37:44,256 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:37:46,138 [ERROR] Timeout fetching Hacker News
+2026-03-11 06:37:46,152 [INFO] Fetching: MIT Tech Review (https://www.technologyreview.com/feed/)
+2026-03-11 06:37:46,453 [INFO] HTTP Request: GET https://www.technologyreview.com/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:37:46,559 [INFO] Fetched 10 articles from MIT Tech Review
+2026-03-11 06:37:46,572 [INFO] Fetching: TechCrunch (https://techcrunch.com/feed/)
+2026-03-11 06:37:46,766 [INFO] HTTP Request: GET https://techcrunch.com/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:37:46,795 [INFO] Fetched 20 articles from TechCrunch
+2026-03-11 06:37:46,811 [INFO] Fetching: The Verge (https://www.theverge.com/rss/index.xml)
+2026-03-11 06:37:47,012 [INFO] HTTP Request: GET https://www.theverge.com/rss/index.xml "HTTP/1.1 200 OK"
+2026-03-11 06:37:47,048 [INFO] Fetched 10 articles from The Verge
+2026-03-11 06:37:47,063 [INFO] Fetch completo: 1263 artigos novos
+2026-03-11 06:37:47,063 [INFO] Fetch concluído: 1263 artigos novos
+2026-03-11 06:38:01,442 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:38:01,963 [INFO] Analisado artigo 3884 completo
+2026-03-11 06:38:01,972 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:38:01,973 [INFO] A analisar parte 1/1 do artigo 3898
+2026-03-11 06:38:01,981 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:38:13,626 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:38:20,908 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:38:21,424 [INFO] Analisado artigo 3898 completo
+2026-03-11 06:38:21,432 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:38:21,432 [INFO] A analisar parte 1/1 do artigo 3861
+2026-03-11 06:38:21,439 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:38:43,651 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:38:46,590 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:38:47,105 [INFO] Analisado artigo 3861 completo
+2026-03-11 06:38:47,114 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:38:47,114 [INFO] A analisar parte 1/1 do artigo 3875
+2026-03-11 06:38:47,122 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:39:13,626 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:39:15,139 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:39:15,657 [INFO] Analisado artigo 3875 completo
+2026-03-11 06:39:15,665 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:39:15,665 [INFO] A analisar parte 1/1 do artigo 3901
+2026-03-11 06:39:15,674 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:39:38,019 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:39:38,538 [INFO] Analisado artigo 3901 completo
+2026-03-11 06:39:38,545 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:39:38,546 [INFO] A analisar parte 1/1 do artigo 3877
+2026-03-11 06:39:38,553 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:39:43,868 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:39:59,195 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:39:59,710 [INFO] Analisado artigo 3877 completo
+2026-03-11 06:39:59,719 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:39:59,719 [INFO] A analisar parte 1/1 do artigo 3893
+2026-03-11 06:39:59,729 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:40:13,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:40:43,651 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:40:47,899 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:40:48,413 [INFO] Analisado artigo 3893 completo
+2026-03-11 06:40:48,424 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:40:48,424 [INFO] A analisar parte 1/1 do artigo 3880
+2026-03-11 06:40:48,433 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:41:13,070 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:41:13,584 [INFO] Analisado artigo 3880 completo
+2026-03-11 06:41:13,592 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:41:13,592 [INFO] A analisar parte 1/1 do artigo 3909
+2026-03-11 06:41:13,600 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:41:13,627 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:41:21,972 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:41:22,487 [INFO] Analisado artigo 3909 completo
+2026-03-11 06:41:22,494 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:41:22,494 [INFO] A analisar parte 1/1 do artigo 3862
+2026-03-11 06:41:22,501 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:41:41,511 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:41:42,029 [INFO] Analisado artigo 3862 completo
+2026-03-11 06:41:42,037 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:41:42,038 [INFO] A analisar parte 1/1 do artigo 3864
+2026-03-11 06:41:42,044 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:41:43,641 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:42:09,773 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:42:10,288 [INFO] Analisado artigo 3864 completo
+2026-03-11 06:42:10,294 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:42:10,294 [INFO] A analisar parte 1/1 do artigo 3867
+2026-03-11 06:42:10,301 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:42:13,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:42:43,639 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:42:46,673 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:42:47,187 [INFO] Analisado artigo 3867 completo
+2026-03-11 06:42:47,195 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:42:47,196 [INFO] A analisar parte 1/1 do artigo 3891
+2026-03-11 06:42:47,205 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:43:01,504 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:43:02,018 [INFO] Analisado artigo 3891 completo
+2026-03-11 06:43:02,025 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:43:02,025 [INFO] A analisar parte 1/1 do artigo 3865
+2026-03-11 06:43:02,031 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:43:13,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:43:23,230 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:43:23,744 [INFO] Analisado artigo 3865 completo
+2026-03-11 06:43:23,752 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:43:23,752 [INFO] A analisar parte 1/1 do artigo 3868
+2026-03-11 06:43:23,761 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:43:43,640 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:43:44,301 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:43:44,817 [INFO] Analisado artigo 3868 completo
+2026-03-11 06:43:44,824 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:43:44,824 [INFO] A analisar parte 1/1 do artigo 3881
+2026-03-11 06:43:44,831 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:44:11,115 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:44:11,633 [INFO] Analisado artigo 3881 completo
+2026-03-11 06:44:11,641 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:44:11,641 [INFO] A analisar parte 1/1 do artigo 3886
+2026-03-11 06:44:11,648 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:44:13,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:44:43,641 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:44:55,514 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:44:56,030 [INFO] Analisado artigo 3886 completo
+2026-03-11 06:44:56,039 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:44:56,039 [INFO] A analisar parte 1/1 do artigo 3866
+2026-03-11 06:44:56,046 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:45:13,626 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:45:43,640 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:45:43,967 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:45:44,481 [INFO] Analisado artigo 3866 completo
+2026-03-11 06:45:44,488 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:45:44,488 [INFO] A analisar parte 1/1 do artigo 3869
+2026-03-11 06:45:44,495 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:46:13,002 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:46:13,517 [INFO] Analisado artigo 3869 completo
+2026-03-11 06:46:13,525 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:46:13,526 [INFO] A analisar parte 1/1 do artigo 3870
+2026-03-11 06:46:13,532 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:46:13,623 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:46:43,642 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:47:10,257 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:47:10,775 [INFO] Analisado artigo 3870 completo
+2026-03-11 06:47:10,783 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:47:10,783 [INFO] A analisar parte 1/1 do artigo 3871
+2026-03-11 06:47:10,790 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:47:13,623 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:47:43,642 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:47:52,379 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:47:52,894 [INFO] Analisado artigo 3871 completo
+2026-03-11 06:47:52,901 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:47:52,901 [INFO] A analisar parte 1/1 do artigo 3872
+2026-03-11 06:47:52,908 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:48:13,623 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:48:43,640 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:48:45,585 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:48:46,098 [INFO] Analisado artigo 3872 completo
+2026-03-11 06:48:46,106 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:48:46,106 [INFO] A analisar parte 1/1 do artigo 3874
+2026-03-11 06:48:46,114 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:49:02,906 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:49:03,419 [INFO] Analisado artigo 3874 completo
+2026-03-11 06:49:03,426 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:49:03,427 [INFO] A analisar parte 1/1 do artigo 3878
+2026-03-11 06:49:03,433 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:49:13,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:49:20,458 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:49:20,971 [INFO] Analisado artigo 3878 completo
+2026-03-11 06:49:20,978 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:49:20,978 [INFO] A analisar parte 1/1 do artigo 3879
+2026-03-11 06:49:20,985 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:49:34,288 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:49:34,804 [INFO] Analisado artigo 3879 completo
+2026-03-11 06:49:34,811 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:49:34,811 [INFO] A analisar parte 1/1 do artigo 3882
+2026-03-11 06:49:34,818 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:49:43,645 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:49:50,852 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:49:51,370 [INFO] Analisado artigo 3882 completo
+2026-03-11 06:49:51,378 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:49:51,378 [INFO] A analisar parte 1/1 do artigo 3883
+2026-03-11 06:49:51,385 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:50:03,460 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:50:03,977 [INFO] Analisado artigo 3883 completo
+2026-03-11 06:50:03,984 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:50:03,985 [INFO] A analisar parte 1/1 do artigo 3885
+2026-03-11 06:50:03,991 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:50:13,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:50:20,164 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:50:20,681 [INFO] Analisado artigo 3885 completo
+2026-03-11 06:50:20,688 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:50:20,688 [INFO] A analisar parte 1/1 do artigo 4826
+2026-03-11 06:50:20,695 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:50:40,694 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:50:41,209 [INFO] Analisado artigo 4826 completo
+2026-03-11 06:50:41,216 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:50:41,216 [INFO] A analisar parte 1/1 do artigo 5032
+2026-03-11 06:50:41,223 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:50:43,649 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:51:05,605 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:51:06,118 [INFO] Analisado artigo 5032 completo
+2026-03-11 06:51:06,126 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:51:06,126 [INFO] A analisar parte 1/1 do artigo 4798
+2026-03-11 06:51:06,135 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:51:13,623 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:51:30,524 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:51:31,038 [INFO] Analisado artigo 4798 completo
+2026-03-11 06:51:31,048 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:51:31,048 [INFO] A analisar parte 1/1 do artigo 4822
+2026-03-11 06:51:31,057 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:51:43,797 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:52:11,974 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:52:12,492 [INFO] Analisado artigo 4822 completo
+2026-03-11 06:52:12,500 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:52:12,501 [INFO] A analisar parte 1/1 do artigo 4808
+2026-03-11 06:52:12,507 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:52:13,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:52:34,639 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:52:35,155 [INFO] Analisado artigo 4808 completo
+2026-03-11 06:52:35,162 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:52:35,162 [INFO] A analisar parte 1/1 do artigo 4188
+2026-03-11 06:52:35,168 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:52:43,642 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:52:48,479 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:52:48,993 [INFO] Analisado artigo 4188 completo
+2026-03-11 06:52:49,000 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:52:49,000 [INFO] A analisar parte 1/1 do artigo 4978
+2026-03-11 06:52:49,007 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:54:12,583 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:54:12,584 [INFO] Scheduler iniciado: intervalo de 30 minutos
+2026-03-11 06:54:12,587 [INFO] System tray configurado
+2026-03-11 06:54:12,735 [INFO] Fetching: El País (https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada)
+2026-03-11 06:54:13,467 [INFO] HTTP Request: GET https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada "HTTP/1.1 200 OK"
+2026-03-11 06:54:13,981 [INFO] Fetched 50 articles from El País
+2026-03-11 06:54:13,995 [INFO] Fetching: Infobae (https://www.infobae.com/feeds/rss/)
+2026-03-11 06:54:14,330 [INFO] HTTP Request: GET https://www.infobae.com/feeds/rss/ "HTTP/1.1 404 Not Found"
+2026-03-11 06:54:14,330 [ERROR] HTTP error 404 for Infobae
+2026-03-11 06:54:14,343 [INFO] Fetching: Anarquia | Anarquista | Anarquismo – Ⓐnarquista.net (http://www.anarquista.net/feed/)
+2026-03-11 06:54:14,662 [INFO] HTTP Request: GET http://www.anarquista.net/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:15,039 [INFO] HTTP Request: GET https://www.anarquista.net/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:54:15,691 [INFO] Fetched 50 articles from Anarquia | Anarquista | Anarquismo – Ⓐnarquista.net
+2026-03-11 06:54:15,704 [INFO] Fetching: El Libertario: Anarquismo y movimientos sociales autónomos (http://periodicoellibertario.blogspot.com/feeds/posts/default)
+2026-03-11 06:54:16,577 [INFO] HTTP Request: GET http://periodicoellibertario.blogspot.com/feeds/posts/default "HTTP/1.1 200 OK"
+2026-03-11 06:54:17,592 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:54:17,592 [INFO] A analisar parte 1/1 do artigo 5125
+2026-03-11 06:54:17,597 [INFO] Fetched 25 articles from El Libertario: Anarquismo y movimientos sociales autónomos
+2026-03-11 06:54:17,601 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:54:17,611 [INFO] Fetching: Revista de Antropologia (http://www.revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom)
+2026-03-11 06:54:17,678 [INFO] HTTP Request: GET http://www.revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:17,748 [INFO] HTTP Request: GET https://www.revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:17,982 [INFO] HTTP Request: GET https://revistas.usp.br/ra/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 302 Found"
+2026-03-11 06:54:19,775 [INFO] HTTP Request: GET https://revistas.usp.br/ra/pt_BR/gateway/plugin/WebFeedGatewayPlugin/atom "HTTP/1.1 200 OK"
+2026-03-11 06:54:19,836 [INFO] Fetched 30 articles from Revista de Antropologia
+2026-03-11 06:54:19,849 [INFO] Fetching: Agência Brasil (https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml)
+2026-03-11 06:54:19,933 [INFO] HTTP Request: GET https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml "HTTP/1.1 200 OK"
+2026-03-11 06:54:19,967 [INFO] Fetched 10 articles from Agência Brasil
+2026-03-11 06:54:19,981 [INFO] Fetching: ArchDaily Brasil (http://www.archdaily.com.br/feed/rss/)
+2026-03-11 06:54:20,265 [INFO] HTTP Request: GET http://www.archdaily.com.br/feed/rss/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:20,396 [INFO] HTTP Request: GET http://www.archdaily.com.br/feed/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:21,393 [INFO] HTTP Request: GET https://feeds.feedburner.com/ArchdailyBR "HTTP/1.1 200 OK"
+2026-03-11 06:54:21,434 [INFO] Fetched 18 articles from ArchDaily Brasil
+2026-03-11 06:54:21,448 [INFO] Fetching: Brasil - Correio Braziliense (http://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml)
+2026-03-11 06:54:21,505 [INFO] HTTP Request: GET http://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:21,545 [INFO] HTTP Request: GET https://www.correiobraziliense.com.br/rss/noticia/brasil/rss.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:21,626 [INFO] HTTP Request: GET https://www.correiobraziliense.com.br/brasil/rss.xml "HTTP/1.1 200 OK"
+2026-03-11 06:54:21,738 [INFO] Fetched 30 articles from Brasil - Correio Braziliense
+2026-03-11 06:54:21,752 [INFO] Fetching: Brasil de Fato (https://www.brasildefato.com.br/rss)
+2026-03-11 06:54:23,457 [INFO] HTTP Request: GET https://www.brasildefato.com.br/rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:23,591 [INFO] HTTP Request: GET https://www.brasildefato.com.br/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:54:23,694 [INFO] Fetched 50 articles from Brasil de Fato
+2026-03-11 06:54:23,708 [INFO] Fetching: Concursos no Brasil (http://concursosnobrasil.com.br/feed/)
+2026-03-11 06:54:23,789 [INFO] HTTP Request: GET http://concursosnobrasil.com.br/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:24,235 [INFO] HTTP Request: GET https://concursosnobrasil.com/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:54:24,256 [INFO] Fetched 15 articles from Concursos no Brasil
+2026-03-11 06:54:24,269 [INFO] Fetching: Folha de S.Paulo (https://feeds.folha.uol.com.br/emcimadahora/rss091.xml)
+2026-03-11 06:54:24,435 [INFO] HTTP Request: GET https://feeds.folha.uol.com.br/emcimadahora/rss091.xml "HTTP/1.1 200 OK"
+2026-03-11 06:54:24,491 [INFO] Fetched 50 articles from Folha de S.Paulo
+2026-03-11 06:54:24,503 [INFO] Fetching: G1 / Globo (https://g1.globo.com/rss/g1/)
+2026-03-11 06:54:24,569 [INFO] HTTP Request: GET https://g1.globo.com/rss/g1/ "HTTP/1.1 200 OK"
+2026-03-11 06:54:24,671 [INFO] Fetched 50 articles from G1 / Globo
+2026-03-11 06:54:24,684 [INFO] Fetching: IGN Brasil (http://br.ign.com/feed.xml)
+2026-03-11 06:54:24,736 [INFO] HTTP Request: GET http://br.ign.com/feed.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:24,782 [INFO] HTTP Request: GET https://br.ign.com/feed.xml "HTTP/1.1 200 OK"
+2026-03-11 06:54:24,816 [INFO] Fetched 40 articles from IGN Brasil
+2026-03-11 06:54:24,831 [INFO] Fetching: Rolling Stone Brasil (http://rollingstone.com.br/feed/)
+2026-03-11 06:54:24,871 [INFO] HTTP Request: GET http://rollingstone.com.br/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:24,926 [INFO] HTTP Request: GET https://rollingstone.com.br/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:54:24,973 [INFO] Fetched 10 articles from Rolling Stone Brasil
+2026-03-11 06:54:24,986 [INFO] Fetching: UOL Notícias (https://rss.uol.com.br/feed/noticias.xml)
+2026-03-11 06:54:25,073 [INFO] HTTP Request: GET https://rss.uol.com.br/feed/noticias.xml "HTTP/1.1 200 OK"
+2026-03-11 06:54:25,090 [INFO] Fetched 15 articles from UOL Notícias
+2026-03-11 06:54:25,104 [INFO] Fetching: China - South China Morning Post (http://www.scmp.com/rss/china.xml)
+2026-03-11 06:54:25,167 [INFO] HTTP Request: GET http://www.scmp.com/rss/china.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:25,613 [INFO] HTTP Request: GET https://www.scmp.com/rss/china.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:26,248 [INFO] HTTP Request: GET https://www.scmp.com/rss/4/feed "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:26,274 [INFO] HTTP Request: GET http://www.scmp.com/rss/4/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:26,643 [INFO] HTTP Request: GET https://www.scmp.com/rss/4/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:54:26,695 [INFO] Fetched 50 articles from China - South China Morning Post
+2026-03-11 06:54:26,708 [INFO] Fetching: China Defense Blog (http://china-defense.blogspot.com/feeds/posts/default)
+2026-03-11 06:54:27,542 [INFO] HTTP Request: GET http://china-defense.blogspot.com/feeds/posts/default "HTTP/1.1 200 OK"
+2026-03-11 06:54:27,582 [INFO] Fetched 25 articles from China Defense Blog
+2026-03-11 06:54:27,595 [INFO] Fetching: China Digital Times (CDT) (http://chinadigitaltimes.net/feed/)
+2026-03-11 06:54:27,791 [INFO] HTTP Request: GET http://chinadigitaltimes.net/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:27,856 [INFO] HTTP Request: GET https://chinadigitaltimes.net/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:54:27,958 [INFO] Fetched 15 articles from China Digital Times (CDT)
+2026-03-11 06:54:27,971 [INFO] Fetching: NASA News (https://www.nasa.gov/rss/dyn/breaking_news.rss)
+2026-03-11 06:54:28,066 [INFO] HTTP Request: GET https://www.nasa.gov/rss/dyn/breaking_news.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:28,093 [INFO] HTTP Request: GET https://www.nasa.gov/news-release/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:54:28,216 [INFO] Fetched 10 articles from NASA News
+2026-03-11 06:54:28,229 [INFO] Fetching: Nature (https://www.nature.com/nature.rss)
+2026-03-11 06:54:28,345 [INFO] HTTP Request: GET https://www.nature.com/nature.rss "HTTP/1.1 200 OK"
+2026-03-11 06:54:28,447 [INFO] Fetched 50 articles from Nature
+2026-03-11 06:54:28,461 [INFO] Fetching: Scientific American (http://rss.sciam.com/ScientificAmerican-Global)
+2026-03-11 06:54:29,253 [INFO] HTTP Request: GET http://rss.sciam.com/ScientificAmerican-Global "HTTP/1.1 200 OK"
+2026-03-11 06:54:29,279 [INFO] Fetched 50 articles from Scientific American
+2026-03-11 06:54:29,293 [INFO] Fetching: Bloomberg (https://feeds.bloomberg.com/markets/news.rss)
+2026-03-11 06:54:29,746 [INFO] HTTP Request: GET https://feeds.bloomberg.com/markets/news.rss "HTTP/1.1 200 OK"
+2026-03-11 06:54:29,770 [INFO] Fetched 30 articles from Bloomberg
+2026-03-11 06:54:29,785 [INFO] Fetching: Financial Times (https://www.ft.com/rss/home)
+2026-03-11 06:54:30,677 [INFO] HTTP Request: GET https://www.ft.com/rss/home "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:30,930 [INFO] HTTP Request: GET https://www.ft.com/rss/home/international "HTTP/1.1 200 OK"
+2026-03-11 06:54:30,948 [INFO] Fetched 11 articles from Financial Times
+2026-03-11 06:54:30,963 [INFO] Fetching: Fashion - ELLE (http://www.elle.com/rss/fashion.xml)
+2026-03-11 06:54:31,216 [INFO] HTTP Request: GET http://www.elle.com/rss/fashion.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:31,400 [INFO] HTTP Request: GET https://www.elle.com/rss/fashion.xml "HTTP/1.1 200 OK"
+2026-03-11 06:54:31,427 [INFO] Fetched 50 articles from Fashion - ELLE
+2026-03-11 06:54:31,441 [INFO] Fetching: Fashion Gone Rogue (http://fashiongonerogue.com/feed/)
+2026-03-11 06:54:32,180 [INFO] HTTP Request: GET http://fashiongonerogue.com/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:32,777 [INFO] HTTP Request: GET http://www.fashiongonerogue.com/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:54:32,800 [INFO] Fetched 10 articles from Fashion Gone Rogue
+2026-03-11 06:54:32,812 [INFO] Fetching: The Fashionography (http://thefashionography.com/feed/)
+2026-03-11 06:54:33,687 [INFO] HTTP Request: GET http://thefashionography.com/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:54:33,712 [INFO] Fetched 30 articles from The Fashionography
+2026-03-11 06:54:33,725 [INFO] Fetching: fashionunited.uk (https://fashionunited.uk/rss-news)
+2026-03-11 06:54:34,094 [INFO] HTTP Request: GET https://fashionunited.uk/rss-news "HTTP/1.1 200 OK"
+2026-03-11 06:54:34,285 [INFO] Fetched 50 articles from fashionunited.uk
+2026-03-11 06:54:34,299 [INFO] Fetching: Al Jazeera (https://www.aljazeera.com/xml/rss/all.xml)
+2026-03-11 06:54:34,377 [INFO] HTTP Request: GET https://www.aljazeera.com/xml/rss/all.xml "HTTP/1.1 200 OK"
+2026-03-11 06:54:34,399 [INFO] Fetched 25 articles from Al Jazeera
+2026-03-11 06:54:34,413 [INFO] Fetching: Associated Press (https://rsshub.app/apnews/topics/apf-topnews)
+2026-03-11 06:54:34,468 [INFO] HTTP Request: GET https://rsshub.app/apnews/topics/apf-topnews "HTTP/1.1 403 Forbidden"
+2026-03-11 06:54:34,468 [ERROR] HTTP error 403 for Associated Press
+2026-03-11 06:54:34,482 [INFO] Fetching: BBC News (http://feeds.bbci.co.uk/news/rss.xml)
+2026-03-11 06:54:34,833 [INFO] HTTP Request: GET http://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 302 Moved Temporarily"
+2026-03-11 06:54:35,099 [INFO] HTTP Request: GET https://feeds.bbci.co.uk/news/rss.xml "HTTP/1.1 200 OK"
+2026-03-11 06:54:35,122 [INFO] Fetched 37 articles from BBC News
+2026-03-11 06:54:35,135 [INFO] Fetching: DW Brasil (https://rss.dw.com/rdf/rss-br-todas)
+2026-03-11 06:54:36,239 [INFO] HTTP Request: GET https://rss.dw.com/rdf/rss-br-todas "HTTP/1.1 200 OK"
+2026-03-11 06:54:36,240 [WARNING] Feed bozo error for DW Brasil: <unknown>:2:0: syntax error
+2026-03-11 06:54:36,240 [INFO] Fetching: Fox News (https://moxie.foxnews.com/google-publisher/world.xml)
+2026-03-11 06:54:36,469 [INFO] HTTP Request: GET https://moxie.foxnews.com/google-publisher/world.xml "HTTP/1.1 200 OK"
+2026-03-11 06:54:36,550 [INFO] Fetched 25 articles from Fox News
+2026-03-11 06:54:36,564 [INFO] Fetching: France 24 PT (https://www.france24.com/pt/rss)
+2026-03-11 06:54:37,985 [INFO] HTTP Request: GET https://www.france24.com/pt/rss "HTTP/1.1 404 Not Found"
+2026-03-11 06:54:38,257 [ERROR] HTTP error 404 for France 24 PT
+2026-03-11 06:54:38,271 [INFO] Fetching: Reuters (https://feeds.reuters.com/reuters/topNews)
+2026-03-11 06:54:38,292 [ERROR] Error fetching Reuters: [Errno -2] Name or service not known
+2026-03-11 06:54:38,305 [INFO] Fetching: The Guardian (https://www.theguardian.com/world/rss)
+2026-03-11 06:54:38,439 [INFO] HTTP Request: GET https://www.theguardian.com/world/rss "HTTP/1.1 200 OK"
+2026-03-11 06:54:38,509 [INFO] Fetched 45 articles from The Guardian
+2026-03-11 06:54:38,526 [INFO] Fetching: "iran" - Google News (http://news.google.com/news?hl=en&gl=us&q=iran&um=1&ie=UTF-8&output=rss)
+2026-03-11 06:54:38,897 [INFO] HTTP Request: GET http://news.google.com/news?hl=en&gl=us&q=iran&um=1&ie=UTF-8&output=rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:39,371 [INFO] HTTP Request: GET https://news.google.com/news?hl=en&gl=us&q=iran&um=1&ie=UTF-8&output=rss "HTTP/1.1 302 Found"
+2026-03-11 06:54:39,460 [INFO] HTTP Request: GET https://news.google.com/rss/search?hl=en&gl=us&q=iran&um=1&ie=UTF-8 "HTTP/1.1 302 Found"
+2026-03-11 06:54:40,227 [INFO] HTTP Request: GET https://news.google.com/rss/search?hl=en-US&gl=US&q=iran&um=1&ie=UTF-8&ceid=US:en "HTTP/1.1 200 OK"
+2026-03-11 06:54:40,331 [INFO] Fetched 50 articles from "iran" - Google News
+2026-03-11 06:54:40,348 [INFO] Fetching: صفحه مقالات ایران‌وایر (http://iranwire.com/feed/)
+2026-03-11 06:54:40,543 [INFO] HTTP Request: GET http://iranwire.com/feed/ "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:41,586 [INFO] HTTP Request: GET https://iranwire.com/feed/ "HTTP/1.1 302 Found"
+2026-03-11 06:54:42,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:54:47,132 [INFO] HTTP Request: GET https://iranwire.com/fa/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:54:48,595 [INFO] Fetched 50 articles from صفحه مقالات ایران‌وایر
+2026-03-11 06:54:48,613 [INFO] Fetching: Programming Digest (http://programmingdigest.net/digests/feed.rss)
+2026-03-11 06:54:48,795 [INFO] HTTP Request: GET http://programmingdigest.net/digests/feed.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:49,134 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:54:49,414 [INFO] HTTP Request: GET https://programmingdigest.net/digests/feed.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:49,434 [INFO] HTTP Request: GET https://programmingdigest.net/newsletters.rss "HTTP/1.1 200 OK"
+2026-03-11 06:54:49,454 [INFO] Fetched 5 articles from Programming Digest
+2026-03-11 06:54:49,469 [INFO] Fetching: Programming Historian (http://programminghistorian.org/feed.xml)
+2026-03-11 06:54:49,644 [INFO] HTTP Request: GET http://programminghistorian.org/feed.xml "HTTP/1.1 200 OK"
+2026-03-11 06:54:49,663 [INFO] Analisado artigo 5125 completo
+2026-03-11 06:54:49,671 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:54:49,671 [INFO] A analisar parte 1/1 do artigo 4503
+2026-03-11 06:54:49,676 [INFO] Fetched 50 articles from Programming Historian
+2026-03-11 06:54:49,678 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:54:49,689 [INFO] Fetching: Programming With Wolfgang (https://www.programmingwithwolfgang.com/feed.xml)
+2026-03-11 06:54:50,383 [INFO] HTTP Request: GET https://www.programmingwithwolfgang.com/feed.xml "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:51,028 [INFO] HTTP Request: GET https://programmingwithwolfgang.com/feed.xml "HTTP/1.1 200 OK"
+2026-03-11 06:54:51,047 [INFO] Fetched 5 articles from Programming With Wolfgang
+2026-03-11 06:54:51,061 [INFO] Fetching: Programming on Medium (https://medium.com/feed/topic/programming)
+2026-03-11 06:54:51,290 [INFO] HTTP Request: GET https://medium.com/feed/topic/programming "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:51,476 [INFO] HTTP Request: GET https://medium.com/feed/tag/programming "HTTP/1.1 200 OK"
+2026-03-11 06:54:51,499 [INFO] Fetched 10 articles from Programming on Medium
+2026-03-11 06:54:51,511 [INFO] Fetching: The Art, Science, and Engineering of Programming (http://programming-journal.org/feed.rss)
+2026-03-11 06:54:51,583 [INFO] HTTP Request: GET http://programming-journal.org/feed.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:51,765 [INFO] HTTP Request: GET https://programming-journal.org/feed.rss "HTTP/1.1 200 OK"
+2026-03-11 06:54:51,793 [INFO] Fetched 25 articles from The Art, Science, and Engineering of Programming
+2026-03-11 06:54:51,805 [INFO] Fetching: programming (http://www.reddit.com/r/programming/.rss)
+2026-03-11 06:54:51,871 [INFO] HTTP Request: GET http://www.reddit.com/r/programming/.rss "HTTP/1.1 301 Moved Permanently"
+2026-03-11 06:54:52,578 [INFO] HTTP Request: GET https://www.reddit.com/r/programming/.rss "HTTP/1.1 200 OK"
+2026-03-11 06:54:52,748 [INFO] Fetched 25 articles from programming
+2026-03-11 06:54:52,761 [INFO] Fetching: Socialismo Actual (http://socialismoactual.blogspot.com/feeds/posts/default)
+2026-03-11 06:54:53,706 [INFO] HTTP Request: GET http://socialismoactual.blogspot.com/feeds/posts/default "HTTP/1.1 200 OK"
+2026-03-11 06:54:53,985 [INFO] Fetched 25 articles from Socialismo Actual
+2026-03-11 06:54:54,139 [INFO] Fetching: Ars Technica (https://feeds.arstechnica.com/arstechnica/index)
+2026-03-11 06:54:54,338 [INFO] HTTP Request: GET https://feeds.arstechnica.com/arstechnica/index "HTTP/1.1 200 OK"
+2026-03-11 06:54:54,371 [INFO] Fetched 20 articles from Ars Technica
+2026-03-11 06:54:54,385 [INFO] Fetching: Hacker News (https://hnrss.org/frontpage)
+2026-03-11 06:54:59,886 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:55:08,081 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:55:08,595 [INFO] Analisado artigo 4503 completo
+2026-03-11 06:55:08,601 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:55:08,601 [INFO] A analisar parte 1/1 do artigo 4793
+2026-03-11 06:55:08,607 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:55:09,540 [ERROR] Timeout fetching Hacker News
+2026-03-11 06:55:09,555 [INFO] Fetching: MIT Tech Review (https://www.technologyreview.com/feed/)
+2026-03-11 06:55:09,793 [INFO] HTTP Request: GET https://www.technologyreview.com/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:55:09,864 [INFO] Fetched 10 articles from MIT Tech Review
+2026-03-11 06:55:09,877 [INFO] Fetching: TechCrunch (https://techcrunch.com/feed/)
+2026-03-11 06:55:10,089 [INFO] HTTP Request: GET https://techcrunch.com/feed/ "HTTP/1.1 200 OK"
+2026-03-11 06:55:10,112 [INFO] Fetched 20 articles from TechCrunch
+2026-03-11 06:55:10,125 [INFO] Fetching: The Verge (https://www.theverge.com/rss/index.xml)
+2026-03-11 06:55:10,226 [INFO] HTTP Request: GET https://www.theverge.com/rss/index.xml "HTTP/1.1 200 OK"
+2026-03-11 06:55:10,255 [INFO] Fetched 10 articles from The Verge
+2026-03-11 06:55:10,269 [INFO] Fetch completo: 1261 artigos novos
+2026-03-11 06:55:10,269 [INFO] Fetch concluído: 1261 artigos novos
+2026-03-11 06:55:12,641 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:55:23,090 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:55:23,604 [INFO] Analisado artigo 4793 completo
+2026-03-11 06:55:23,611 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:55:23,611 [INFO] A analisar parte 1/1 do artigo 4788
+2026-03-11 06:55:23,617 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:55:42,623 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:55:44,816 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:55:45,334 [INFO] Analisado artigo 4788 completo
+2026-03-11 06:55:45,341 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:55:45,341 [INFO] A analisar parte 1/1 do artigo 4841
+2026-03-11 06:55:45,349 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:56:00,563 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:56:01,077 [INFO] Analisado artigo 4841 completo
+2026-03-11 06:56:01,084 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:56:01,084 [INFO] A analisar parte 1/1 do artigo 4724
+2026-03-11 06:56:01,091 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:56:12,640 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:56:26,125 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:56:26,640 [INFO] Analisado artigo 4724 completo
+2026-03-11 06:56:26,647 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:56:26,647 [INFO] A analisar parte 1/1 do artigo 4838
+2026-03-11 06:56:26,654 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:56:42,625 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:56:43,590 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:56:44,112 [INFO] Analisado artigo 4838 completo
+2026-03-11 06:56:44,119 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:56:44,119 [INFO] A analisar parte 1/1 do artigo 4516
+2026-03-11 06:56:44,126 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:56:54,080 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:56:54,595 [INFO] Analisado artigo 4516 completo
+2026-03-11 06:56:54,601 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:56:54,602 [INFO] A analisar parte 1/1 do artigo 4303
+2026-03-11 06:56:54,608 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:57:04,895 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:57:05,409 [INFO] Analisado artigo 4303 completo
+2026-03-11 06:57:05,417 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:57:05,417 [INFO] A analisar parte 1/1 do artigo 4195
+2026-03-11 06:57:05,425 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:57:12,649 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:57:30,472 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:57:30,985 [INFO] Analisado artigo 4195 completo
+2026-03-11 06:57:30,995 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:57:30,995 [INFO] A analisar parte 1/1 do artigo 4518
+2026-03-11 06:57:31,001 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:57:42,623 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:58:12,642 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:58:19,047 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 06:58:19,565 [INFO] Analisado artigo 4518 completo
+2026-03-11 06:58:19,573 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:58:19,573 [INFO] A analisar parte 1/1 do artigo 4846
+2026-03-11 06:58:19,580 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:58:42,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:59:12,640 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:59:19,647 [ERROR] Ollama timeout
+2026-03-11 06:59:20,157 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:59:20,157 [INFO] A analisar parte 1/1 do artigo 4831
+2026-03-11 06:59:20,163 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 06:59:42,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:00:12,641 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:00:20,206 [ERROR] Ollama timeout
+2026-03-11 07:00:20,715 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:00:20,715 [INFO] A analisar parte 1/1 do artigo 4709
+2026-03-11 07:00:20,724 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:00:42,625 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:01:12,640 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:01:20,790 [ERROR] Ollama timeout
+2026-03-11 07:01:21,298 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:01:21,298 [INFO] A analisar parte 1/1 do artigo 4519
+2026-03-11 07:01:21,304 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:01:42,624 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:02:12,642 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:02:21,322 [ERROR] Ollama timeout
+2026-03-11 07:02:21,830 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:02:21,830 [INFO] A analisar parte 1/1 do artigo 4789
+2026-03-11 07:02:21,837 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:02:42,625 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:03:10,478 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 07:03:10,997 [INFO] Analisado artigo 4789 completo
+2026-03-11 07:03:11,006 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:03:11,006 [INFO] A analisar parte 1/1 do artigo 4521
+2026-03-11 07:03:11,013 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:03:12,644 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:03:39,848 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 07:03:40,366 [INFO] Analisado artigo 4521 completo
+2026-03-11 07:03:40,374 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:03:40,374 [INFO] A analisar parte 1/1 do artigo 4523
+2026-03-11 07:03:40,380 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:03:42,626 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:04:05,921 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 07:04:06,434 [INFO] Analisado artigo 4523 completo
+2026-03-11 07:04:06,441 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:04:06,441 [INFO] A analisar parte 1/1 do artigo 4524
+2026-03-11 07:04:06,448 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:04:12,640 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:04:42,623 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:04:53,855 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 07:04:54,370 [INFO] Analisado artigo 4524 completo
+2026-03-11 07:04:54,376 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:04:54,377 [INFO] A analisar parte 1/1 do artigo 4196
+2026-03-11 07:04:54,383 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:05:12,641 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:05:42,623 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:05:49,289 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 07:05:49,804 [INFO] Analisado artigo 4196 completo
+2026-03-11 07:05:49,811 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:05:49,812 [INFO] A analisar parte 1/1 do artigo 4197
+2026-03-11 07:05:49,818 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:06:07,680 [INFO] HTTP Request: POST http://localhost:11434/api/chat "HTTP/1.1 200 OK"
+2026-03-11 07:06:08,198 [INFO] Analisado artigo 4197 completo
+2026-03-11 07:06:08,209 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:06:08,210 [INFO] A analisar parte 1/1 do artigo 4525
+2026-03-11 07:06:08,219 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:06:12,641 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
+2026-03-11 07:06:42,623 [INFO] HTTP Request: GET http://localhost:11434/api/tags "HTTP/1.1 200 OK"
