@@ -6,7 +6,7 @@
     "fetch_interval": "30",
     "fetch_on_startup": "0",
     "ollama_url": "http://localhost:11434",
-    "ollama_model": "",
+    "ollama_model": "kimi-k2.5:cloud",
     "ollama_enabled": "1",
     "translate_fallback": "1",
     "default_language": "pt",
