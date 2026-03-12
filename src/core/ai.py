@@ -67,7 +67,6 @@ def _query(prompt: str, system: str = "", model: str = None,
     payload = {
         "model": model,
         "stream": False,
-        "think": False,          # desativa thinking mode (qwen3, deepseek-r1) — nível raiz
         "options": {
             "num_predict": max_tokens,
         },
@@ -107,11 +106,12 @@ def _query(prompt: str, system: str = "", model: str = None,
 
         elapsed = time.monotonic() - _t0
 
-        # Log diagnóstico — mostra estrutura da resposta e primeiros 300 chars
-        logger.debug(
-            f"Ollama resp keys={list(data.keys())} "
+        # Log diagnóstico — WARNING para aparecer no log em qualquer nível
+        logger.warning(
+            f"[DIAG] Ollama resp keys={list(data.keys())} "
             f"msg_keys={list(message_obj.keys())} "
-            f"content({len(content)}c)={content[:300]!r}"
+            f"done_reason={data.get('done_reason','')} "
+            f"content({len(content)}c)={content[:400]!r}"
         )
 
         # Se ainda vazio, tentar /api/generate como fallback
