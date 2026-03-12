@@ -28,6 +28,10 @@ class ArchiveView(QWidget):
         self._current_tag = None
         self._build()
 
+    def set_night_mode(self, night: bool):
+        self.night_mode = night
+        self.reload()
+
     def _build(self):
         root = QHBoxLayout(self)
         root.setContentsMargins(0, 0, 0, 0)

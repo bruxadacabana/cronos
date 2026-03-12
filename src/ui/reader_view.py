@@ -9,15 +9,15 @@ from datetime import datetime, timedelta
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QTextBrowser, QFrame, QComboBox, QGraphicsOpacityEffect, QSizePolicy,
-    QDialog, QListWidget, QListWidgetItem
+    QDialog, QListWidget, QListWidgetItem, QScrollArea, QStackedWidget
 )
-from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve, QTimer, QThread, pyqtSignal
-from PyQt6.QtGui import QFont
+from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve, QTimer, QThread, pyqtSignal, QRect
+from PyQt6.QtGui import QFont, QColor, QPainter, QPen, QBrush
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from core.database import mark_read, toggle_favorite, get_article, get_articles
-from core.fetcher import fetch_article_content
+from core.fetcher import fetch_article_content, find_similar_articles, _is_meaningful
 from core.translator import get_supported_languages, translate_article
 
 
@@ -28,6 +28,59 @@ def clean(text):
         if d == text: break
         text = d
     return re.sub(r'\s+', ' ', text).strip()
+
+
+def _normalize_content(content: str) -> str:
+    """
+    Converte qualquer forma de conteúdo (HTML, texto plano, híbrido)
+    em HTML com parágrafos <p> bem formados e legíveis.
+    """
+    if not content:
+        return content
+
+    # 1. Se já tem <p> tags com conteúdo real — limpa e garante estrutura
+    if re.search(r"<p[^>]*>", content, re.IGNORECASE):
+        # Extrai texto de cada <p> e reconstrói limpo
+        paragraphs = re.findall(r"<p[^>]*>(.*?)</p>", content, re.DOTALL | re.IGNORECASE)
+        if paragraphs:
+            cleaned = []
+            for p in paragraphs:
+                text = re.sub(r"<[^>]+>", " ", p)
+                text = re.sub(r"\s+", " ", text).strip()
+                if len(text) > 20:   # ignora parágrafos vazios/lixo
+                    cleaned.append(text)
+            if cleaned:
+                return "".join(f"<p>{p}</p>" for p in cleaned)
+
+    # 2. Texto plano com tags misturadas — extrai só o texto
+    raw = re.sub(r"<[^>]+>", " ", content)
+    raw = re.sub(r"\s+", " ", raw).strip()
+
+    if not raw:
+        return content
+
+    # 3. Divide por quebra de linha dupla (parágrafos reais)
+    paragraphs = [p.strip() for p in re.split(r"\n{2,}", raw) if p.strip()]
+
+    # 4. Se veio tudo numa linha, agrupa por frases (3 frases por parágrafo)
+    if len(paragraphs) <= 1:
+        # Divide em frases: ponto/exclamação/interrogação seguido de espaço + maiúscula
+        sentences = re.split(r'(?<=[.!?])\s+(?=[A-ZÁÀÂÃÉÊÍÓÔÕÚ"\u201C\u201E])', raw)
+        buf, groups = [], []
+        for s in sentences:
+            s = s.strip()
+            if not s:
+                continue
+            buf.append(s)
+            if len(buf) >= 3:
+                groups.append(" ".join(buf))
+                buf = []
+        if buf:
+            groups.append(" ".join(buf))
+        paragraphs = groups if len(groups) > 1 else [raw]
+
+    return "".join(f"<p>{p}</p>" for p in paragraphs)
+
 
 
 class TranslationWorker(QThread):
@@ -211,34 +264,22 @@ class PointsOfViewDialog(QDialog):
         layout.addWidget(self.status_lbl)
 
     def _load_similar_articles(self):
+        from core.fetcher import find_similar_articles
+
         try:
             pub_date_str = self.current_article.get("published_at", "")[:19].replace("Z", "")
             pub_date = datetime.fromisoformat(pub_date_str)
         except Exception:
             pub_date = datetime.now()
 
-        date_from = (pub_date - timedelta(days=4)).isoformat()
-        date_to   = (pub_date + timedelta(days=4)).isoformat()
-        all_arts  = get_articles(limit=1200, date_from=date_from, date_to=date_to)
+        date_from = (pub_date - timedelta(days=5)).isoformat()
+        date_to   = (pub_date + timedelta(days=5)).isoformat()
+        all_arts  = get_articles(limit=1500, date_from=date_from, date_to=date_to)
 
-        kws = []
-        if self.current_article.get("ai_keywords"):
-            kws = [k.strip().lower() for k in self.current_article["ai_keywords"].split(",")]
-        if not kws:
-            kws = [w.lower() for w in re.findall(r'\b\w{5,}\b', self.current_article.get("title", ""))]
-
-        results = []
-        for art in all_arts:
-            if art["id"] == self.current_article["id"]:
-                continue
-            if art.get("source_name") == self.current_article.get("source_name"):
-                continue  # pula mesma fonte
-            text = (art.get("title", "") + " " + (art.get("ai_keywords") or "")).lower()
-            score = sum(1 for kw in kws if kw in text)
-            if score > 0:
-                results.append((score, art))
-
-        results.sort(key=lambda x: x[0], reverse=True)
+        results = find_similar_articles(
+            self.current_article, all_arts,
+            min_score=0.12, max_results=15
+        )
 
         # Limpa placeholder
         while self.cards_layout.count() > 1:
@@ -265,15 +306,50 @@ class ReaderView(QWidget):
         super().__init__(parent)
         self.night_mode = night_mode
         self.current_article = None
+        self.hide()   # visível só ao abrir artigo
         self._build()
 
+    # ── Overlay escurecido ────────────────────────────────────────────────────
+    def paintEvent(self, event):
+        """Pinta o fundo escurecido do overlay."""
+        p = QPainter(self)
+        if self.night_mode:
+            p.fillRect(self.rect(), QColor(0, 0, 10, 184))
+        else:
+            p.fillRect(self.rect(), QColor(30, 18, 4, 176))
+
+    def _apply_modal_style(self):
+        if self.night_mode:
+            self._modal.setStyleSheet(
+                "QFrame#readerModal{background:#080012;border:1px solid #7700ee;border-left:3px solid #cc0066;}"
+            )
+        else:
+            self._modal.setStyleSheet(
+                "QFrame#readerModal{background:#faf5e8;border:1px solid #b89050;border-left:3px solid #c03020;}"
+            )
+
+    def _update_margin_style(self):
+        if self.night_mode:
+            self._margin.setStyleSheet("background:qlineargradient(x1:0,y1:0,x2:0,y2:1,stop:0 #cc0066,stop:1 #880044);")
+        else:
+            self._margin.setStyleSheet("background:qlineargradient(x1:0,y1:0,x2:0,y2:1,stop:0 #c03928,stop:1 #901a10);")
+
     def _build(self):
-        layout = QVBoxLayout(self)
-        layout.setContentsMargins(0,0,0,0)
+        outer = QVBoxLayout(self)
+        outer.setContentsMargins(32, 24, 32, 24)
+        outer.setSpacing(0)
+
+        # Caixa modal
+        self._modal = QFrame(self)
+        self._modal.setObjectName("readerModal")
+        self._apply_modal_style()
+        layout = QVBoxLayout(self._modal)
+        layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(0)
+        outer.addWidget(self._modal)
 
         # Toolbar
-        toolbar = QFrame()
+        toolbar = QFrame(self._modal)
         toolbar.setObjectName("readerToolbar")
         tb = QHBoxLayout(toolbar)
         tb.setContentsMargins(14,8,14,8)
@@ -355,6 +431,29 @@ class ReaderView(QWidget):
         body.addWidget(self.reader)
         layout.addLayout(body, 1)
 
+        # Painel POV inline (conteúdo parcial)
+        self.pov_inline_frame = QFrame()
+        self.pov_inline_frame.setObjectName("povInlineFrame")
+        pov_if = QVBoxLayout(self.pov_inline_frame)
+        pov_if.setContentsMargins(16, 10, 16, 10)
+        pov_if.setSpacing(6)
+        pov_hdr = QHBoxLayout()
+        pov_title = QLabel("⊘  Conteúdo parcial — outras coberturas do mesmo assunto")
+        pov_title.setObjectName("sectionHeader")
+        pov_hdr.addWidget(pov_title, 1)
+        pov_close = QPushButton("✕")
+        pov_close.setFixedSize(24, 24)
+        pov_close.setFlat(True)
+        pov_close.clicked.connect(self.pov_inline_frame.hide)
+        pov_hdr.addWidget(pov_close)
+        pov_if.addLayout(pov_hdr)
+        self.pov_inline_list = QListWidget()
+        self.pov_inline_list.setMaximumHeight(180)
+        self.pov_inline_list.itemDoubleClicked.connect(self._on_pov_inline_click)
+        pov_if.addWidget(self.pov_inline_list)
+        self.pov_inline_frame.hide()
+        layout.addWidget(self.pov_inline_frame)
+
         # Resumo IA
         self.summary_frame = QFrame()
         self.summary_frame.setObjectName("summaryFrame")
@@ -379,6 +478,8 @@ class ReaderView(QWidget):
         layout.addWidget(self.summary_frame)
 
     def load_article(self, article: dict):
+        self.show()   # torna o overlay visível
+        self.raise_()
         self.current_article = article
         self.pov_btn.show()
         self.archive_btn.show()
@@ -393,14 +494,24 @@ class ReaderView(QWidget):
         self.fav_btn.setText("★" if article.get("is_favorite") else "☆")
 
         content = article.get("content_clean") or article.get("content") or ""
-        
         texto_puro = clean(content)
-        
+
         # Se o texto real for muito curto, tenta baixar a matéria completa
         if len(texto_puro) < 800 and article.get("url"):
-            raw_html, _ = fetch_article_content(article["url"])
+            raw_html, fetched_text = fetch_article_content(article["url"])
             if raw_html and len(clean(raw_html)) > len(texto_puro):
                 content = raw_html
+                texto_puro = clean(raw_html)
+
+        # Marca/desmarca content_partial com base no conteúdo real obtido agora
+        is_partial = not _is_meaningful(texto_puro)
+        if is_partial != bool(article.get("content_partial")):
+            from core.database import get_connection
+            conn = get_connection()
+            conn.execute("UPDATE articles SET content_partial=? WHERE id=?",
+                         (1 if is_partial else 0, article["id"]))
+            conn.commit(); conn.close()
+            article["content_partial"] = 1 if is_partial else 0
 
         if not content:
             content = article.get("summary", "Conteúdo não disponível.")
@@ -408,6 +519,10 @@ class ReaderView(QWidget):
         # Animação: flip de página
         self._flip_in(lambda: self.reader.setHtml(self._build_html(article, content)))
         self._update_analysis(article)
+
+        # Pontos de Vista automático quando conteúdo parcial
+        if is_partial:
+            self._show_pov_inline(article)
 
     def _archive_article(self):
         if not self.current_article:
@@ -422,6 +537,49 @@ class ReaderView(QWidget):
                 save_to_archive(self.current_article["id"], new_tags, note)
                 self.archive_btn.setText("✓ Arquivado")
                 QTimer.singleShot(2000, lambda: self.archive_btn.setText("📁 Arquivar"))
+
+    def _show_pov_inline(self, article: dict):
+        """Carrega Pontos de Vista inline quando o conteúdo é parcial."""
+        from core.fetcher import find_similar_articles
+
+        self.pov_inline_list.clear()
+
+        try:
+            pub_str = article.get("published_at", "")[:19].replace("Z", "")
+            pub_dt  = datetime.fromisoformat(pub_str)
+        except Exception:
+            pub_dt  = datetime.now()
+
+        date_from = (pub_dt - timedelta(days=5)).isoformat()
+        date_to   = (pub_dt + timedelta(days=5)).isoformat()
+        all_arts  = get_articles(limit=1500, date_from=date_from, date_to=date_to)
+
+        results = find_similar_articles(article, all_arts, min_score=0.12, max_results=10)
+
+        # Completos primeiro, depois parciais (mesma pontuação relativa)
+        results.sort(key=lambda x: (x[1].get("content_partial", 0), -x[0]))
+
+        if not results:
+            self.pov_inline_frame.hide()
+            return
+
+        for _, art in results[:10]:
+            partial_flag = " [⊘ parcial]" if art.get("content_partial") else ""
+            src   = clean(art.get("source_name", ""))
+            title = clean(art.get("title", ""))
+            item  = QListWidgetItem(f"{src}{partial_flag}  —  {title}")
+            item.setData(Qt.ItemDataRole.UserRole, art)
+            # Cor diferente para parciais
+            if art.get("content_partial"):
+                item.setForeground(QColor("#9a6030"))
+            self.pov_inline_list.addItem(item)
+
+        self.pov_inline_frame.show()
+
+    def _on_pov_inline_click(self, item):
+        art = item.data(Qt.ItemDataRole.UserRole)
+        if art:
+            self.load_article(art)
 
     def _show_pov(self):
         """Abre a janela de Pontos de Vista para a matéria atual."""
@@ -463,6 +621,12 @@ class ReaderView(QWidget):
         if article.get("published_at"):
             try:
                 dt = datetime.fromisoformat(article["published_at"].replace("Z","+00:00"))
+                # Converte UTC → horário local
+                if dt.tzinfo is not None:
+                    import time as _time
+                    from datetime import timezone, timedelta
+                    local_offset = timedelta(seconds=-_time.timezone)
+                    dt = dt.astimezone(timezone(local_offset))
                 pub = dt.strftime("%d de %B de %Y · %H:%M")
             except Exception:
                 pub = article["published_at"][:16]
@@ -471,6 +635,9 @@ class ReaderView(QWidget):
         source = clean(article.get("source_name",""))
         author = clean(article.get("author",""))
         url    = article.get("url","")
+
+        # Normaliza conteúdo → parágrafos HTML legíveis
+        content = _normalize_content(content)
 
         return f"""<!DOCTYPE html><html><head><meta charset="utf-8">
 <style>
@@ -496,12 +663,14 @@ li {{ margin-bottom:6px; }}
 </body></html>"""
 
     def _update_analysis(self, article):
-        has = any([
-            article.get("economic_axis") is not None,
-            article.get("emotional_tone"),
-            article.get("clickbait_score") is not None,
-        ])
-        if has:
+        # Análise está presente só se ao menos o resumo OU o tom emocional existirem
+        # (campos numéricos como economic_axis=0.0 podem ser o padrão do banco, não resultado real)
+        has_analysis = bool(
+            article.get("ai_summary") or
+            article.get("emotional_tone") or
+            article.get("ai_category")
+        )
+        if has_analysis:
             ea = article.get("economic_axis", 0) or 0
             aa = article.get("authority_axis", 0) or 0
             eco_map = [(-1,-.5,"◀◀ Esq.Eco"),  (-.5,-.2,"◀ Centro-Esq"),
@@ -575,8 +744,9 @@ li {{ margin-bottom:6px; }}
 
     def set_night_mode(self, night: bool):
         self.night_mode = night
-        c_red = "#cc0066" if night else "#c03928"
-        self._margin.setStyleSheet(f"background:{c_red};")
+        self._update_margin_style()
+        self._apply_modal_style()
+        self.update()
         if self.current_article:
             content = self.current_article.get("content_clean") or self.current_article.get("summary","")
             self.reader.setHtml(self._build_html(self.current_article, content))

@@ -47,6 +47,10 @@ class TrendingView(QWidget):
         self.scroll.setWidget(self.container)
         layout.addWidget(self.scroll)
 
+    def set_night_mode(self, night: bool):
+        self.night_mode = night
+        self.refresh()
+
     def refresh(self):
         from core.database import get_articles
         from core.trending import detect_trending

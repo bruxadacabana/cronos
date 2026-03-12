@@ -14,14 +14,21 @@ from PyQt6.QtGui import QPainter, QPen, QBrush, QColor, QFont, QFontMetrics, QLi
 # ── Nuvem de palavras ─────────────────────────────────────────────────────────
 
 class WordCloudWidget(QWidget):
+    """
+    Nuvem de palavras com layout em spiral melhorado.
+    - Passo angular menor (mais denso) e raio maior (menos sobreposição)
+    - Colisão por retângulo completo com padding
+    - Clipa dentro dos limites do widget
+    - Fontes proporcionais ao widget (min 9, max 26)
+    """
     def __init__(self, night=False, parent=None):
         super().__init__(parent)
         self.night = night
-        self.words = []  # list of (word, count)
-        self.setMinimumHeight(160)
-        random.seed(99)
+        self.words = []
+        self.setMinimumHeight(180)
+        self.setMinimumWidth(300)
 
-    def set_data(self, words): self.words = words[:40]; self.update()
+    def set_data(self, words): self.words = words[:35]; self.update()
     def set_night_mode(self, v): self.night = v; self.update()
 
     def paintEvent(self, event):
@@ -31,33 +38,46 @@ class WordCloudWidget(QWidget):
         w, h = self.width(), self.height()
         max_c = max(c for _, c in self.words) or 1
 
-        placed = []
-        cx, cy = w // 2, h // 2
-        colors_day   = ["#8b4513","#a05020","#6a3010","#c08030","#7a5828","#503010"]
-        colors_night = ["#cc66ff","#9933ee","#ff44aa","#7700ee","#aa44ff","#dd22cc"]
+        colors_day   = ["#8b4513","#a05020","#6a3010","#c08030","#7a5828","#503010","#8b6914","#9a6020"]
+        colors_night = ["#cc66ff","#9933ee","#ff44aa","#7700ee","#aa44ff","#dd22cc","#ff66dd","#cc88ff"]
         colors = colors_night if self.night else colors_day
 
+        placed = []   # list of (x1, y1, x2, y2) bounding boxes
+        cx, cy = w / 2, h / 2
+        pad = 5
+
         for i, (word, count) in enumerate(self.words):
-            size = int(9 + (count / max_c) * 18)
+            # Tamanho proporcional à área do widget
+            scale = min(w, h) / 240.0
+            size = max(9, min(26, int((9 + (count / max_c) * 18) * scale)))
             font = QFont("Special Elite", size)
             fm = QFontMetrics(font)
             tw = fm.horizontalAdvance(word)
             th = fm.height()
             col = QColor(colors[i % len(colors)])
 
-            # Spiral placement
             placed_ok = False
-            for attempt in range(300):
-                angle = attempt * 0.4
-                r = attempt * 1.8
-                tx = int(cx + r * math.cos(angle) - tw / 2)
-                ty = int(cy + r * math.sin(angle) + th / 2)
-                rect = (tx, ty - th, tw, th)
-                if not any(
-                    abs(tx - px) < (tw + pw) // 2 + 4 and abs(ty - py) < (th + ph) // 2 + 4
-                    for px, py, pw, ph in placed
-                ):
-                    placed.append((tx, ty, tw, th))
+            # Espiral: passo angular pequeno, raio cresce devagar
+            for attempt in range(500):
+                angle = attempt * 0.25
+                r = attempt * 2.2
+                tx = cx + r * math.cos(angle) - tw / 2
+                ty = cy + r * math.sin(angle) + th / 2
+
+                # Garante que cabe no widget
+                if tx < pad or tx + tw > w - pad:
+                    continue
+                if ty - th < pad or ty > h - pad:
+                    continue
+
+                # Verifica colisão com palavras já colocadas (AABB)
+                x1, y1, x2, y2 = tx - pad, ty - th - pad, tx + tw + pad, ty + pad
+                collision = any(
+                    not (x2 < bx1 or x1 > bx2 or y2 < by1 or y1 > by2)
+                    for bx1, by1, bx2, by2 in placed
+                )
+                if not collision:
+                    placed.append((x1, y1, x2, y2))
                     placed_ok = True
                     break
 

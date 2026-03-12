@@ -6,7 +6,7 @@
     "fetch_interval": "30",
     "fetch_on_startup": "1",
     "ollama_url": "http://localhost:11434",
-    "ollama_model": "qwen3.5:397b-cloud",
+    "ollama_model": "llama3:8b",
     "ollama_enabled": "1",
     "translate_fallback": "1",
     "default_language": "pt",
@@ -29,5 +29,7 @@
     "twitter_password": "",
     "auto_analyze": "1",
     "analyze_on_startup": "1",
-    "substack_urls": ""
+    "substack_urls": "https://janelledodo.substack.com/",
+    "article_max_age_days": "1",
+    "date_limit_asked": "1"
 }

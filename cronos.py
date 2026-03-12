@@ -33,19 +33,6 @@ def main():
     from PyQt6.QtWidgets import QApplication
     from PyQt6.QtCore import Qt
     app = QApplication(sys.argv)
-    # Ícone da janela (evita aviso QSystemTrayIcon::setVisible: No Icon set)
-    try:
-        from pathlib import Path as _Path
-        _icon_path = _Path(__file__).parent / "src" / "assets" / "icons" / "cronos.png"
-        if _icon_path.exists():
-            from PyQt6.QtGui import QIcon as _QIcon
-            app.setWindowIcon(_QIcon(str(_icon_path)))
-        else:
-            from assets.icon_data import get_icon_path as _gip
-            from PyQt6.QtGui import QIcon as _QIcon
-            app.setWindowIcon(_QIcon(_gip("png")))
-    except Exception:
-        pass
     app.setApplicationName("Cronos")
     app.setApplicationVersion("1.2")
     app.setOrganizationName("Cronos")

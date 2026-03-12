@@ -16,8 +16,9 @@ from .widgets.carousel import TrendingCarousel
 
 
 class FeedView(QWidget):
-    article_selected = pyqtSignal(dict)
+    article_selected    = pyqtSignal(dict)
     source_feed_requested = pyqtSignal(int, str)
+    theme_toggle        = pyqtSignal()   # emitido ao clicar ☀/🌙
 
     def __init__(self, night_mode=False, parent=None):
         super().__init__(parent)
@@ -64,6 +65,14 @@ class FeedView(QWidget):
         self.fav_btn.setToolTip("Favoritos")
         self.fav_btn.toggled.connect(self._toggle_fav)
         fb.addWidget(self.fav_btn)
+
+        # ── Botão ☀/🌙 — canto superior direito do feed ──
+        self.theme_btn = QPushButton("☀" if not self.night_mode else "🌙")
+        self.theme_btn.setObjectName("themeSwitchBtn")
+        self.theme_btn.setFixedWidth(38)
+        self.theme_btn.setToolTip("Alternar tema dia/noite")
+        self.theme_btn.clicked.connect(self._on_theme_toggle)
+        fb.addWidget(self.theme_btn)
 
         root.addWidget(filter_bar)
 
@@ -118,6 +127,15 @@ class FeedView(QWidget):
         self.refresh()
 
     # ── Públicos ──────────────────────────────────────────────────────────────
+
+    def set_night_mode(self, night: bool):
+        self.night_mode = night
+        self.theme_btn.setText("🌙" if night else "☀")
+        self.carousel.set_night_mode(night)
+        self._load_articles()
+
+    def _on_theme_toggle(self):
+        self.theme_toggle.emit()
 
     def refresh(self):
         self._load_articles()

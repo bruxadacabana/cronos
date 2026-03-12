@@ -5,7 +5,7 @@ Dispara alertas por palavras-chave e por fonte específica.
 
 import logging
 from PyQt6.QtWidgets import QSystemTrayIcon, QMenu, QApplication
-from PyQt6.QtGui import QIcon, QColor, QPixmap
+from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import QObject, pyqtSignal
 from pathlib import Path
 from .database import get_alert_rules, get_connection
@@ -71,21 +71,37 @@ class NotificationManager(QObject):
 
         self.tray = QSystemTrayIcon(parent=app)
 
-        # Ícone (fallback para ícone padrão se não existir)
-        if ICON_PATH.exists():
-            self.tray.setIcon(QIcon(str(ICON_PATH)))
-        else:
-            # Fallback: ícone embutido
-            try:
-                from assets.icon_data import get_icon_path
-                self.tray.setIcon(QIcon(get_icon_path("png")))
-            except Exception:
-                # Ícone genérico do sistema
-                from PyQt6.QtGui import QPixmap
-                px = QPixmap(32, 32)
-                px.fill(QColor(176, 160, 106))
-                self.tray.setIcon(QIcon(px))
+        # Tenta .ico (Windows) → .png → fallback programático
+        icon = None
+        for candidate in [
+            BASE_DIR / "src" / "assets" / "icons" / "cronos.ico",
+            BASE_DIR / "src" / "assets" / "icons" / "cronos.png",
+            ICON_PATH,
+        ]:
+            if candidate.exists():
+                icon = QIcon(str(candidate))
+                if not icon.isNull():
+                    break
+                icon = None
 
+        if icon is None:
+            # Gera ícone mínimo 32x32 programaticamente para nunca ficar vazio
+            from PyQt6.QtGui import QPixmap, QPainter, QColor, QBrush
+            from PyQt6.QtCore import Qt
+            px = QPixmap(32, 32)
+            px.fill(Qt.GlobalColor.transparent)
+            painter = QPainter(px)
+            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+            painter.setBrush(QBrush(QColor("#8b6914")))
+            painter.setPen(Qt.PenStyle.NoPen)
+            painter.drawEllipse(2, 2, 28, 28)
+            painter.setPen(QColor("#f0e8d5"))
+            painter.setFont(painter.font())
+            painter.drawText(px.rect(), Qt.AlignmentFlag.AlignCenter, "C")
+            painter.end()
+            icon = QIcon(px)
+
+        self.tray.setIcon(icon)
         self.tray.setToolTip("Cronos — Leitor de Notícias")
         self.tray.activated.connect(self._on_tray_activated)
         self.tray.messageClicked.connect(self._on_message_clicked)

@@ -149,6 +149,23 @@ class SettingsView(QWidget):
 
         layout.addWidget(data_group)
 
+        # ── Período de Notícias ──
+        period_group = QGroupBox("Período de Notícias")
+        pf = QFormLayout(period_group)
+
+        self.article_max_age = QSpinBox()
+        self.article_max_age.setRange(0, 3650)
+        self.article_max_age.setSuffix(" dias  (0 = sem limite)")
+        self.article_max_age.setSpecialValueText("Sem limite")
+        pf.addRow("Baixar notícias dos últimos:", self.article_max_age)
+
+        pf.addRow("", QLabel(
+            "Padrão: 30 dias. Cada fonte pode ter seu próprio limite\n"
+            "(configure na tela Fontes → botão 'Período')."
+        ))
+
+        layout.addWidget(period_group)
+
         # Botão salvar
         save_btn = QPushButton("💾 Salvar configurações")
         save_btn.setObjectName("btnPrimary")
@@ -170,6 +187,7 @@ class SettingsView(QWidget):
         self.ollama_android_url.setText(get_setting("ollama_android_url", ""))
         self.translate_fallback.setChecked(get_setting("translate_fallback", "1") == "1")
         self.notif_enabled.setChecked(get_setting("notifications_enabled", "1") == "1")
+        self.article_max_age.setValue(int(get_setting("article_max_age_days", "30")))
 
         default_lang = get_setting("default_language", "pt")
         for i in range(self.default_language.count()):
@@ -190,6 +208,8 @@ class SettingsView(QWidget):
         set_setting("translate_fallback", "1" if self.translate_fallback.isChecked() else "0")
         set_setting("default_language", self.default_language.currentData())
         set_setting("notifications_enabled", "1" if self.notif_enabled.isChecked() else "0")
+        set_setting("article_max_age_days", str(self.article_max_age.value()))
+        set_setting("date_limit_asked", "1")  # marca que o usuário já configurou
         QMessageBox.information(self, "Cronos", "Configurações salvas com sucesso!")
 
     def _on_theme_change(self, index):

@@ -1,12 +1,24 @@
-# Cronos v1.2 — dependências
+# Cronos v1.3 — dependências
+
+# Core UI
 PyQt6>=6.4.0
+
+# Feeds RSS
 feedparser>=6.0
+
+# HTTP
 httpx>=0.24
-beautifulsoup4>=4.12
-readability-lxml>=0.8
+
+# Scraping — hierárquico (melhor disponível é usado automaticamente)
+trafilatura>=1.6          # melhor extrator de conteúdo editorial — RECOMENDADO
+beautifulsoup4>=4.12      # fallback bs4
+readability-lxml>=0.8     # fallback readability
+
+# Tradução
 deep-translator>=1.11
+
 # Redes sociais
-praw>=7.7           # Reddit
-atproto>=0.0.46     # Bluesky
-twscrape>=0.12      # Twitter/X (desativado por padrão)
-google-api-python-client>=2.0  # YouTube
+praw>=7.7                           # Reddit
+atproto>=0.0.46                     # Bluesky
+twscrape>=0.12                      # Twitter/X (desativado por padrão)
+google-api-python-client>=2.0       # YouTube

@@ -73,27 +73,26 @@ class MainWindow(QMainWindow):
         # ── Stack principal ──
         from PyQt6.QtWidgets import QStackedWidget
         self.stack = QStackedWidget()
+        root.addWidget(self.stack)
 
-        # 0: Feed + Leitor
+        # ReaderView como overlay sobre o STACK inteiro (funciona em qualquer aba)
+        from .reader_view import ReaderView
+        self.reader_view = ReaderView(self.night_mode, parent=self.stack)
+        self.reader_view.back_btn.clicked.connect(self._close_reader)
+
+        # 0: Feed
         feed_page = QWidget()
         fp = QHBoxLayout(feed_page)
         fp.setContentsMargins(0,0,0,0)
         fp.setSpacing(0)
-        self.splitter = QSplitter(Qt.Orientation.Horizontal)
 
         from .feed_view import FeedView
         self.feed_view = FeedView(self.night_mode)
         self.feed_view.article_selected.connect(self._open_article)
         self.feed_view.source_feed_requested.connect(self._open_source_in_feed)
+        self.feed_view.theme_toggle.connect(self._toggle_theme)
+        fp.addWidget(self.feed_view)
 
-        from .reader_view import ReaderView
-        self.reader_view = ReaderView(self.night_mode)
-        self.reader_view.back_btn.clicked.connect(self._close_reader)
-
-        self.splitter.addWidget(self.feed_view)
-        self.splitter.addWidget(self.reader_view)
-        self.splitter.setSizes([600, 0])
-        fp.addWidget(self.splitter)
         self.stack.addWidget(feed_page)          # 0
 
         # 1: Fontes
@@ -133,8 +132,6 @@ class MainWindow(QMainWindow):
         self.archive_view.article_selected.connect(self._open_article)
         self.stack.addWidget(self.archive_view) # 6
 
-        root.addWidget(self.stack)
-
         # ── Status bar ──
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
@@ -159,6 +156,10 @@ class MainWindow(QMainWindow):
             self.feed_view.reset_to_home()
             return
 
+        # Esconde o leitor ao trocar de aba — evita overlay fantasma
+        if hasattr(self, "reader_view") and self.reader_view.isVisible():
+            self.reader_view.hide()
+
         self._current_section = key
         self.sidebar.set_active(key)
 
@@ -180,16 +181,27 @@ class MainWindow(QMainWindow):
             self.archive_view.reload()
 
     def _open_article(self, article: dict):
-        self.splitter.setSizes([380, 980])
+        # Overlay cobre o stack inteiro — funciona em qualquer aba
+        self.reader_view.setGeometry(self.stack.rect())
+        self.reader_view.raise_()
         self.reader_view.load_article(article)
-
-        # NOVO: Se o artigo ainda não tem análise (ex: clickbait_score está vazio), manda furar a fila
-        if article.get("clickbait_score") is None:
-            if hasattr(self, "analysis_worker"):
-                self.analysis_worker.prioritize_article(article["id"])
+        # Prioriza análise se QUALQUER campo essencial estiver faltando
+        needs_analysis = (
+            not article.get("ai_summary") or
+            not article.get("emotional_tone") or
+            article.get("clickbait_score") is None
+        )
+        if needs_analysis and hasattr(self, "analysis_worker"):
+            self.analysis_worker.prioritize_article(article["id"])
 
     def _close_reader(self):
-        self.splitter.setSizes([600, 0])
+        self.reader_view.hide()
+
+    def resizeEvent(self, event):
+        """Mantém o overlay do leitor cobrindo o feed ao redimensionar."""
+        super().resizeEvent(event)
+        if hasattr(self, "stack") and hasattr(self, "reader_view"):
+            self.reader_view.setGeometry(self.stack.rect())
 
     def _open_source_in_feed(self, source_id: int, source_name: str):
         self._current_section = "feed"
@@ -212,6 +224,7 @@ class MainWindow(QMainWindow):
         from core.analyzer import AnalysisWorker
         self.analysis_worker = AnalysisWorker(self)
         self.analysis_worker.article_analyzed.connect(self._on_article_analyzed)
+        self.analysis_worker.article_pre_analyzed.connect(self._on_article_pre_analyzed)
         self.analysis_worker.progress.connect(self._on_analysis_progress)
         self.analysis_worker.finished_batch.connect(lambda: (self.progress.hide(), self.status_bar.showMessage("Análises concluídas.", 3000)))
 
@@ -238,18 +251,24 @@ class MainWindow(QMainWindow):
         except Exception:
             pass
 
+    def _on_article_pre_analyzed(self, article_id: int, result: dict):
+        """Pré-análise concluída — sem atualização visual por enquanto (evita recarregar o feed inteiro)."""
+        pass
+
     def _on_article_analyzed(self, article_id: int, result: dict):
         # 1. Atualiza o dashboard se estiver aberto
         if self._current_section == "dashboard":
             self.dashboard_view.refresh()
 
-        # 2. NOVO: Se o artigo que acabou de ser analisado é o que você está lendo agora, atualiza o painel!
-        if self.reader_view.current_article and self.reader_view.current_article.get("id") == article_id:
+        # 2. Atualiza o painel do leitor se esse artigo está aberto agora
+        if (self.reader_view.isVisible() and
+                self.reader_view.current_article and
+                self.reader_view.current_article.get("id") == article_id):
             from core.database import get_article
-            updated_article = get_article(article_id)
-            if updated_article:
-                self.reader_view.current_article = updated_article
-                self.reader_view._update_analysis(updated_article)
+            updated = get_article(article_id)
+            if updated:
+                self.reader_view.current_article = updated
+                self.reader_view._update_analysis(updated)
 
     def _on_analysis_progress(self, done: int, total: int):
         if total > 0:
@@ -287,20 +306,36 @@ class MainWindow(QMainWindow):
 
     # ── Tema ──────────────────────────────────────────────────────────────────
 
+    def _toggle_theme(self):
+        new_theme = "day" if self.night_mode else "night"
+        self._set_theme(new_theme)
+
     def _apply_theme(self):
         theme = "night" if self.night_mode else "day"
         qss = load_stylesheet(theme)
         QApplication.instance().setStyleSheet(qss)
-        # Textura de papel via PNG embutido (Windows-safe)
         try:
             from core.font_loader import apply_paper_texture
             apply_paper_texture(QApplication.instance(), theme)
         except Exception:
             pass
+        # Propaga para todas as views
+        if hasattr(self, "feed_view"):
+            self.feed_view.set_night_mode(self.night_mode)
         if hasattr(self, "reader_view"):
             self.reader_view.set_night_mode(self.night_mode)
         if hasattr(self, "dashboard_view"):
             self.dashboard_view.set_night_mode(self.night_mode)
+        if hasattr(self, "sources_view") and hasattr(self.sources_view, "set_night_mode"):
+            self.sources_view.set_night_mode(self.night_mode)
+        if hasattr(self, "trending_view") and hasattr(self.trending_view, "set_night_mode"):
+            self.trending_view.set_night_mode(self.night_mode)
+        if hasattr(self, "archive_view") and hasattr(self.archive_view, "set_night_mode"):
+            self.archive_view.set_night_mode(self.night_mode)
+        if hasattr(self, "social_view") and hasattr(self.social_view, "set_night_mode"):
+            self.social_view.set_night_mode(self.night_mode)
+        if hasattr(self, "sidebar"):
+            self.sidebar.set_night_mode(self.night_mode)
 
     def _set_theme(self, theme: str):
         self.night_mode = (theme == "night")

@@ -112,7 +112,7 @@ def init_db():
     # Migrações seguras
     for col, dfn in [("economic_axis","REAL DEFAULT 0.0"),("authority_axis","REAL DEFAULT 0.0"),("political_confirmed","INTEGER DEFAULT 0")]:
         _add_col(c, "sources", col, dfn)
-    for col, dfn in [("economic_axis","REAL"),("authority_axis","REAL"),("ai_keywords","TEXT"),("ai_implications","TEXT"),("ai_5ws","TEXT"),("analysis_queued","INTEGER DEFAULT 0")]:
+    for col, dfn in [("economic_axis","REAL"),("authority_axis","REAL"),("ai_keywords","TEXT"),("ai_implications","TEXT"),("ai_5ws","TEXT"),("analysis_queued","INTEGER DEFAULT 0"),("content_partial","INTEGER DEFAULT 0")]:
         _add_col(c, "articles", col, dfn)
 
     conn.commit()
@@ -283,8 +283,8 @@ def save_articles(articles):
     new_ids = []
     for a in articles:
         try:
-            c = conn.execute("INSERT OR IGNORE INTO articles (source_id,title,url,summary,author,published_at,language,category,thumbnail_url) VALUES (?,?,?,?,?,?,?,?,?)",
-                (a.get("source_id"),a.get("title"),a.get("url"),a.get("summary"),a.get("author"),a.get("published_at"),a.get("language","pt"),a.get("category","geral"),a.get("thumbnail_url")))
+            c = conn.execute("INSERT OR IGNORE INTO articles (source_id,title,url,summary,author,published_at,language,category,thumbnail_url,content_partial) VALUES (?,?,?,?,?,?,?,?,?,?)",
+                (a.get("source_id"),a.get("title"),a.get("url"),a.get("summary"),a.get("author"),a.get("published_at"),a.get("language","pt"),a.get("category","geral"),a.get("thumbnail_url"),a.get("content_partial",0)))
             if c.lastrowid and c.rowcount > 0:
                 new_ids.append(c.lastrowid)
         except Exception:
@@ -299,7 +299,7 @@ def get_articles(limit=100, offset=0, category=None, language=None, is_read=None
     conn = get_connection()
     q = "SELECT a.*, s.name as source_name, s.economic_axis as source_economic, s.authority_axis as source_authority FROM articles a LEFT JOIN sources s ON a.source_id=s.id WHERE 1=1"
     params = []
-    if category:       q += " AND (a.category=? OR a.ai_category=?)"; params += [category,category]
+    if category:       q += " AND (a.category=? OR a.ai_category LIKE ?)"; params += [category, f"%{category}%"]
     if language:       q += " AND a.language=?"; params.append(language)
     if is_read is not None: q += " AND a.is_read=?"; params.append(int(is_read))
     if is_favorite is not None: q += " AND a.is_favorite=?"; params.append(int(is_favorite))
@@ -489,5 +489,58 @@ def rename_archive_tag(old_tag, new_tag):
 def delete_archive_tag(tag):
     conn = get_connection()
     conn.execute("DELETE FROM archive_items WHERE tag=?", (tag,))
+    conn.commit()
+    conn.close()
+
+
+# ── Controle de limite de data por fonte ─────────────────────────────────────
+
+def _ensure_source_date_limit_col():
+    """Garante que a coluna date_limit_days existe na tabela sources."""
+    conn = get_connection()
+    _add_col(conn.cursor(), "sources", "date_limit_days", "INTEGER DEFAULT NULL")
+    conn.commit()
+    conn.close()
+
+def get_source_date_limit(source_id: int):
+    """
+    Retorna datetime do limite mais antigo para esta fonte.
+    Prioridade: limite da fonte > limite global > padrão (30 dias).
+    Retorna None se não há limite configurado.
+    """
+    from datetime import datetime, timezone, timedelta
+    _ensure_source_date_limit_col()
+
+    conn = get_connection()
+    row = conn.execute("SELECT date_limit_days FROM sources WHERE id=?", (source_id,)).fetchone()
+    conn.close()
+
+    # Limite da fonte tem prioridade
+    if row and row["date_limit_days"] is not None:
+        days = row["date_limit_days"]
+        if days == 0:  # 0 = sem limite para esta fonte
+            return None
+        return datetime.now(timezone.utc) - timedelta(days=days)
+
+    # Limite global
+    global_days = get_setting("article_max_age_days", None)
+    if global_days is None:
+        # Pergunta já foi respondida? Usa padrão de 30 dias se sim.
+        asked = get_setting("date_limit_asked", "0")
+        if asked == "1":
+            global_days = get_setting("article_max_age_days", "30")
+        else:
+            return None  # ainda não configurado — sem limite por ora
+
+    days = int(global_days)
+    if days == 0:
+        return None
+    return datetime.now(timezone.utc) - timedelta(days=days)
+
+def set_source_date_limit(source_id: int, days: int):
+    """Define limite de dias para uma fonte específica. 0 = sem limite."""
+    _ensure_source_date_limit_col()
+    conn = get_connection()
+    conn.execute("UPDATE sources SET date_limit_days=? WHERE id=?", (days, source_id))
     conn.commit()
     conn.close()

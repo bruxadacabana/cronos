@@ -79,12 +79,25 @@ class ArticleCard(QWidget):
             cb_lbl = QLabel(f"⚠ CLICKBAIT {cb:.0%}")
             cb_lbl.setObjectName("clickbaitBadge")
             hdr.addWidget(cb_lbl)
+
+        # Badge conteúdo parcial
+        if self.article.get("content_partial"):
+            cp_lbl = QLabel("⊘ PARCIAL")
+            cp_lbl.setObjectName("partialBadge")
+            cp_lbl.setToolTip("Conteúdo incompleto — fonte pode estar bloqueando o acesso")
+            hdr.addWidget(cp_lbl)
         hdr.addStretch()
 
         pub = self.article.get("published_at", "")
         if pub:
             try:
                 dt = datetime.fromisoformat(pub.replace("Z", "+00:00"))
+                # Converte UTC → horário local da máquina
+                if dt.tzinfo is not None:
+                    import time as _time
+                    from datetime import timezone, timedelta
+                    local_offset = timedelta(seconds=-_time.timezone)
+                    dt = dt.astimezone(timezone(local_offset))
                 ds = dt.strftime("%d/%m  %H:%M")
             except Exception:
                 ds = pub[:10]

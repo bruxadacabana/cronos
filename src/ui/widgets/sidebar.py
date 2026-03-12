@@ -39,6 +39,8 @@ class _LogoWidget(QWidget):
         super().__init__(parent)
         self.night = night
         self.setFixedHeight(76)
+        # Largura minima = sidebar colapsada; expande junto com a sidebar
+        self.setMinimumWidth(W_COLLAPSED)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         import random; random.seed(7)
         self._stars = [
@@ -119,15 +121,16 @@ class _LogoWidget(QWidget):
         # Estrelas animadas
         for s in self._stars:
             self._draw_star(p, s, s["x"] * w, s["y"] * h)
-        # Texto CRONOS
-        font = QFont("IM Fell English", 17)
-        font.setItalic(True)
-        p.setFont(font)
-        col = QColor("#cc88ff" if self.night else "#2e1806")
-        p.setPen(QPen(col))
-        fm = QFontMetrics(font)
-        tw = fm.horizontalAdvance("CRONOS")
-        p.drawText(QPoint((w - tw) // 2, h // 2 + fm.ascent() // 2 - 2), "CRONOS")
+        # Texto CRONOS — só visível quando há espaço (sidebar expandida)
+        if w >= 100:
+            font = QFont("IM Fell English", 17)
+            font.setItalic(True)
+            p.setFont(font)
+            col = QColor("#cc88ff" if self.night else "#2e1806")
+            p.setPen(QPen(col))
+            fm  = QFontMetrics(font)
+            tw  = fm.horizontalAdvance("CRONOS")
+            p.drawText(QPoint((w - tw) // 2, h // 2 + fm.ascent() // 2 - 2), "CRONOS")
         # Separador
         p.setPen(QPen(QColor("#9900ff55" if self.night else "#8b691455"), 1))
         p.drawLine(6, h - 1, w - 6, h - 1)
@@ -184,6 +187,7 @@ class _OllamaDot(QWidget):
     def __init__(self, night=False, parent=None):
         super().__init__(parent)
         self.night, self.online = night, False
+        self.model_name = ""
         self.setFixedHeight(38)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self._expanded = False
@@ -217,8 +221,13 @@ class _OllamaDot(QWidget):
         if self._expanded:
             p.setFont(QFont("Special Elite", 9))
             p.setPen(QPen(QColor("#e0d0ff" if self.night else "#2a1a08")))
-            p.drawText(W_COLLAPSED + 4, cy + 4,
-                       "IA online" if self.online else "IA offline")
+            if self.online and self.model_name:
+                label = self.model_name
+            elif self.online:
+                label = "IA online"
+            else:
+                label = "IA offline"
+            p.drawText(W_COLLAPSED + 4, cy + 4, label)
 
 
 class Sidebar(QWidget):
@@ -292,6 +301,7 @@ class Sidebar(QWidget):
     # Método para atualizar o status da IA via timer da MainWindow (linha 307)
     def set_ollama_status(self, online, model_name): 
         self._dot.online = online
+        self._dot.model_name = model_name or ""
         self._dot.update()
 
     def _on_nav(self, key):
