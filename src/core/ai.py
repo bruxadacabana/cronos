@@ -84,13 +84,6 @@ def _query(prompt: str, system: str = "", model: str = None,
             json=payload,
             timeout=effective_timeout
         )
-        if not resp.is_success:
-            # Logar body completo do erro para diagnóstico
-            try:
-                err_body = resp.json()
-            except Exception:
-                err_body = resp.text[:500]
-            logger.error(f"[DIAG 400] status={resp.status_code} body={err_body!r} payload_keys={list(payload.keys())} model={model!r}")
         resp.raise_for_status()
         data = resp.json()
 
@@ -113,12 +106,10 @@ def _query(prompt: str, system: str = "", model: str = None,
 
         elapsed = time.monotonic() - _t0
 
-        # Log diagnóstico — WARNING para aparecer no log em qualquer nível
-        logger.warning(
-            f"[DIAG] Ollama resp keys={list(data.keys())} "
-            f"msg_keys={list(message_obj.keys())} "
-            f"done_reason={data.get('done_reason','')} "
-            f"content({len(content)}c)={content[:400]!r}"
+        # Log debug da resposta
+        logger.debug(
+            f"Ollama content({len(content)}c) keys={list(data.keys())} "
+            f"done_reason={data.get('done_reason','')}"
         )
 
         # Se ainda vazio, tentar /api/generate como fallback

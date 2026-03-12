@@ -189,6 +189,14 @@ class SettingsView(QWidget):
         self.notif_enabled.setChecked(get_setting("notifications_enabled", "1") == "1")
         self.article_max_age.setValue(int(get_setting("article_max_age_days", "30")))
 
+        # Carrega modelo salvo no combo — garante que aparece mesmo sem recarregar lista
+        saved_model = get_setting("ollama_model", "")
+        if saved_model:
+            # Adiciona ao combo se ainda não está lá
+            if self.ollama_model.findText(saved_model) == -1:
+                self.ollama_model.addItem(saved_model)
+            self.ollama_model.setCurrentText(saved_model)
+
         default_lang = get_setting("default_language", "pt")
         for i in range(self.default_language.count()):
             if self.default_language.itemData(i) == default_lang:
@@ -202,7 +210,9 @@ class SettingsView(QWidget):
         set_setting("theme_night_start", self.night_start.text() or "19:00")
         set_setting("reader_font_size", str(self.font_size.value()))
         set_setting("ollama_url", self.ollama_url.text() or "http://localhost:11434")
-        set_setting("ollama_model", self.ollama_model.currentText())
+        model_text = self.ollama_model.currentText().strip()
+        if model_text:
+            set_setting("ollama_model", model_text)
         set_setting("ollama_enabled", "1" if self.ollama_enabled.isChecked() else "0")
         set_setting("ollama_android_url", self.ollama_android_url.text())
         set_setting("translate_fallback", "1" if self.translate_fallback.isChecked() else "0")
@@ -217,14 +227,21 @@ class SettingsView(QWidget):
 
     def _load_models(self):
         models = get_available_models()
-        current = self.ollama_model.currentText()
+        saved  = get_setting("ollama_model", "")
+        current = self.ollama_model.currentText() or saved
         self.ollama_model.clear()
         if models:
             self.ollama_model.addItems(models)
-            if current in models:
+            # Restaurar modelo salvo mesmo que não esteja na lista (ex: cloud models)
+            if current and current not in models:
+                self.ollama_model.addItem(current)
+            if current:
                 self.ollama_model.setCurrentText(current)
         else:
-            self.ollama_model.addItem(get_setting("ollama_model", "llama3"))
+            # Sem conexão: exibir modelo salvo para não perder
+            fallback = saved or "llama3"
+            self.ollama_model.addItem(fallback)
+            self.ollama_model.setCurrentText(fallback)
             QMessageBox.information(self, "Ollama", "Ollama não está disponível ou nenhum modelo instalado.")
 
     def _load_alerts(self):

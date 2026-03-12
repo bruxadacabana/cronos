@@ -198,22 +198,25 @@ class _OllamaDot(QWidget):
     def set_expanded(self, v): self._expanded = v; self.update()
 
     def _check(self):
+        # Ler URL e modelo das settings
+        try:
+            from core.database import get_setting
+            ollama_url = get_setting("ollama_url", "http://localhost:11434").rstrip("/")
+            name = get_setting("ollama_model", "") or ""
+        except Exception:
+            ollama_url = "http://localhost:11434"
+            name = ""
+
         import urllib.request
         try:
-            urllib.request.urlopen("http://localhost:11434/api/tags", timeout=2)
+            urllib.request.urlopen(f"{ollama_url}/api/tags", timeout=2)
             ok = True
         except Exception:
             ok = False
-        # Atualiza model_name das settings para não perder o nome após repaint
-        try:
-            from core.database import get_setting
-            name = get_setting("ollama_model", "") or ""
-            if name != self.model_name:
-                self.model_name = name
-        except Exception:
-            pass
-        changed = (ok != self.online) or (not self.model_name)
+
+        changed = (ok != self.online) or (name != self.model_name)
         self.online = ok
+        self.model_name = name
         if changed:
             self.update()
 
