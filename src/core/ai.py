@@ -84,6 +84,13 @@ def _query(prompt: str, system: str = "", model: str = None,
             json=payload,
             timeout=effective_timeout
         )
+        if not resp.is_success:
+            # Logar body completo do erro para diagnóstico
+            try:
+                err_body = resp.json()
+            except Exception:
+                err_body = resp.text[:500]
+            logger.error(f"[DIAG 400] status={resp.status_code} body={err_body!r} payload_keys={list(payload.keys())} model={model!r}")
         resp.raise_for_status()
         data = resp.json()
 
