@@ -31,41 +31,89 @@ def clean(text):
     return re.sub(r'\s+', ' ', text).strip()
 
 
+def _is_markdown(content: str) -> bool:
+    """Heurística: tem pelo menos uma marca Markdown estrutural."""
+    return bool(re.search(r"(^#{1,4} |^- |\*\*|^> )", content, re.MULTILINE))
+
+
+def _markdown_to_html(md: str) -> str:
+    """
+    Converte Markdown em HTML rico para o QTextBrowser.
+    Ordem de tentativas: markdown stdlib → regex manual.
+    """
+    try:
+        import markdown as _md_lib
+        return _md_lib.markdown(md, extensions=["extra", "nl2br"])
+    except ImportError:
+        pass
+
+    # Fallback manual via regex (cobre 90% dos casos do Cronos)
+    html_out = md
+
+    # Headings  # ## ###
+    html_out = re.sub(r"^### (.+)$",  r"<h3>\1</h3>", html_out, flags=re.MULTILINE)
+    html_out = re.sub(r"^## (.+)$",   r"<h2>\1</h2>", html_out, flags=re.MULTILINE)
+    html_out = re.sub(r"^# (.+)$",    r"<h1>\1</h1>", html_out, flags=re.MULTILINE)
+    # Blockquotes
+    html_out = re.sub(r"^> (.+)$",    r"<blockquote>\1</blockquote>", html_out, flags=re.MULTILINE)
+    # Bold / italic
+    html_out = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", html_out)
+    html_out = re.sub(r"\*(.+?)\*",   r"<i>\1</i>", html_out)
+    # Listas
+    html_out = re.sub(r"^- (.+)$",    r"<li>\1</li>",   html_out, flags=re.MULTILINE)
+    html_out = re.sub(r"(<li>.*</li>\n?)+", r"<ul>\g<0></ul>", html_out, flags=re.DOTALL)
+    # Parágrafos: blocos de texto separados por linha vazia
+    blocks = re.split(r"\n{2,}", html_out)
+    parts  = []
+    for b in blocks:
+        b = b.strip()
+        if not b:
+            continue
+        if re.match(r"<(h[1-4]|ul|blockquote)", b):
+            parts.append(b)
+        else:
+            parts.append(f"<p>{b.replace(chr(10), ' ')}</p>")
+    return "\n".join(parts)
+
+
 def _normalize_content(content: str) -> str:
     """
-    Converte qualquer forma de conteúdo (HTML, texto plano, híbrido)
-    em HTML com parágrafos <p> bem formados e legíveis.
+    Normaliza conteúdo para HTML rico exibível no QTextBrowser.
+    Detecta Markdown (novo padrão) → converte para HTML estruturado.
+    Fallback para texto plano → agrupa em parágrafos.
     """
     if not content or str(content).strip().lower() in ("none", "null"):
         return ""
 
-    # 1. Se já tem <p> tags com conteúdo real — limpa e garante estrutura
+    content = str(content).strip()
+
+    # 1. Markdown estruturado (vem do novo scraper) → HTML rico
+    if _is_markdown(content):
+        return _markdown_to_html(content)
+
+    # 2. Já é HTML com tags — limpa e reconstrói parágrafos
     if re.search(r"<p[^>]*>", content, re.IGNORECASE):
-        # Extrai texto de cada <p> e reconstrói limpo
         paragraphs = re.findall(r"<p[^>]*>(.*?)</p>", content, re.DOTALL | re.IGNORECASE)
         if paragraphs:
             cleaned = []
             for p in paragraphs:
                 text = re.sub(r"<[^>]+>", " ", p)
                 text = re.sub(r"\s+", " ", text).strip()
-                if len(text) > 20:   # ignora parágrafos vazios/lixo
+                if len(text) > 20:
                     cleaned.append(text)
             if cleaned:
                 return "".join(f"<p>{p}</p>" for p in cleaned)
 
-    # 2. Texto plano com tags misturadas — extrai só o texto
+    # 3. Texto plano puro — divide por quebras e agrupa em parágrafos
     raw = re.sub(r"<[^>]+>", " ", content)
     raw = re.sub(r"\s+", " ", raw).strip()
-
     if not raw:
-        return content
+        return ""
 
-    # 3. Divide por quebra de linha dupla (parágrafos reais)
     paragraphs = [p.strip() for p in re.split(r"\n{2,}", raw) if p.strip()]
 
-    # 4. Se veio tudo numa linha, agrupa por frases (3 frases por parágrafo)
+    # 4. Bloco único → divide por frases (3 por parágrafo)
     if len(paragraphs) <= 1:
-        # Divide em frases: ponto/exclamação/interrogação seguido de espaço + maiúscula
         sentences = re.split(r'(?<=[.!?])\s+(?=[A-ZÁÀÂÃÉÊÍÓÔÕÚ"\u201C\u201E])', raw)
         buf, groups = [], []
         for s in sentences:
@@ -681,12 +729,13 @@ class ReaderView(QWidget):
         self._anim_out = a_out
 
     def _build_html(self, article, content):
-        night = self.night_mode
-        bg   = "#04000a" if night else "#faf5e8"
-        fg   = "#e0d0ff" if night else "#2a1a08"
-        acc  = "#9944ff" if night else "#8b6914"
-        link = "#cc88ff" if night else "#6a4a10"
-        font = "'IM Fell English', Georgia, serif"
+        night  = self.night_mode
+        bg     = "#04000a" if night else "#faf5e8"
+        fg     = "#e0d0ff" if night else "#2a1a08"
+        acc    = "#9944ff" if night else "#8b6914"
+        link   = "#cc88ff" if night else "#6a4a10"
+        bq_bg  = "#0d0020" if night else "#f5edd8"
+        font   = "'IM Fell English', Georgia, serif"
 
         pub = ""
         if article.get("published_at"):
@@ -713,19 +762,53 @@ class ReaderView(QWidget):
         return f"""<!DOCTYPE html><html><head><meta charset="utf-8">
 <style>
 * {{ box-sizing:border-box; }}
-body {{ background:{bg}; color:{fg}; font-family:{font}; font-size:16px; line-height:1.85; max-width:820px; margin:0 auto; padding:28px 44px 40px 36px; }}
-h1 {{ font-size:28px; font-weight:normal; font-style:italic; border-bottom:2px solid {acc}; padding-bottom:14px; margin-bottom:10px; line-height:1.3; }}
-.meta {{ font-family:'Special Elite','Courier New',monospace; font-size:11px; color:{acc}; margin-bottom:24px; letter-spacing:.5px; }}
+body {{ background:{bg}; color:{fg}; font-family:{font}; font-size:16px; line-height:1.9; max-width:820px; margin:0 auto; padding:28px 44px 40px 36px; }}
+
+/* Título do artigo */
+h1.article-title {{ font-size:28px; font-weight:normal; font-style:italic; border-bottom:2px solid {acc}; padding-bottom:14px; margin-bottom:10px; line-height:1.3; }}
+
+/* Metadados */
+.meta {{ font-family:'Special Elite','Courier New',monospace; font-size:11px; color:{acc}; margin-bottom:28px; letter-spacing:.5px; }}
 .meta a {{ color:{link}; text-decoration:none; }}
-p {{ margin:0 0 18px 0; }}
+
+/* Headings dentro do artigo — estilo jornal */
+h1 {{ font-size:22px; font-weight:normal; font-style:italic; color:{acc}; margin:28px 0 12px; border-bottom:1px solid {acc}; padding-bottom:6px; }}
+h2 {{ font-size:19px; font-weight:normal; font-style:italic; color:{acc}; margin:24px 0 10px; }}
+h3 {{ font-size:16px; font-weight:bold; font-style:normal; color:{acc}; margin:20px 0 8px; text-transform:uppercase; letter-spacing:.8px; }}
+h4 {{ font-size:14px; font-weight:bold; color:{acc}; margin:16px 0 6px; }}
+
+/* Parágrafos */
+p {{ margin:0 0 20px 0; text-align:justify; }}
+
+/* Blockquote — estilo recorte de jornal */
+blockquote {{
+    border-left:4px solid {acc};
+    background:{bq_bg};
+    margin:22px 0 22px 0;
+    padding:12px 20px;
+    font-style:italic;
+    border-radius:0 2px 2px 0;
+    color:{acc};
+    font-size:15px;
+}}
+
+/* Listas */
+ul,ol {{ margin:0 0 20px 0; padding-left:26px; }}
+li {{ margin-bottom:8px; }}
+
+/* Links */
 a {{ color:{link}; }}
-img {{ max-width:100%; height:auto; border-radius:8px; border:1px solid {acc}; margin:10px 0; display:block; }}
-blockquote {{ border-left:4px solid {acc}; margin:18px 0 18px 10px; padding:8px 18px; opacity:.85; font-style:italic; border-radius:0 8px 8px 0; }}
-h2,h3 {{ font-size:20px; font-weight:normal; font-style:italic; color:{acc}; margin:24px 0 10px; }}
-ul,ol {{ margin:0 0 18px 0; padding-left:24px; }}
-li {{ margin-bottom:6px; }}
+
+/* Separador */
+hr {{ border:none; border-top:1px dashed {acc}; margin:28px 0; opacity:.5; }}
+
+/* Imagens */
+img {{ max-width:100%; height:auto; border:1px solid {acc}; margin:12px 0; display:block; }}
+
+/* Bold / italic dentro do corpo */
+b,strong {{ color:{acc}; font-weight:bold; }}
 </style></head><body>
-<h1>{title}</h1>
+<h1 class="article-title">{title}</h1>
 <div class="meta">
 {source}{f' · {author}' if author else ''}{f' · {pub}' if pub else ''}
 {f' · <a href="{url}">Abrir no navegador ↗</a>' if url else ''}
