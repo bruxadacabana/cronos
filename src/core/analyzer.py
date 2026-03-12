@@ -227,8 +227,9 @@ class PreAnalysisWorker(QThread):
 
 class _SingleArticleWorker(QThread):
     """Thread dedicado para análise completa de UM artigo específico."""
-    done   = pyqtSignal(int, dict)
-    failed = pyqtSignal(int)
+    done          = pyqtSignal(int, dict)
+    failed        = pyqtSignal(int)
+    progress_tick = pyqtSignal(int, int, int, int)  # (elapsed_ms, timeout_ms, chunk_i, total_chunks)
 
     def __init__(self, article: dict, parent=None):
         super().__init__(parent)
@@ -255,12 +256,25 @@ class _SingleArticleWorker(QThread):
         _log_start(art_id, title, "priority")
         _t0_total = time.monotonic()
         chunks = chunk_article_text(content_full, chunk_size=4500)
+        import threading
+        PRIORITY_TIMEOUT_MS = 60_000
+        total_chunks = len(chunks)
         all_results = []
         for i, chunk in enumerate(chunks):
+            self.progress_tick.emit(0, PRIORITY_TIMEOUT_MS, i, total_chunks)
             prompt = ANALYSIS_PROMPT.format(title=title, content=chunk)
             _t0 = time.monotonic()
+            _stop_tick = [False]
+            def _ticker(w=self, t0=_t0, tms=PRIORITY_TIMEOUT_MS, ci=i, tc=total_chunks, flag=_stop_tick):
+                while not flag[0]:
+                    e_ms = int((time.monotonic() - t0) * 1000)
+                    w.progress_tick.emit(min(e_ms, tms - 10), tms, ci, tc)
+                    time.sleep(0.4)
+            _tick_t = threading.Thread(target=_ticker, daemon=True)
+            _tick_t.start()
             try:
                 raw = _ollama_generate(prompt, max_tokens=400, timeout=60)
+                _stop_tick[0] = True
                 elapsed_chunk = time.monotonic() - _t0
                 res = _parse_analysis(raw)
                 if res:
@@ -275,6 +289,7 @@ class _SingleArticleWorker(QThread):
                         f"  Resposta: {(raw or '')[:200]}"
                     )
             except Exception as e:
+                _stop_tick[0] = True
                 _log_error(art_id, title, e, chunk=i+1, mode="priority")
             time.sleep(0.2)
 
@@ -302,10 +317,12 @@ class AnalysisWorker(QThread):
       - Pré-análise rápida via PreAnalysisWorker (todos os artigos novos)
       - Análise completa via _SingleArticleWorker (artigo aberto) ou batch interno
     """
-    article_analyzed     = pyqtSignal(int, dict)   # análise completa
-    article_pre_analyzed = pyqtSignal(int, dict)   # pré-análise
-    progress             = pyqtSignal(int, int)
-    finished_batch       = pyqtSignal()
+    article_analyzed        = pyqtSignal(int, dict)
+    article_pre_analyzed    = pyqtSignal(int, dict)
+    article_analysis_failed = pyqtSignal(int)
+    priority_progress       = pyqtSignal(int, int)   # (elapsed_ms, timeout_ms)
+    progress                = pyqtSignal(int, int)
+    finished_batch          = pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -359,6 +376,7 @@ class AnalysisWorker(QThread):
         worker = _SingleArticleWorker(art, parent=self.parent())
         worker.done.connect(self._on_priority_done)
         worker.failed.connect(self._on_priority_failed)
+        worker.progress_tick.connect(self._on_priority_tick)
         self._priority_worker = worker
         worker.start()
 
@@ -431,11 +449,15 @@ class AnalysisWorker(QThread):
         self._pre_worker.unskip(article_id)
         self.article_analyzed.emit(article_id, result)
 
+    def _on_priority_tick(self, elapsed_ms, timeout_ms, chunk_i, total_chunks):
+        self.priority_progress.emit(elapsed_ms, timeout_ms)
+
     def _on_priority_failed(self, article_id: int):
         with QMutexLocker(self._mutex):
             self._priority_ids.discard(article_id)
         self._pre_worker.unskip(article_id)
         logger.warning(f"[priority] Falha análise completa artigo {article_id}")
+        self.article_analysis_failed.emit(article_id)
 
     # ── Progresso combinado ──────────────────────────────────────────────────
 

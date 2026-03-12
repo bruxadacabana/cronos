@@ -1,0 +1,16 @@
+
+==================================================
+CRASH EM: 2026-03-12 06:09:18.417124
+Traceback (most recent call last):
+  File "/home/spacewitch/Documents/cronos/cronos.py", line 71, in <module>
+    main()
+    ~~~~^^
+  File "/home/spacewitch/Documents/cronos/cronos.py", line 66, in main
+    window = MainWindow()
+  File "/home/spacewitch/Documents/cronos/src/ui/main_window.py", line 47, in __init__
+    self._build_ui()
+    ~~~~~~~~~~~~~~^^
+  File "/home/spacewitch/Documents/cronos/src/ui/main_window.py", line 83, in _build_ui
+    self.reader_view.retry_analysis_requested.connect(self._retry_article_analysis)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ReaderView' object has no attribute 'retry_analysis_requested'

@@ -43,6 +43,18 @@ try:
 except ImportError:
     HAS_BS4 = False
 
+try:
+    from goose3 import Goose
+    HAS_GOOSE = True
+except ImportError:
+    HAS_GOOSE = False
+
+try:
+    import markdownify as _markdownify
+    HAS_MARKDOWNIFY = True
+except ImportError:
+    HAS_MARKDOWNIFY = False
+
 from .database import (get_sources, save_articles, get_connection,
                         get_setting, get_source_date_limit)
 
@@ -148,37 +160,143 @@ def _is_meaningful(text: str) -> bool:
 # Scraper hierárquico
 # ============================================================
 
-def _scrape_trafilatura(raw_html: str, url: str) -> str:
-    if not HAS_TRAFILATURA:
+# ── Conversor HTML → Markdown estruturado ────────────────────────────────────
+
+def _html_to_markdown(html_frag: str) -> str:
+    """
+    Converte HTML limpo em Markdown preservando headings, listas, blockquotes.
+    Usa markdownify se disponível; fallback para _clean_html (texto plano).
+    """
+    if not html_frag:
         return ""
+    if HAS_MARKDOWNIFY:
+        try:
+            md = _markdownify.markdownify(
+                html_frag,
+                heading_style="ATX",       # # H1  ## H2
+                bullets="-",
+                strip=["a", "img"],        # remove links e imgs (geralmente lixo)
+                newline_style="backslash",
+            )
+            # Limpa linhas vazias excessivas
+            md = re.sub(r"\n{3,}", "\n\n", md)
+            return md.strip()
+        except Exception as e:
+            logger.debug(f"markdownify erro: {e}")
+    # fallback sem markdownify
+    return _clean_html(html_frag)
+
+
+def _clean_html_to_md_paragraphs(html_frag: str) -> str:
+    """
+    Extrai parágrafos e elementos estruturais de HTML limpo
+    e retorna Markdown, mesmo sem markdownify.
+    """
+    if not HAS_BS4:
+        return _clean_html(html_frag)
     try:
-        result = trafilatura.extract(
+        soup = BeautifulSoup(html_frag, "html.parser")
+        parts = []
+        for el in soup.find_all(
+            ["h1","h2","h3","h4","p","blockquote","li","ul","ol"]
+        ):
+            text = el.get_text(" ", strip=True)
+            if not text:
+                continue
+            tag = el.name
+            if tag == "h1":
+                parts.append(f"# {text}")
+            elif tag == "h2":
+                parts.append(f"## {text}")
+            elif tag in ("h3","h4"):
+                parts.append(f"### {text}")
+            elif tag == "blockquote":
+                parts.append(f"> {text}")
+            elif tag == "li":
+                parts.append(f"- {text}")
+            elif len(text) > 30:
+                parts.append(text)
+        return "\n\n".join(parts)
+    except Exception:
+        return _clean_html(html_frag)
+
+
+# ── Extratores individuais ────────────────────────────────────────────────────
+
+def _scrape_trafilatura(raw_html: str, url: str) -> tuple:
+    """Retorna (markdown, texto_puro) ou ("","")."""
+    if not HAS_TRAFILATURA:
+        return "", ""
+    try:
+        # Extrai HTML estruturado (mantém headings, parágrafos, listas)
+        html_out = trafilatura.extract(
             raw_html, url=url,
+            output_format="html",
             include_comments=False,
-            include_tables=False,
+            include_tables=True,
+            include_formatting=True,
             no_fallback=False,
             favor_precision=True,
         )
-        return result or ""
+        if html_out:
+            md  = _html_to_markdown(html_out) or _clean_html_to_md_paragraphs(html_out)
+            txt = _clean_html(html_out)
+            return md, txt
+
+        # Fallback para texto plano se HTML falhar
+        txt = trafilatura.extract(
+            raw_html, url=url,
+            include_comments=False,
+            no_fallback=False,
+            favor_precision=True,
+        ) or ""
+        return txt, txt   # texto plano serve de ambos
     except Exception as e:
         logger.debug(f"trafilatura erro: {e}")
-        return ""
+        return "", ""
 
 
-def _scrape_readability(raw_html: str) -> str:
+def _scrape_readability(raw_html: str) -> tuple:
+    """Retorna (markdown, texto_puro) ou ("","")."""
     if not HAS_READABILITY:
-        return ""
+        return "", ""
     try:
         doc = ReadabilityDocument(raw_html)
-        return _clean_html(doc.summary())
+        html_out = doc.summary()
+        md  = _html_to_markdown(html_out) or _clean_html_to_md_paragraphs(html_out)
+        txt = _clean_html(html_out)
+        return md, txt
     except Exception as e:
         logger.debug(f"readability erro: {e}")
-        return ""
+        return "", ""
 
 
-def _scrape_bs4(raw_html: str) -> str:
+def _scrape_goose(raw_html: str, url: str) -> tuple:
+    """Goose3 — melhor precisão de extração, sem formatação estrutural.
+    Retorna (markdown, texto_puro) ou ("","")."""
+    if not HAS_GOOSE:
+        return "", ""
+    try:
+        g = Goose({"enable_image_fetching": False, "http_timeout": 10})
+        article = g.extract(raw_html=raw_html, url=url)
+        txt = (article.cleaned_text or "").strip()
+        if not txt:
+            return "", ""
+        # Goose retorna texto plano; converte para Markdown com parágrafos
+        paragraphs = [p.strip() for p in txt.split("\n\n") if p.strip()]
+        if len(paragraphs) <= 1:
+            paragraphs = [p.strip() for p in txt.split("\n") if len(p.strip()) > 40]
+        md = "\n\n".join(paragraphs)
+        return md, txt
+    except Exception as e:
+        logger.debug(f"goose3 erro: {e}")
+        return "", ""
+
+
+def _scrape_bs4(raw_html: str) -> tuple:
+    """Retorna (markdown, texto_puro) ou ("","")."""
     if not HAS_BS4:
-        return ""
+        return "", ""
     try:
         soup = BeautifulSoup(raw_html, "html.parser")
         for tag in soup(["script", "style", "nav", "header", "footer",
@@ -189,22 +307,31 @@ def _scrape_bs4(raw_html: str) -> str:
             text = p.get_text(" ", strip=True)
             if len(text) > 60:
                 paragraphs.append(text)
-        return "\n\n".join(paragraphs)
+        txt = "\n\n".join(paragraphs)
+        return txt, txt
     except Exception as e:
         logger.debug(f"bs4 erro: {e}")
-        return ""
+        return "", ""
 
 
-def _scrape_regex(raw_html: str) -> str:
+def _scrape_regex(raw_html: str) -> tuple:
     raw = re.sub(r"<script[^>]*>.*?</script>", "", raw_html, flags=re.DOTALL)
     raw = re.sub(r"<style[^>]*>.*?</style>",   "", raw,      flags=re.DOTALL)
-    return _clean_html(raw)
+    txt = _clean_html(raw)
+    return txt, txt
 
 
 def fetch_article_content(url: str) -> tuple:
     """
-    Busca conteúdo completo via scraping hierárquico.
-    Retorna (html_para_exibição, texto_puro).
+    Busca conteúdo completo via scraping hierárquico de 5 camadas.
+    Retorna (markdown_formatado, texto_puro).
+
+    Hierarquia:
+      1. trafilatura  — extrai HTML estruturado → converte para Markdown
+      2. readability  — extrai HTML DOM → converte para Markdown
+      3. goose3       — melhor precisão de extração (texto plano)
+      4. bs4          — fallback manual
+      5. regex        — último recurso
     """
     try:
         resp = httpx.get(url, headers=HEADERS, timeout=TIMEOUT,
@@ -213,29 +340,34 @@ def fetch_article_content(url: str) -> tuple:
         encoding = resp.encoding or resp.apparent_encoding or "utf-8"
         raw_html  = resp.content.decode(encoding, errors="replace")
 
-        # 1. trafilatura
-        text = _scrape_trafilatura(raw_html, url)
-        if _is_meaningful(text):
-            logger.debug(f"trafilatura OK [{len(text)}c] {url}")
-            html = "<p>" + text.replace("\n\n", "</p><p>").replace("\n", " ") + "</p>"
-            return html, text
+        # 1. trafilatura — retorna HTML estruturado → Markdown
+        md, txt = _scrape_trafilatura(raw_html, url)
+        if _is_meaningful(txt):
+            logger.debug(f"trafilatura OK [{len(txt)}c] {url}")
+            return md or txt, txt
 
-        # 2. readability
-        text = _scrape_readability(raw_html)
-        if _is_meaningful(text):
-            logger.debug(f"readability OK [{len(text)}c] {url}")
-            return f"<p>{text}</p>", text
+        # 2. readability — HTML DOM → Markdown
+        md, txt = _scrape_readability(raw_html)
+        if _is_meaningful(txt):
+            logger.debug(f"readability OK [{len(txt)}c] {url}")
+            return md or txt, txt
 
-        # 3. bs4
-        text = _scrape_bs4(raw_html)
-        if _is_meaningful(text):
-            logger.debug(f"bs4 OK [{len(text)}c] {url}")
-            return f"<p>{text}</p>", text
+        # 3. goose3 — alta precisão, texto plano bem segmentado
+        md, txt = _scrape_goose(raw_html, url)
+        if _is_meaningful(txt):
+            logger.debug(f"goose3 OK [{len(txt)}c] {url}")
+            return md or txt, txt
 
-        # 4. regex fallback
-        text = _scrape_regex(raw_html)
-        logger.debug(f"regex fallback [{len(text)}c] {url}")
-        return f"<p>{text}</p>", text
+        # 4. bs4 — fallback manual
+        md, txt = _scrape_bs4(raw_html)
+        if _is_meaningful(txt):
+            logger.debug(f"bs4 OK [{len(txt)}c] {url}")
+            return md or txt, txt
+
+        # 5. regex — último recurso
+        md, txt = _scrape_regex(raw_html)
+        logger.debug(f"regex fallback [{len(txt)}c] {url}")
+        return md or txt, txt
 
     except httpx.TimeoutException:
         logger.warning(f"Timeout scraping {url}")
@@ -316,16 +448,20 @@ def fetch_source(source: dict,
                     pass
 
             # Tenta scraping quando o feed não entrega conteúdo completo
-            content_clean = ""
+            content_clean   = ""   # Markdown formatado para exibição
+            content_plain   = ""   # Texto puro para análise IA
             if not _is_meaningful(feed_text):
                 try:
-                    _, scraped = fetch_article_content(link)
-                    if _is_meaningful(scraped):
-                        content_clean = scraped
+                    md_scraped, txt_scraped = fetch_article_content(link)
+                    if _is_meaningful(txt_scraped):
+                        content_clean = md_scraped   # Markdown → exibição
+                        content_plain = txt_scraped  # texto puro → IA
                 except Exception:
                     pass
+            else:
+                content_plain = feed_text
 
-            best   = content_clean or feed_text
+            best   = content_plain or feed_text
             is_partial = not _is_meaningful(best)
 
             articles.append({

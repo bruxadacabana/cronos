@@ -215,7 +215,8 @@ def _bias_label(ea, aa):
 
 class PointsOfViewDialog(QDialog):
     """Pontos de Vista — redesenhado com cards visuais e viés político."""
-    article_selected = pyqtSignal(dict)
+    article_selected         = pyqtSignal(dict)
+    retry_analysis_requested = pyqtSignal(int)   # article_id
 
     def __init__(self, current_article, night_mode=False, parent=None):
         super().__init__(parent)
@@ -416,13 +417,30 @@ class ReaderView(QWidget):
         ap.addWidget(self.analysis_pending)
 
         self.analysis_progress = QProgressBar()
-        self.analysis_progress.setRange(0, 0)   # indeterminate spinner
-        self.analysis_progress.setMaximumWidth(140)
-        self.analysis_progress.setMinimumHeight(12)
-        self.analysis_progress.setMaximumHeight(12)
+        self.analysis_progress.setRange(0, 60000)   # 0..timeout_ms = progresso real
+        self.analysis_progress.setValue(0)
+        self.analysis_progress.setMaximumWidth(160)
+        self.analysis_progress.setFixedHeight(12)
         self.analysis_progress.setTextVisible(False)
         self.analysis_progress.hide()
         ap.addWidget(self.analysis_progress)
+
+        # Flag de falha — carimbo vermelho visível quando análise falha
+        self.analysis_fail_lbl = QLabel("✕ Falha na análise")
+        self.analysis_fail_lbl.setObjectName("analysisFailFlag")
+        self.analysis_fail_lbl.setToolTip(
+            "O Ollama não respondeu a tempo.\n"
+            "Clique em 'Tentar novamente' para re-analisar."
+        )
+        self.analysis_fail_lbl.hide()
+        ap.addWidget(self.analysis_fail_lbl)
+
+        self.analysis_retry_btn = QPushButton("↺ Tentar novamente")
+        self.analysis_retry_btn.setObjectName("btnRetryAnalysis")
+        self.analysis_retry_btn.setFixedHeight(22)
+        self.analysis_retry_btn.hide()
+        self.analysis_retry_btn.clicked.connect(self._retry_analysis)
+        ap.addWidget(self.analysis_retry_btn)
         self.analysis_panel.hide()
         layout.addWidget(self.analysis_panel)
 
@@ -486,6 +504,46 @@ class ReaderView(QWidget):
         sf.addWidget(self.implications_lbl)
         self.summary_frame.hide()
         layout.addWidget(self.summary_frame)
+
+    # ── Análise prioritária — chamados pelo main_window ──────────────────────
+
+    def notify_analysis_progress(self, elapsed_ms: int, timeout_ms: int):
+        """Atualiza a barra de progresso real da análise do artigo aberto."""
+        if not self.isVisible():
+            return
+        self.analysis_pending.show()
+        self.analysis_progress.setRange(0, max(timeout_ms, 1))
+        self.analysis_progress.setValue(min(elapsed_ms, timeout_ms))
+        self.analysis_progress.show()
+        self.analysis_fail_lbl.hide()
+        self.analysis_retry_btn.hide()
+
+    def notify_analysis_failed(self, article_id: int):
+        """Exibe a flag de falha e o botão de retry para o artigo aberto."""
+        if not self.isVisible():
+            return
+        art = getattr(self, "current_article", None)
+        if not art or art.get("id") != article_id:
+            return
+        self.analysis_pending.hide()
+        self.analysis_progress.hide()
+        self.analysis_fail_lbl.show()
+        self.analysis_retry_btn.show()
+
+    def _retry_analysis(self):
+        """Re-enfileira o artigo atual para análise prioritária."""
+        art = getattr(self, "current_article", None)
+        if not art:
+            return
+        # Esconde fail, mostra spinner
+        self.analysis_fail_lbl.hide()
+        self.analysis_retry_btn.hide()
+        self.analysis_progress.setRange(0, 60000)
+        self.analysis_progress.setValue(0)
+        self.analysis_pending.show()
+        self.analysis_progress.show()
+        # Sinaliza para o main_window re-enfileirar
+        self.retry_analysis_requested.emit(art["id"])
 
     def load_article(self, article: dict):
         self.show()   # torna o overlay visível
@@ -701,6 +759,8 @@ li {{ margin-bottom:6px; }}
             self.analysis_panel.show()
             self.analysis_pending.hide()
             self.analysis_progress.hide()
+            self.analysis_fail_lbl.hide()
+            self.analysis_retry_btn.hide()
 
             # 5Ws e implicações
             import json
@@ -718,7 +778,11 @@ li {{ margin-bottom:6px; }}
         else:
             self.analysis_panel.show()
             self.analysis_pending.show()
+            self.analysis_progress.setRange(0, 60000)
+            self.analysis_progress.setValue(0)
             self.analysis_progress.show()
+            self.analysis_fail_lbl.hide()
+            self.analysis_retry_btn.hide()
             self.bias_lbl.setText("")
             self.tone_lbl.setText("")
             self.cb_lbl.setText("")

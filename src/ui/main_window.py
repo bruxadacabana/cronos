@@ -80,6 +80,7 @@ class MainWindow(QMainWindow):
         from .reader_view import ReaderView
         self.reader_view = ReaderView(self.night_mode, parent=self.stack)
         self.reader_view.back_btn.clicked.connect(self._close_reader)
+        self.reader_view.retry_analysis_requested.connect(self._retry_article_analysis)
 
         # 0: Feed
         feed_page = QWidget()
@@ -237,6 +238,8 @@ class MainWindow(QMainWindow):
         self.analysis_worker = AnalysisWorker(self)
         self.analysis_worker.article_analyzed.connect(self._on_article_analyzed)
         self.analysis_worker.article_pre_analyzed.connect(self._on_article_pre_analyzed)
+        self.analysis_worker.article_analysis_failed.connect(self._on_article_analysis_failed)
+        self.analysis_worker.priority_progress.connect(self._on_priority_progress)
         self.analysis_worker.progress.connect(self._on_analysis_progress)
         self.analysis_worker.finished_batch.connect(self._on_analysis_finished)
 
@@ -281,6 +284,34 @@ class MainWindow(QMainWindow):
             if updated:
                 self.reader_view.current_article = updated
                 self.reader_view._update_analysis(updated)
+
+    def _on_article_analysis_failed(self, article_id: int):
+        """Repassa falha ao reader_view se o artigo estiver aberto."""
+        if (self.reader_view.isVisible() and
+                getattr(self.reader_view, "current_article", None) and
+                self.reader_view.current_article.get("id") == article_id):
+            self.reader_view.notify_analysis_failed(article_id)
+
+    def _on_priority_progress(self, elapsed_ms: int, timeout_ms: int):
+        """Repassa progresso real da análise prioritária ao reader_view."""
+        if self.reader_view.isVisible():
+            self.reader_view.notify_analysis_progress(elapsed_ms, timeout_ms)
+
+    def _retry_article_analysis(self, article_id: int):
+        """Re-enfileira artigo para análise, limpando resultado anterior."""
+        if not hasattr(self, "analysis_worker"):
+            return
+        from core.database import get_connection
+        conn = get_connection()
+        conn.execute(
+            "UPDATE articles SET analysis_done=0, analysis_queued=0, "
+            "ai_summary=NULL, emotional_tone=NULL, clickbait_score=NULL, "
+            "ai_category=NULL, ai_keywords=NULL, ai_implications=NULL, "
+            "ai_5ws=NULL, economic_axis=0.0, authority_axis=0.0 "
+            "WHERE id=?", (article_id,)
+        )
+        conn.commit(); conn.close()
+        self.analysis_worker.prioritize_article(article_id)
 
     def _on_analysis_finished(self):
         self.progress.hide()

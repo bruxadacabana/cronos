@@ -10,9 +10,14 @@ feedparser>=6.0
 httpx>=0.24
 
 # Scraping — hierárquico (melhor disponível é usado automaticamente)
-trafilatura>=1.6          # melhor extrator de conteúdo editorial — RECOMENDADO
-beautifulsoup4>=4.12      # fallback bs4
-readability-lxml>=0.8     # fallback readability
+trafilatura>=1.6          # 1º: melhor extrator, retorna HTML estruturado
+readability-lxml>=0.8     # 2º: extrator DOM clássico
+goose3>=3.1               # 3º: alta precisão de extração (novo)
+beautifulsoup4>=4.12      # 4º: fallback manual
+
+# Formatação de conteúdo
+markdownify>=0.13         # converte HTML extraído em Markdown estruturado
+# markdown>=3.6           # opcional: renderiza Markdown via stdlib (mais rico)
 
 # Tradução
 deep-translator>=1.11
