@@ -4,7 +4,7 @@
     "theme_day_start": "05:00",
     "theme_night_start": "18:00",
     "fetch_interval": "30",
-    "fetch_on_startup": "1",
+    "fetch_on_startup": "0",
     "ollama_url": "http://localhost:11434",
     "ollama_model": "",
     "ollama_enabled": "1",
