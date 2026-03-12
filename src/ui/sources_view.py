@@ -11,6 +11,7 @@ from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QColor
 
 from core.database import get_setting, set_setting
+from core.database import deactivate_source, delete_source
 
 def _c(t):
     return html.unescape(t) if t else ""
@@ -30,7 +31,8 @@ def _days_since(iso_str):
 
 class SourcesView(QWidget):
     open_source_feed = pyqtSignal(int, str)
-    fetch_now = pyqtSignal() # Sinal para o botão "Atualizar Agora"
+    fetch_now        = pyqtSignal()
+    source_updated   = pyqtSignal()  # emitido após desativar/excluir
 
     def __init__(self, night_mode=False, parent=None):
         super().__init__(parent)
@@ -100,9 +102,15 @@ class SourcesView(QWidget):
         btns = QHBoxLayout()
         edit_btn = QPushButton("✏ Editar")
         edit_btn.clicked.connect(self._edit_selected)
-        del_btn = QPushButton("✕ Desativar")
+        disable_btn = QPushButton("⏸ Desativar")
+        disable_btn.setObjectName("btnWarning")
+        disable_btn.setToolTip("Pausa a fonte — mantém as notícias já baixadas")
+        disable_btn.clicked.connect(self._disable_source)
+
+        del_btn = QPushButton("🗑 Excluir")
         del_btn.setObjectName("btnDanger")
-        del_btn.clicked.connect(self._remove)
+        del_btn.setToolTip("Remove permanentemente a fonte do Cronos")
+        del_btn.clicked.connect(self._delete_source)
         period_btn = QPushButton("📅 Período")
         period_btn.setToolTip("Baixar notícias de um período específico desta fonte")
         period_btn.clicked.connect(self._period_dialog)
@@ -111,6 +119,7 @@ class SourcesView(QWidget):
         open_btn.clicked.connect(self._open_feed)
 
         btns.addWidget(edit_btn)
+        btns.addWidget(disable_btn)
         btns.addWidget(del_btn)
         btns.addWidget(period_btn)
         btns.addStretch()
@@ -211,15 +220,81 @@ class SourcesView(QWidget):
             conn.commit(); conn.close()
             self.reload()
 
-    def _remove(self):
+    def _disable_source(self):
+        """Desativa a fonte — para de baixar novas notícias, mantém as existentes."""
         s = self._cur()
         if not s: return
-        if QMessageBox.question(self,"Confirmar",f"Desativar '{s['name']}'?") == QMessageBox.StandardButton.Yes:
-            from core.database import get_connection
-            conn = get_connection()
-            conn.execute("UPDATE sources SET active=0 WHERE id=?", (s["id"],))
-            conn.commit(); conn.close()
+        if s.get("active") == 0:
+            nome = s["name"]
+            msg_info = "A fonte '" + nome + "' já está desativada.\n"
+            msg_info += "Para reativá-la, edite a fonte e marque 'Fonte ativa'."
+            QMessageBox.information(self, "Já desativada", msg_info)
+            return
+        nome = s["name"]
+        msg_d = "Desativar '" + nome + "'?\n\n"
+        msg_d += "As notícias já baixadas continuarão disponíveis.\n"
+        msg_d += "Para reativar, edite a fonte e marque 'Fonte ativa'."
+        if QMessageBox.question(
+            self, "Desativar fonte", msg_d
+        ) == QMessageBox.StandardButton.Yes:
+            deactivate_source(s["id"])
             self.reload()
+            self.source_updated.emit()
+
+    def _delete_source(self):
+        """Exclui permanentemente a fonte, com opção de remover as notícias."""
+        s = self._cur()
+        if not s: return
+
+        from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QCheckBox, QDialogButtonBox
+        dlg = QDialog(self)
+        nome = s["name"]
+        dlg.setWindowTitle(f"Excluir '{nome}'")
+        layout = QVBoxLayout(dlg)
+
+        layout.addWidget(QLabel(
+            f"<b>Excluir permanentemente '{nome}'?</b><br><br>"
+            "Esta ação não pode ser desfeita."
+        ))
+
+        # Contar artigos da fonte
+        from core.database import get_connection as _gc
+        conn = _gc()
+        row = conn.execute(
+            "SELECT COUNT(*) FROM articles WHERE source_id=?", (s["id"],)
+        ).fetchone()
+        conn.close()
+        n_articles = row[0] if row else 0
+
+        del_arts_check = QCheckBox(
+            f"Deletar também as {n_articles} notícia(s) já baixadas desta fonte"
+        )
+        del_arts_check.setChecked(False)
+        layout.addWidget(del_arts_check)
+
+        btns = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Ok |
+            QDialogButtonBox.StandardButton.Cancel
+        )
+        btns.button(QDialogButtonBox.StandardButton.Ok).setText("Excluir")
+        btns.button(QDialogButtonBox.StandardButton.Ok).setObjectName("btnDanger")
+        btns.accepted.connect(dlg.accept)
+        btns.rejected.connect(dlg.reject)
+        layout.addWidget(btns)
+
+        if dlg.exec() != QDialog.DialogCode.Accepted:
+            return
+
+        delete_articles = del_arts_check.isChecked()
+        deleted = delete_source(s["id"], delete_articles=delete_articles)
+
+        if delete_articles:
+            msg = f"Fonte excluída e {deleted} notícia(s) removida(s)."
+        else:
+            msg = f"Fonte excluída. As {n_articles} notícia(s) foram mantidas."
+        QMessageBox.information(self, "Fonte excluída", msg)
+        self.reload()
+        self.source_updated.emit()
 
 
     def _check_first_run_date_limit(self):

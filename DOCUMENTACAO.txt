@@ -1,5 +1,5 @@
 ╔══════════════════════════════════════════════════════════════════════════════╗
-║                    CRONOS — LEITOR DE NOTÍCIAS v1.4                        ║
+║                    CRONOS — LEITOR DE NOTÍCIAS v1.5                        ║
 ║                    Documentação Completa                                    ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
@@ -36,8 +36,7 @@
   1. Instale as dependências do sistema:
        sudo pacman -S python python-pip python-virtualenv
        sudo pacman -S qt6-base qt6-tools
-       # Fontes necessárias (opcional — o cronos.sh faz isso automaticamente)
-       sudo pacman -S noto-fonts ttf-liberation
+       sudo pacman -S noto-fonts ttf-liberation  # fontes (opcional)
 
   2. (Opcional) Instale o Ollama:
        curl -fsSL https://ollama.ai/install.sh | sh
@@ -72,7 +71,7 @@
        pkg install python python-pip x11-repo
        pkg install termux-x11-nightly
        pip install PyQt6 --extra-index-url https://pypi.org/simple/
-     
+
   3. Para exibir a interface gráfica:
        Instale o Termux:X11
        Execute: export DISPLAY=:0
@@ -100,6 +99,9 @@
     cd C:\caminho\para\cronos
     python cronos.py
 
+  Modo debug (gera logs mais detalhados):
+    python cronos.py --debug
+
   ℹ  Na primeira execução, o cronos.bat cria automaticamente o ambiente
      virtual (.venv) e instala todas as dependências. Isso leva alguns
      minutos. As execuções seguintes iniciam em segundos.
@@ -122,6 +124,9 @@
     source .venv/bin/activate
     pip install -r requirements.txt
     python3 cronos.py
+
+  Modo debug (gera logs mais detalhados):
+    python3 cronos.py --debug
 
 └────────────────────────────────────────────────────────────────────────────┘
 
@@ -171,7 +176,7 @@
 4. FONTES DE NOTÍCIAS (data/sources.json)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  A partir da v1.4, a lista de fontes RSS é armazenada em:
+  A lista de fontes RSS é armazenada em:
     data/sources.json
 
   Esse arquivo é criado automaticamente na primeira execução com 25 fontes
@@ -188,20 +193,72 @@
       "authority_axis": -1.0 a 1.0    // negativo=libertário, positivo=autoritário
     }
 
-  Fontes padrão incluídas (25):
-    Brasil:        G1/Globo, Folha de S.Paulo, UOL, Agência Brasil, Brasil de Fato
-    Internacional: BBC, Reuters, AP, Al Jazeera, The Guardian, Fox News
-    Tecnologia:    Hacker News, Ars Technica, The Verge, TechCrunch, MIT Tech Review
-    Ciência:       NASA, Scientific American, Nature
-    América Latina:Infobae, El País
-    Outros:        DW Brasil, France 24 PT, Bloomberg, Financial Times
+  ⚠  Substack foi removido da aba Fontes RSS (v1.5). Newsletters do Substack
+     devem ser configuradas na aba Redes Sociais.
 
   ⚠  Alterações no sources.json só são sincronizadas com o banco de dados
-     na próxima inicialização do programa. Para adicionar fontes em tempo
-     real, use a aba Fontes dentro do programa.
+     na próxima inicialização. Para adicionar fontes em tempo real, use
+     a aba Fontes dentro do programa.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-5. FUNCIONALIDADES v1.4 (NOVIDADES)
+5. FUNCIONALIDADES v1.5 (NOVIDADES)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  BARRA DE PROGRESSO DE ANÁLISE MELHORADA:
+    - Exibe a contagem real de artigos em tempo real:
+        "Analisando 12 de 45 artigos  (33 restantes)"
+    - Barra de progresso maior (260-380px × 18px) com porcentagem decimal:
+        "67.8%"
+    - Progresso combina pré-análise + análise completa numa única barra
+    - Mini barra de progresso no leitor, ao lado de "⏳ Analisando...",
+      enquanto a IA processa o artigo aberto
+
+  SISTEMA DE LOGS DE ANÁLISE (data/logs/):
+    - data/logs/cronos.log      — log geral da aplicação (INFO+)
+    - data/logs/analysis.log    — log detalhado das análises de IA (DEBUG+)
+    - Rotação automática: máximo 2 MB por arquivo, 5 backups mantidos
+    - Cada análise registra: título, tempo em segundos, categoria,
+      tom emocional, clickbait score e prévia do resumo
+    - Erros têm separador visual e traceback completo
+    - Cada chamada ao Ollama registra: tamanho do prompt, max_tokens,
+      timeout configurado e tempo real de resposta
+    - JSON inválidos da IA registram os primeiros 200 chars da resposta bruta
+    - Modo debug: python cronos.py --debug
+        ativo: logs de cada chunk individual e chamadas Ollama no cronos.log
+
+  TRADUÇÃO SEM OLLAMA — 4 BACKENDS GRATUITOS EM CASCATA:
+    1. deep-translator (Google Translate via scraping)
+       → instale com: pip install deep-translator
+       → mais preciso e rápido; requer conexão com internet
+    2. MyMemory API
+       → sem instalação; limite ~1000 palavras/dia por IP
+    3. Lingva (instâncias públicas open-source)
+       → sem instalação; sem limite declarado; múltiplas instâncias de fallback
+    4. ArgosTranslate (100% offline)
+       → instale com: pip install argostranslate
+       → requer download do pacote de idioma correspondente
+       → funciona sem internet após instalação
+    → Se todos falharem, mensagem clara com instruções de instalação
+
+  ANÁLISE DE IA MAIS RÁPIDA:
+    - Conteúdo limitado a 5.000 chars antes de chunkar (suficiente para artigos)
+    - chunk_size reduzido de 15.000 → 4.500 chars (adequado para llama3:8b)
+    - max_tokens reduzido de 600 → 400 (o JSON de resposta cabe em ~300 tokens)
+    - timeout reduzido de 90s → 60s (mais agressivo, evita travamentos)
+    - num_predict agora é passado corretamente ao Ollama (era ignorado antes)
+    - Verificação de disponibilidade do Ollama não é mais duplicada a cada chunk
+
+  CAROUSEL / TRENDING ESTABILIZADO:
+    - Correção de crash "RuntimeError: C/C++ object deleted" ao atualizar
+      a aba de destaques quando o carrossel estava exibindo o placeholder
+    - O placeholder é recriado a cada necessidade, nunca reutilizado após deleção
+
+  CONTEÚDO "None" NO LEITOR CORRIGIDO:
+    - Banco pode retornar None mesmo com fallback declarado; agora tratado
+      explicitamente em load_article, _normalize_content e _build_html
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. FUNCIONALIDADES v1.4
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   SIDEBAR REFEITA:
@@ -210,22 +267,22 @@
     - Menu recolhido (só ícones, 56px) → expande ao hover (210px)
     - Animação suave de largura com debounce anti-flicker no Windows
     - Indicador Ollama (● verde = online, ● vermelho = offline) no rodapé
+    - Nome do modelo IA exibido ao expandir a sidebar
 
-  EFEITOS VISUAIS (funcionando no Windows):
+  EFEITOS VISUAIS:
     - Textura de papel: PNG embutido aplicado via background-image
     - Canto dobrado: triângulo no canto superior direito de cada card (QPainter)
     - Sombra deslocada sólida: offset 3px sem sombra difusa (efeito carimbo)
     - Linhas pautadas horizontais: desenhadas no fundo de cada card (QPainter)
-    - Estrelas no logotipo: desenhadas via QPainter com variação de tamanho e rotação
+    - Estrelas no logotipo: desenhadas via QPainter com variação de tamanho
     - Border-radius: 2px apenas — cantos quase retos
 
   FONTES RSS EM ARQUIVO SEPARADO:
     - data/sources.json separado do banco de dados principal
     - Editável com qualquer editor de texto
-    - Funções de API: save_source_to_json, remove_source_from_json, update_source_json
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-6. FUNCIONALIDADES v1.3
+7. FUNCIONALIDADES v1.3
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   PONTOS DE VISTA:
@@ -254,13 +311,13 @@
     - Clickbait: índice por fonte + evolução de viés
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-7. INTELIGÊNCIA ARTIFICIAL (OLLAMA)
+8. INTELIGÊNCIA ARTIFICIAL (OLLAMA)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   Instale: https://ollama.ai
 
   Modelos recomendados (execute no terminal após instalar o Ollama):
-    ollama pull llama3        — rápido, ótimo para PT/EN
+    ollama pull llama3        — rápido, ótimo para PT/EN (recomendado)
     ollama pull mistral       — ótimo para análise política
     ollama pull gemma2        — equilibrado
     ollama pull phi3          — leve, para máquinas com pouca RAM
@@ -268,42 +325,142 @@
   Configure em: Configurações → Inteligência Artificial
   Indicador na sidebar: ● verde = Ollama online, ● vermelho = offline
 
-  O Cronos analisa automaticamente cada artigo ao abri-lo:
-    - Resumo neutro (1-2 parágrafos)
-    - Tom emocional (neutro/positivo/negativo/alarmista/esperançoso/...)
-    - Score de clickbait 0–100%
-    - Eixo econômico e autoritário (-1 a +1)
-    - Palavras-chave e implicações
-    - Análise em chunks para artigos longos (>15.000 caracteres)
+  DOIS NÍVEIS DE ANÁLISE:
+
+    Pré-análise (rápida, ~3-5s por artigo):
+      → Roda em batch para todos os artigos novos automaticamente
+      → Usa apenas o título como entrada (não precisa de conteúdo completo)
+      → Extrai: keywords, categoria, tom emocional, score de clickbait
+
+    Análise completa (profunda, ~15-30s por artigo):
+      → Disparada imediatamente ao abrir uma matéria (prioridade máxima)
+      → Roda em background para artigos já pré-analisados (sem notícia aberta)
+      → Preenche: resumo, implicações, 5Ws, eixo econômico, eixo autoritário
+      → Conteúdo limitado a 5.000 chars para otimizar velocidade
+
+  O Ollama é usado APENAS para análise de artigos.
+  A tradução de textos usa backends separados (ver seção 9).
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-8. PRIVACIDADE E DADOS
+9. TRADUÇÃO DE ARTIGOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  A tradução funciona sem nenhuma configuração adicional, usando uma cadeia
+  de 4 backends gratuitos em ordem de prioridade:
+
+  BACKEND 1 — deep-translator (Google Translate)
+    Requer:  pip install deep-translator
+    Limite:  generoso (sem limite fixo conhecido)
+    Requer internet: sim
+    Recomendado para uso regular.
+
+  BACKEND 2 — MyMemory API
+    Requer:  nada (HTTP direto)
+    Limite:  ~1.000 palavras/dia por IP (gratuito sem chave)
+    Requer internet: sim
+    Usado automaticamente se o backend 1 não estiver instalado.
+
+  BACKEND 3 — Lingva (instâncias públicas)
+    Requer:  nada (HTTP direto)
+    Limite:  sem limite declarado
+    Requer internet: sim
+    Múltiplas instâncias de fallback para maior disponibilidade.
+
+  BACKEND 4 — ArgosTranslate (offline)
+    Requer:  pip install argostranslate
+             + download do pacote de idioma desejado
+    Limite:  nenhum (100% local)
+    Requer internet: apenas para baixar o pacote de idioma pela 1ª vez
+    Ideal para uso sem internet.
+
+  Idiomas suportados: Português, Inglês, Espanhol, Francês, Alemão,
+  Italiano, Japonês, Chinês, Árabe, Russo, Coreano, Holandês, Polonês,
+  Turco, Ucraniano.
+
+  Resultados de tradução são salvos em cache (data/cronos.db, tabela
+  translations) para evitar chamadas repetidas ao mesmo artigo.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+10. LOGS E DIAGNÓSTICO (data/logs/)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ARQUIVOS DE LOG:
+
+    data/logs/cronos.log
+      Log geral da aplicação. Contém INFO de todos os módulos Cronos:
+      feeds baixados, artigos salvos, ações do usuário, erros gerais.
+      Rotação automática: 2 MB / 5 backups mantidos.
+
+    data/logs/analysis.log
+      Log dedicado às análises de IA. Contém DEBUG+ dos módulos:
+      cronos.analyzer, cronos.ai, cronos.translator.
+      Cada análise registra:
+        - Início: ID do artigo e título
+        - Por chunk: número do chunk, tempo em segundos
+        - JSON inválido: primeiros 200 chars da resposta bruta da IA
+        - Sucesso: categoria, tom, clickbait, prévia do resumo, tempo total
+        - Falha: tipo de erro e traceback completo
+      Cada chamada ao Ollama registra:
+        - Tamanho do prompt (chars), max_tokens, timeout configurado
+        - Tempo real de resposta em segundos
+        - Motivo exato em caso de falha (timeout, rede, etc.)
+      Rotação automática: 2 MB / 5 backups mantidos.
+
+    error_log.txt  (na raiz do programa)
+      Crashes fatais não capturados. Mantido por compatibilidade.
+
+  MODO DEBUG:
+    Execute com:  python cronos.py --debug
+    Efeito: ativa nível DEBUG no cronos.log (logs de cada chunk individual
+    e chamadas Ollama). Sem a flag, apenas INFO+ vai para o cronos.log,
+    mas o analysis.log sempre recebe DEBUG+.
+
+  EXEMPLO DE ENTRADA NO analysis.log:
+    ────────────────────────────────────────────────────────────
+    2025-01-15 14:23:11 [ERROR   ] cronos.analyzer
+    [BATCH] Falha na análise (chunk 1)
+      ID    : 1234
+      Título: Exemplo de título do artigo
+      Erro  : TimeoutError: Ollama não respondeu em 60s
+    ────────────────────────────────────────────────────────────
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+11. PRIVACIDADE E DADOS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   Todos os dados ficam LOCALMENTE na pasta data/:
-    data/cronos.db       — banco de dados (artigos, análises, arquivo pessoal)
+    data/cronos.db       — banco de dados (artigos, análises, arquivo pessoal,
+                           cache de traduções)
     data/sources.json    — lista de fontes RSS (editável)
     data/settings.json   — preferências do usuário
-    data/logs/           — logs de execução
-    data/cache/          — cache temporário
+    data/logs/           — logs de execução (cronos.log, analysis.log)
+    data/cache/          — cache temporário de scraping
 
-  Nenhum dado pessoal é enviado para servidores externos, exceto:
+  Conexões externas realizadas pelo programa:
     - Requisições RSS para as URLs das fontes configuradas
-    - API do Ollama (local, rodando na sua máquina)
-    - Google Translate (opcional, quando tradução é solicitada)
+    - Scraping de artigos completos (URLs das notícias)
+    - API do Ollama (local, rodando na sua máquina — sem internet)
+    - Tradução: MyMemory API ou Lingva (se deep-translator não instalado)
+    - Tradução: Google Translate via deep-translator (se instalado)
     - API Feedly (opcional, busca de novas fontes RSS — somente leitura)
+    - Redes sociais: apenas se configuradas na aba Redes Sociais
+
+  O Ollama roda 100% localmente. Nenhum texto de artigo é enviado
+  para servidores externos durante a análise de IA.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-9. ESTRUTURA DE ARQUIVOS
+12. ESTRUTURA DE ARQUIVOS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   cronos/
-  ├── data/                       ← TODOS os dados do usuário aqui
+  ├── data/                       <- TODOS os dados do usuário aqui
   │   ├── cronos.db               — banco de dados principal
-  │   ├── sources.json            — lista de fontes RSS (v1.4, editável)
+  │   ├── sources.json            — lista de fontes RSS (editável)
   │   ├── settings.json           — preferências
-  │   ├── cache/                  — cache temporário
-  │   └── logs/                   — logs de execução
+  │   ├── cache/                  — cache temporário de scraping
+  │   └── logs/
+  │       ├── cronos.log          — log geral (INFO+, rotação 2MB×5)
+  │       └── analysis.log        — log de análises IA (DEBUG+, rotação 2MB×5)
   ├── src/
   │   ├── assets/
   │   │   ├── fonts/              — Special Elite, IM Fell English
@@ -312,37 +469,38 @@
   │   │   └── paper_night.png     — textura noite (gerada automaticamente)
   │   ├── core/
   │   │   ├── database.py         — BD + sources.json + arquivo pessoal
-  │   │   ├── fetcher.py          — RSS + scraping
-  │   │   ├── ai.py               — Ollama
-  │   │   ├── analyzer.py         — Fila de análise (QThread)
+  │   │   ├── fetcher.py          — RSS + scraping hierárquico
+  │   │   ├── ai.py               — Ollama (análise apenas, não tradução)
+  │   │   ├── analyzer.py         — Fila de análise em dois níveis (QThread)
+  │   │   ├── log_setup.py        — Sistema de logging centralizado (v1.5)
   │   │   ├── font_loader.py      — Fontes + textura de papel
   │   │   ├── trending.py         — Detecção trending (Jaccard)
   │   │   ├── scheduler.py        — Timer de atualização
-  │   │   ├── translator.py       — Tradução
-  │   │   ├── notifier.py         — Notificações do sistema
-  │   │   └── social/             — Reddit, Bluesky, Mastodon, YouTube, Twitter, Substack
+  │   │   ├── translator.py       — Tradução (4 backends gratuitos, v1.5)
+  │   │   ├── notifier.py         — Notificações do sistema + tray icon
+  │   │   └── social/             — Reddit, Bluesky, Mastodon, YouTube, Twitter
   │   └── ui/
   │       ├── main_window.py
   │       ├── feed_view.py
   │       ├── reader_view.py      — Pontos de Vista, Arquivar, Banner clickbait
   │       ├── archive_view.py     — Aba Arquivo com tags
   │       ├── dashboard_view.py   — Dashboard 4 abas
-  │       ├── sources_view.py
-  │       ├── social_view.py
+  │       ├── sources_view.py     — Fontes RSS (Substack removido v1.5)
+  │       ├── social_view.py      — Redes sociais
   │       ├── settings_view.py
   │       ├── trending_view.py
   │       ├── themes/
-  │       │   ├── day.qss         — Tema papel envelhecido (reescrito v1.4)
-  │       │   └── night.qss       — Tema cyberpunk roxo (reescrito v1.4)
+  │       │   ├── day.qss         — Tema papel envelhecido
+  │       │   └── night.qss       — Tema cyberpunk roxo
   │       └── widgets/
-  │           ├── sidebar.py      — Sidebar refeita (v1.4)
-  │           ├── article_card.py — Canto dobrado + sombra + linhas (v1.4)
-  │           ├── compass.py      — Bússola com repulsão de sobrepostos
+  │           ├── sidebar.py      — Sidebar com indicador Ollama + modelo
+  │           ├── article_card.py — Canto dobrado + sombra + linhas
+  │           ├── compass.py      — Bússola política com repulsão
   │           ├── dashboard_widgets.py — Nuvem, radar, termômetro
-  │           ├── carousel.py
+  │           ├── carousel.py     — Carrossel trending (crash fix v1.5)
   │           ├── flow_layout.py
   │           └── star_widget.py
-  ├── cronos.py                   — Ponto de entrada
+  ├── cronos.py                   — Ponto de entrada (suporta --debug)
   ├── cronos.sh                   — Atalho Linux (auto-instala dependências)
   ├── cronos.bat                  — Atalho Windows (auto-instala dependências)
   ├── cronos.desktop              — Integração com launchers Linux
@@ -351,7 +509,7 @@
   └── DOCUMENTACAO.txt            — Este arquivo
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-10. SOLUÇÃO DE PROBLEMAS
+13. SOLUÇÃO DE PROBLEMAS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   [Windows] Tela preta ou erro ao iniciar:
@@ -373,33 +531,55 @@
 
   [Qualquer OS] Ollama não conecta:
     → Verifique se está rodando: curl http://localhost:11434/api/tags
-    → Inicie: ollama serve
+    → Inicie manualmente: ollama serve
     → Configure outra URL em Configurações → IA
+
+  [Qualquer OS] Tradução não funciona:
+    → Execute: pip install deep-translator
+    → Se sem internet: pip install argostranslate
+      (e baixe o pacote do idioma desejado)
+    → Verifique data/logs/analysis.log para ver qual backend foi tentado
+
+  [Qualquer OS] Análise de IA muito lenta:
+    → Use llama3:8b (mais rápido): ollama pull llama3:8b
+    → Verifique data/logs/analysis.log para ver o tempo de cada chunk
+    → Execute com --debug para log mais detalhado:
+        python cronos.py --debug
 
   [Qualquer OS] Banco corrompido:
     → Apague data/cronos.db (perde histórico e arquivo pessoal)
     → Na próxima execução é recriado automaticamente
     → ⚠  data/sources.json é preservado separadamente
 
-  Logs de erro:
-    → data/logs/cronos.log
-    → error_log.txt (erros fatais na raiz do programa)
+  ONDE ENCONTRAR LOGS:
+    → data/logs/cronos.log      — log geral
+    → data/logs/analysis.log    — erros e tempos de análise IA
+    → error_log.txt             — crashes fatais (na raiz do programa)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-11. DEPENDÊNCIAS (requirements.txt)
+14. DEPENDÊNCIAS (requirements.txt)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  PyQt6>=6.4.0                Interface gráfica (Windows, Linux, Android)
-  Pillow>=9.0                 Geração de texturas de papel (opcional, melhor qualidade)
-  feedparser>=6.0             Leitura de feeds RSS
-  httpx>=0.24                 Requisições HTTP
-  beautifulsoup4>=4.12        Parsing HTML
-  readability-lxml>=0.8       Extração de conteúdo limpo
-  deep-translator>=1.11       Tradução (Google Translate)
-  praw>=7.7                   Reddit
-  atproto>=0.0.46             Bluesky
-  twscrape>=0.12              Twitter/X (desativado por padrão)
-  google-api-python-client>=2.0  YouTube
+  OBRIGATÓRIAS:
+    PyQt6>=6.4.0                Interface gráfica (Windows, Linux, Android)
+    feedparser>=6.0             Leitura de feeds RSS
+    httpx>=0.24                 Requisições HTTP
+    beautifulsoup4>=4.12        Parsing HTML
+    readability-lxml>=0.8       Extração de conteúdo limpo de artigos
+    trafilatura>=1.6            Extração de conteúdo (hierarquia de scrapers)
+
+  OPCIONAIS — TRADUÇÃO:
+    deep-translator>=1.11       Tradução via Google Translate (recomendado)
+    argostranslate              Tradução 100% offline
+
+  OPCIONAIS — SCRAPING E QUALIDADE:
+    Pillow>=9.0                 Geração de texturas de papel (melhor qualidade)
+
+  OPCIONAIS — REDES SOCIAIS:
+    praw>=7.7                   Reddit
+    atproto>=0.0.46             Bluesky
+    twscrape>=0.12              Twitter/X (desativado por padrão)
+    google-api-python-client>=2.0  YouTube
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Cronos v1.4 — Código aberto, uso pessoal
+Cronos v1.5 — Código aberto, uso pessoal

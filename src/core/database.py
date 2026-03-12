@@ -297,7 +297,7 @@ def get_articles(limit=100, offset=0, category=None, language=None, is_read=None
                  is_favorite=None, search=None, date_from=None, date_to=None,
                  source_id=None, unanalyzed_only=False):
     conn = get_connection()
-    q = "SELECT a.*, s.name as source_name, s.economic_axis as source_economic, s.authority_axis as source_authority FROM articles a LEFT JOIN sources s ON a.source_id=s.id WHERE 1=1"
+    q = "SELECT a.*, s.name as source_name, s.economic_axis as source_economic, s.authority_axis as source_authority FROM articles a LEFT JOIN sources s ON a.source_id=s.id WHERE (s.active=1 OR s.id IS NULL)"
     params = []
     if category:       q += " AND (a.category=? OR a.ai_category LIKE ?)"; params += [category, f"%{category}%"]
     if language:       q += " AND a.language=?"; params.append(language)
@@ -312,6 +312,30 @@ def get_articles(limit=100, offset=0, category=None, language=None, is_read=None
     rows = conn.execute(q, params).fetchall()
     conn.close()
     return [dict(r) for r in rows]
+
+def deactivate_source(source_id: int) -> None:
+    """Desativa uma fonte (mantém artigos existentes)."""
+    conn = get_connection()
+    conn.execute("UPDATE sources SET active=0 WHERE id=?", (source_id,))
+    conn.commit(); conn.close()
+
+def delete_source(source_id: int, delete_articles: bool = False) -> int:
+    """
+    Exclui permanentemente uma fonte do banco.
+    Se delete_articles=True, remove também todos os artigos dessa fonte.
+    Retorna o número de artigos deletados (0 se delete_articles=False).
+    """
+    conn = get_connection()
+    deleted = 0
+    if delete_articles:
+        row = conn.execute(
+            "SELECT COUNT(*) FROM articles WHERE source_id=?", (source_id,)
+        ).fetchone()
+        deleted = row[0] if row else 0
+        conn.execute("DELETE FROM articles WHERE source_id=?", (source_id,))
+    conn.execute("DELETE FROM sources WHERE id=?", (source_id,))
+    conn.commit(); conn.close()
+    return deleted
 
 def get_article(article_id):
     conn = get_connection()

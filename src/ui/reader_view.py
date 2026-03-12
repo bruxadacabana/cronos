@@ -9,7 +9,8 @@ from datetime import datetime, timedelta
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QTextBrowser, QFrame, QComboBox, QGraphicsOpacityEffect, QSizePolicy,
-    QDialog, QListWidget, QListWidgetItem, QScrollArea, QStackedWidget
+    QDialog, QListWidget, QListWidgetItem, QScrollArea, QStackedWidget,
+    QProgressBar
 )
 from PyQt6.QtCore import Qt, QPropertyAnimation, QEasingCurve, QTimer, QThread, pyqtSignal, QRect
 from PyQt6.QtGui import QFont, QColor, QPainter, QPen, QBrush
@@ -35,8 +36,8 @@ def _normalize_content(content: str) -> str:
     Converte qualquer forma de conteúdo (HTML, texto plano, híbrido)
     em HTML com parágrafos <p> bem formados e legíveis.
     """
-    if not content:
-        return content
+    if not content or str(content).strip().lower() in ("none", "null"):
+        return ""
 
     # 1. Se já tem <p> tags com conteúdo real — limpa e garante estrutura
     if re.search(r"<p[^>]*>", content, re.IGNORECASE):
@@ -413,6 +414,15 @@ class ReaderView(QWidget):
         self.analysis_pending.setObjectName("statusLabel")
         self.analysis_pending.hide()
         ap.addWidget(self.analysis_pending)
+
+        self.analysis_progress = QProgressBar()
+        self.analysis_progress.setRange(0, 0)   # indeterminate spinner
+        self.analysis_progress.setMaximumWidth(140)
+        self.analysis_progress.setMinimumHeight(12)
+        self.analysis_progress.setMaximumHeight(12)
+        self.analysis_progress.setTextVisible(False)
+        self.analysis_progress.hide()
+        ap.addWidget(self.analysis_progress)
         self.analysis_panel.hide()
         layout.addWidget(self.analysis_panel)
 
@@ -494,13 +504,16 @@ class ReaderView(QWidget):
         self.fav_btn.setText("★" if article.get("is_favorite") else "☆")
 
         content = article.get("content_clean") or article.get("content") or ""
+        # Garantir string — banco pode retornar None mesmo com OR acima
+        if content is None or str(content).strip().lower() in ("none", "null", ""):
+            content = ""
         texto_puro = clean(content)
 
         # Se o texto real for muito curto, tenta baixar a matéria completa
         if len(texto_puro) < 800 and article.get("url"):
             raw_html, fetched_text = fetch_article_content(article["url"])
             if raw_html and len(clean(raw_html)) > len(texto_puro):
-                content = raw_html
+                content = raw_html or ""
                 texto_puro = clean(raw_html)
 
         # Marca/desmarca content_partial com base no conteúdo real obtido agora
@@ -637,7 +650,7 @@ class ReaderView(QWidget):
         url    = article.get("url","")
 
         # Normaliza conteúdo → parágrafos HTML legíveis
-        content = _normalize_content(content)
+        content = _normalize_content(content or "")
 
         return f"""<!DOCTYPE html><html><head><meta charset="utf-8">
 <style>
@@ -687,6 +700,7 @@ li {{ margin-bottom:6px; }}
             if cb is not None: self.cb_lbl.setText(f"Clickbait: {cb:.0%}")
             self.analysis_panel.show()
             self.analysis_pending.hide()
+            self.analysis_progress.hide()
 
             # 5Ws e implicações
             import json
@@ -704,6 +718,7 @@ li {{ margin-bottom:6px; }}
         else:
             self.analysis_panel.show()
             self.analysis_pending.show()
+            self.analysis_progress.show()
             self.bias_lbl.setText("")
             self.tone_lbl.setText("")
             self.cb_lbl.setText("")

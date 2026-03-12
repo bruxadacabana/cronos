@@ -7,6 +7,7 @@ from pathlib import Path
 from datetime import datetime
 
 from PyQt6.QtWidgets import (
+    QLabel,
     QMainWindow, QWidget, QHBoxLayout, QSplitter,
     QStatusBar, QApplication, QProgressBar
 )
@@ -136,9 +137,20 @@ class MainWindow(QMainWindow):
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
         self.status_bar.showMessage("Cronos pronto.")
+
+        # Label de análise em tempo real (ex: "Analisando 12 de 45 artigos")
+        self._analysis_lbl = QLabel()
+        self._analysis_lbl.setObjectName("statusLabel")
+        self._analysis_lbl.hide()
+        self.status_bar.addPermanentWidget(self._analysis_lbl)
+
+        # Barra de progresso maior com % decimal
         self.progress = QProgressBar()
-        self.progress.setMaximumWidth(180)
-        self.progress.setMaximumHeight(13)
+        self.progress.setMinimumWidth(260)
+        self.progress.setMaximumWidth(380)
+        self.progress.setMinimumHeight(18)
+        self.progress.setMaximumHeight(18)
+        self.progress.setFormat("%.1f%%")   # será substituído por setText manual
         self.progress.hide()
         self.status_bar.addPermanentWidget(self.progress)
 
@@ -226,7 +238,7 @@ class MainWindow(QMainWindow):
         self.analysis_worker.article_analyzed.connect(self._on_article_analyzed)
         self.analysis_worker.article_pre_analyzed.connect(self._on_article_pre_analyzed)
         self.analysis_worker.progress.connect(self._on_analysis_progress)
-        self.analysis_worker.finished_batch.connect(lambda: (self.progress.hide(), self.status_bar.showMessage("Análises concluídas.", 3000)))
+        self.analysis_worker.finished_batch.connect(self._on_analysis_finished)
 
     def _startup_analysis(self):
         from core.database import get_unanalyzed_articles, mark_queued
@@ -270,11 +282,24 @@ class MainWindow(QMainWindow):
                 self.reader_view.current_article = updated
                 self.reader_view._update_analysis(updated)
 
+    def _on_analysis_finished(self):
+        self.progress.hide()
+        self._analysis_lbl.hide()
+        self.status_bar.showMessage("Análises concluídas.", 3000)
+
     def _on_analysis_progress(self, done: int, total: int):
         if total > 0:
+            pct = (done / total) * 100
+            remaining = total - done
+            self._analysis_lbl.setText(
+                f"Analisando {done} de {total} artigos  ({remaining} restantes)"
+            )
+            self._analysis_lbl.show()
             self.progress.show()
-            self.progress.setRange(0, total)
-            self.progress.setValue(done)
+            # Usa escala ×10 para permitir 1 casa decimal (QProgressBar só aceita int)
+            self.progress.setRange(0, total * 10)
+            self.progress.setValue(int(done * 10))
+            self.progress.setFormat(f"{pct:.1f}%")
 
     def _manual_fetch(self):
         self.sidebar.get_refresh_btn().setEnabled(False)

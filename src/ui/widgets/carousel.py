@@ -136,21 +136,36 @@ class TrendingCarousel(QWidget):
         self._placeholder = QLabel("Carregando notícias em destaque…")
         self._placeholder.setObjectName("statusLabel")
         self._placeholder.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._placeholder._is_placeholder = True
         self._stack.addWidget(self._placeholder)
 
+    def _make_placeholder(self):
+        from PyQt6.QtWidgets import QLabel
+        ph = QLabel("Carregando notícias em destaque…")
+        ph.setObjectName("statusLabel")
+        ph.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        return ph
+
     def set_data(self, clusters: list, articles_by_id: dict = None):
-        # Limpa
+        # Limpa todos os widgets do stack com segurança
         while self._stack.count():
             w = self._stack.widget(0)
             self._stack.removeWidget(w)
-            w.deleteLater()
+            # Não deletar o placeholder antigo aqui — só widgets reais
+            if not getattr(w, "_is_placeholder", False):
+                w.deleteLater()
+            else:
+                w.setParent(None)   # desanexa sem deletar
         for i in reversed(range(self._dots_row.count())):
             item = self._dots_row.takeAt(i)
-            if item.widget(): item.widget().deleteLater()
+            if item.widget():
+                item.widget().deleteLater()
         self._slides = []
 
         if not clusters:
-            self._stack.addWidget(self._placeholder)
+            ph = self._make_placeholder()
+            ph._is_placeholder = True
+            self._stack.addWidget(ph)
             return
 
         for cl in clusters:

@@ -8,6 +8,7 @@ import httpx
 import json
 import logging
 import re
+import time
 from typing import Optional
 from pathlib import Path
 
@@ -74,6 +75,7 @@ def _query(prompt: str, system: str = "", model: str = None,
         payload["messages"].append({"role": "system", "content": system})
     payload["messages"].append({"role": "user", "content": prompt})
 
+    _t0 = time.monotonic()
     try:
         resp = httpx.post(
             f"{_get_ollama_url()}/api/chat",
@@ -82,12 +84,33 @@ def _query(prompt: str, system: str = "", model: str = None,
         )
         resp.raise_for_status()
         data = resp.json()
-        return data.get("message", {}).get("content", "").strip()
+        content = data.get("message", {}).get("content", "").strip()
+        elapsed = time.monotonic() - _t0
+        try:
+            from core.log_setup import log_ollama_call
+            log_ollama_call(len(prompt), max_tokens, effective_timeout,
+                            success=True, elapsed=elapsed)
+        except Exception:
+            logger.debug(f"Ollama OK — {elapsed:.2f}s")
+        return content
     except httpx.TimeoutException:
-        logger.error(f"Ollama timeout após {effective_timeout}s")
+        elapsed = time.monotonic() - _t0
+        try:
+            from core.log_setup import log_ollama_call
+            log_ollama_call(len(prompt), max_tokens, effective_timeout,
+                            success=False, elapsed=elapsed,
+                            error=f"Timeout após {effective_timeout}s")
+        except Exception:
+            logger.error(f"Ollama timeout após {effective_timeout}s ({elapsed:.1f}s decorridos)")
         return None
     except Exception as e:
-        logger.error(f"Ollama error: {e}")
+        elapsed = time.monotonic() - _t0
+        try:
+            from core.log_setup import log_ollama_call
+            log_ollama_call(len(prompt), max_tokens, effective_timeout,
+                            success=False, elapsed=elapsed, error=str(e))
+        except Exception:
+            logger.error(f"Ollama error após {elapsed:.1f}s: {e}")
         return None
 
 

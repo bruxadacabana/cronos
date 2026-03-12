@@ -21,6 +21,28 @@ from PyQt6.QtCore import QThread, pyqtSignal, QMutex, QMutexLocker
 
 logger = logging.getLogger("cronos.analyzer")
 
+# Helpers de log estruturado (importados lazy para evitar ciclo)
+def _log_start(art_id, title, mode):
+    try:
+        from core.log_setup import log_analysis_start
+        log_analysis_start(art_id, title, mode)
+    except Exception:
+        logger.info(f"[{mode}] Iniciando análise artigo {art_id}: {title[:60]}")
+
+def _log_result(art_id, result, elapsed, mode):
+    try:
+        from core.log_setup import log_analysis_result
+        log_analysis_result(art_id, result, elapsed, mode)
+    except Exception:
+        logger.info(f"[{mode}] Concluído artigo {art_id} em {elapsed:.1f}s")
+
+def _log_error(art_id, title, error, chunk=None, mode="batch"):
+    try:
+        from core.log_setup import log_analysis_error
+        log_analysis_error(art_id, title, error, chunk, mode)
+    except Exception:
+        logger.error(f"[{mode}] Erro artigo {art_id}: {error}", exc_info=True)
+
 # ── Prompt de pré-análise (só título, resposta pequena) ───────────────────────
 PRE_ANALYSIS_PROMPT = """Analise o TÍTULO desta notícia e responda APENAS com JSON válido.
 
@@ -153,19 +175,49 @@ class PreAnalysisWorker(QThread):
                 done += 1
                 continue
 
+            _log_start(art_id, title, "pre")
             prompt = PRE_ANALYSIS_PROMPT.format(title=title)
+            _t0 = time.monotonic()
+            _retry_count = getattr(article, "_retry", 0) if hasattr(article, "_retry") else article.get("_pre_retry", 0)
             try:
                 raw = _ollama_generate(prompt, max_tokens=200, timeout=30)
                 result = _parse_pre_analysis(raw)
+                elapsed = time.monotonic() - _t0
                 if result:
                     update_article_analysis(art_id, **result)
                     self.article_pre_analyzed.emit(art_id, result)
-                    logger.debug(f"[pre] Artigo {art_id} pré-analisado")
+                    _log_result(art_id, result, elapsed, "pre")
+                    done += 1
+                else:
+                    # JSON inválido — descarta (modelo respondeu mas mal formado)
+                    logger.warning(
+                        f"[PRE] ✗ JSON inválido/vazio para artigo {art_id}\n"
+                        f"  Título  : {title[:80]}\n"
+                        f"  Resposta: {(raw or '')[:200]}"
+                    )
+                    done += 1
             except Exception as e:
-                logger.error(f"[pre] Erro artigo {art_id}: {e}")
+                elapsed = time.monotonic() - _t0
+                _log_error(art_id, title, e, mode="pre")
+                # Timeout/erro de rede — re-enfileira com limite de 2 tentativas
+                if _retry_count < 2:
+                    article["_pre_retry"] = _retry_count + 1
+                    backoff = 5 * (2 ** _retry_count)   # 5s, 10s
+                    logger.info(
+                        f"[PRE] Re-enfileirando artigo {art_id} "
+                        f"(tentativa {_retry_count + 1}/2, aguardando {backoff}s)"
+                    )
+                    time.sleep(backoff)
+                    with QMutexLocker(self._mutex):
+                        self._queue.append(article)
+                    # Não incrementa done — artigo ainda não foi processado
+                else:
+                    logger.warning(
+                        f"[PRE] Artigo {art_id} descartado após 2 tentativas com falha"
+                    )
+                    done += 1
 
-            done += 1
-            time.sleep(0.1)   # pré-análise é leve, quase sem pausa
+            time.sleep(0.1)
 
         self._processing = False
         self.finished_batch.emit()
@@ -200,25 +252,45 @@ class _SingleArticleWorker(QThread):
             content_full = title
 
         content_full = content_full[:5000]
+        _log_start(art_id, title, "priority")
+        _t0_total = time.monotonic()
         chunks = chunk_article_text(content_full, chunk_size=4500)
         all_results = []
         for i, chunk in enumerate(chunks):
             prompt = ANALYSIS_PROMPT.format(title=title, content=chunk)
+            _t0 = time.monotonic()
             try:
                 raw = _ollama_generate(prompt, max_tokens=400, timeout=60)
+                elapsed_chunk = time.monotonic() - _t0
                 res = _parse_analysis(raw)
                 if res:
                     all_results.append(res)
+                    logger.debug(
+                        f"[PRIORITY] chunk {i+1}/{len(chunks)} OK "
+                        f"({elapsed_chunk:.1f}s) artigo {art_id}"
+                    )
+                else:
+                    logger.warning(
+                        f"[PRIORITY] ✗ JSON inválido chunk {i+1} artigo {art_id}\n"
+                        f"  Resposta: {(raw or '')[:200]}"
+                    )
             except Exception as e:
-                logger.error(f"[priority] Erro parte {i+1} artigo {art_id}: {e}")
+                _log_error(art_id, title, e, chunk=i+1, mode="priority")
             time.sleep(0.2)
 
+        elapsed_total = time.monotonic() - _t0_total
         if all_results:
             final = _merge_chunks(all_results)
             update_article_analysis(art_id, **final)
             self.done.emit(art_id, final)
-            logger.info(f"[priority] Artigo {art_id} análise completa OK")
+            _log_result(art_id, final, elapsed_total, "priority")
         else:
+            logger.error(
+                f"[PRIORITY] ✗ Análise completa falhou — nenhum chunk válido\n"
+                f"  ID    : {art_id}\n"
+                f"  Título: {title[:80]}\n"
+                f"  Chunks: {len(chunks)}  Tempo: {elapsed_total:.1f}s"
+            )
             self.failed.emit(art_id)
 
 
@@ -244,9 +316,15 @@ class AnalysisWorker(QThread):
         self._priority_ids: set = set()
         self._priority_worker   = None
 
+        # Contadores globais para progresso combinado (pré + completa)
+        self._total_enqueued = 0   # total acumulado desde último reset
+        self._total_done     = 0   # concluídos (pré + completa)
+
         # Worker de pré-análise separado
         self._pre_worker = PreAnalysisWorker(parent=parent)
         self._pre_worker.article_pre_analyzed.connect(self._on_pre_done)
+        self._pre_worker.progress.connect(self._on_pre_progress)
+        self._pre_worker.finished_batch.connect(self._on_pre_finished)
 
     # ── API pública ───────────────────────────────────────────────────────────
 
@@ -290,20 +368,25 @@ class AnalysisWorker(QThread):
           - pré-análise imediata (todos sem ai_keywords)
           - análise completa em background (todos sem ai_summary)
         """
-        # Pré-análise: todos os sem keywords
         needs_pre = [a for a in articles if not a.get("ai_keywords")]
         if needs_pre:
             self._pre_worker.enqueue(needs_pre)
+            with QMutexLocker(self._mutex):
+                self._total_enqueued += len(needs_pre)
 
-        # Análise completa batch: só os que já têm pré-análise mas não têm summary
         needs_full = [a for a in articles
                       if a.get("ai_keywords") and not a.get("ai_summary")]
         with QMutexLocker(self._mutex):
             existing = {a.get("id") for a in self._queue} | self._priority_ids
+            added = 0
             for a in needs_full:
                 if a.get("id") not in existing:
                     self._queue.append(a)
                     existing.add(a.get("id"))
+                    added += 1
+            self._total_enqueued += added
+
+        self._emit_combined_progress()
 
         if needs_full and not self._processing:
             self.start()
@@ -330,6 +413,9 @@ class AnalysisWorker(QThread):
 
     def _on_pre_done(self, article_id: int, result: dict):
         """Pré-análise concluída — emite sinal e enfileira para análise completa."""
+        with QMutexLocker(self._mutex):
+            self._total_done += 1
+        self._emit_combined_progress()
         self.article_pre_analyzed.emit(article_id, result)
 
         # Busca o artigo para enfileirar na análise completa
@@ -350,6 +436,38 @@ class AnalysisWorker(QThread):
             self._priority_ids.discard(article_id)
         self._pre_worker.unskip(article_id)
         logger.warning(f"[priority] Falha análise completa artigo {article_id}")
+
+    # ── Progresso combinado ──────────────────────────────────────────────────
+
+    def _emit_combined_progress(self):
+        with QMutexLocker(self._mutex):
+            done  = self._total_done
+            total = self._total_enqueued
+        if total > 0:
+            self.progress.emit(done, total)
+
+    def _on_pre_progress(self, pre_done: int, pre_total: int):
+        """Repassa progresso da pré-análise."""
+        self._emit_combined_progress()
+
+    def _on_pre_finished(self):
+        """Pré-análise terminou. Só emite finished_batch se a fila de análise
+        completa também estiver vazia E não houver processamento em curso."""
+        with QMutexLocker(self._mutex):
+            pre_done  = len(self._queue) == 0
+            full_done = not self._processing
+        if pre_done and full_done:
+            logger.info("[AnalysisWorker] Pré-análise e batch concluídos — emitindo finished_batch")
+            with QMutexLocker(self._mutex):
+                self._total_enqueued = 0
+                self._total_done = 0
+            self.finished_batch.emit()
+        else:
+            remaining = len(self._queue)
+            logger.debug(
+                f"[AnalysisWorker] Pré-análise concluída; "
+                f"batch ainda em curso ({remaining} na fila, processing={self._processing})"
+            )
 
     # ── Batch de análise completa ─────────────────────────────────────────────
 
@@ -399,33 +517,64 @@ class AnalysisWorker(QThread):
                 content_full = title
 
             content_full = content_full[:5000]
+            _log_start(art_id, title, "batch")
+            _t0_total = time.monotonic()
             chunks = chunk_article_text(content_full, chunk_size=4500)
             all_results = []
             for i, chunk in enumerate(chunks):
                 with QMutexLocker(self._mutex):
                     if art_id in self._priority_ids:
-                        logger.info(f"[batch] Artigo {art_id} virou prioritário — abortando")
+                        logger.info(
+                            f"[BATCH] Artigo {art_id} promovido a prioritário — abortando batch"
+                        )
                         break
                 prompt = ANALYSIS_PROMPT.format(title=title, content=chunk)
+                _t0 = time.monotonic()
                 try:
                     raw = _ollama_generate(prompt, max_tokens=400, timeout=60)
+                    elapsed_chunk = time.monotonic() - _t0
                     res = _parse_analysis(raw)
                     if res:
                         all_results.append(res)
+                        logger.debug(
+                            f"[BATCH] chunk {i+1}/{len(chunks)} OK "
+                            f"({elapsed_chunk:.1f}s) artigo {art_id}"
+                        )
+                    else:
+                        logger.warning(
+                            f"[BATCH] ✗ JSON inválido chunk {i+1} artigo {art_id}\n"
+                            f"  Resposta: {(raw or '')[:200]}"
+                        )
                 except Exception as e:
-                    logger.error(f"[batch] Erro parte {i+1} artigo {art_id}: {e}")
+                    _log_error(art_id, title, e, chunk=i+1, mode="batch")
                 time.sleep(0.1)
 
+            elapsed_total = time.monotonic() - _t0_total
             if all_results:
                 final = _merge_chunks(all_results)
                 update_article_analysis(art_id, **final)
                 self.article_analyzed.emit(art_id, final)
-                logger.info(f"[batch] Artigo {art_id} análise completa OK")
+                _log_result(art_id, final, elapsed_total, "batch")
+                with QMutexLocker(self._mutex):
+                    self._total_done += 1
+                self._emit_combined_progress()
 
             done += 1
 
         self._processing = False
-        self.finished_batch.emit()
+        # Só finaliza se pré-análise também já terminou
+        pre_still_running = self._pre_worker.isRunning()
+        if not pre_still_running:
+            logger.info("[AnalysisWorker] Batch completo concluído — emitindo finished_batch")
+            with QMutexLocker(self._mutex):
+                self._total_enqueued = 0
+                self._total_done = 0
+            self.finished_batch.emit()
+        else:
+            logger.debug(
+                "[AnalysisWorker] Batch completo concluído; "
+                "aguardando pré-análise terminar para emitir finished_batch"
+            )
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────

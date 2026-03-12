@@ -147,6 +147,18 @@ QPushButton#btnPrimary {
     border-color: #5a3c08;
 }
 QPushButton#btnPrimary:hover { background-color: #6e510f; }
+QPushButton#btnWarning {
+    background-color: #8b6000;
+    color: #f5e6c8;
+    border: 2px solid #5a3d00;
+    font-family: "Special Elite", "Courier New", monospace;
+    font-size: 12px;
+    padding: 4px 14px;
+    border-radius: 2px;
+    box-shadow: none;
+}
+QPushButton#btnWarning:hover { background-color: #6b4a00; }
+
 QPushButton#btnDanger {
     background-color: #8b2010;
     color: #f5edda;
@@ -377,11 +389,14 @@ QProgressBar {
     text-align: center;
     color: #2a1a08;
     font-family: "Special Elite", "Courier New", monospace;
-    font-size: 10px;
+    font-size: 11px;
+    font-weight: bold;
+    min-height: 18px;
 }
 QProgressBar::chunk {
     background-color: #8b6914;
     border-radius: 2px;
+    margin: 1px;
 }
 
 /* ── Dialogs: fundo e widgets internos ── */
