@@ -67,7 +67,10 @@ def _query(prompt: str, system: str = "", model: str = None,
     payload = {
         "model": model,
         "stream": False,
-        "options": {"num_predict": max_tokens},
+        "options": {
+            "num_predict": max_tokens,
+            "think": False,      # desativa thinking mode (qwen3, deepseek-r1)
+        },
         "messages": [],
     }
 
@@ -84,8 +87,52 @@ def _query(prompt: str, system: str = "", model: str = None,
         )
         resp.raise_for_status()
         data = resp.json()
-        content = data.get("message", {}).get("content", "").strip()
+
+        # Extrair conteúdo — suporta /api/chat e variantes cloud
+        message_obj = data.get("message", {}) or {}
+        content = (
+            message_obj.get("content") or
+            message_obj.get("text") or
+            data.get("response") or
+            data.get("content") or
+            ""
+        ).strip()
+
+        # qwen3: thinking pode vir em campo separado; se content vazio, usa thinking
+        thinking = (message_obj.get("thinking") or
+                    message_obj.get("reasoning_content") or
+                    message_obj.get("reasoning") or "")
+        if thinking and not content:
+            content = thinking.strip()
+
         elapsed = time.monotonic() - _t0
+
+        # Log diagnóstico — mostra estrutura da resposta e primeiros 300 chars
+        logger.debug(
+            f"Ollama resp keys={list(data.keys())} "
+            f"msg_keys={list(message_obj.keys())} "
+            f"content({len(content)}c)={content[:300]!r}"
+        )
+
+        # Se ainda vazio, tentar /api/generate como fallback
+        if not content:
+            logger.debug("Tentando /api/generate como fallback...")
+            gen_payload = {
+                "model": model,
+                "prompt": prompt,
+                "stream": False,
+                "options": {"num_predict": max_tokens, "think": False},
+            }
+            resp2 = httpx.post(
+                f"{_get_ollama_url()}/api/generate",
+                json=gen_payload,
+                timeout=effective_timeout
+            )
+            resp2.raise_for_status()
+            data2 = resp2.json()
+            content = (data2.get("response") or "").strip()
+            logger.debug(f"/api/generate content({len(content)}c)={content[:300]!r}")
+
         try:
             from core.log_setup import log_ollama_call
             log_ollama_call(len(prompt), max_tokens, effective_timeout,
