@@ -67,9 +67,9 @@ def _query(prompt: str, system: str = "", model: str = None,
     payload = {
         "model": model,
         "stream": False,
+        "think": False,          # desativa thinking mode (qwen3, deepseek-r1) — nível raiz
         "options": {
             "num_predict": max_tokens,
-            "think": False,      # desativa thinking mode (qwen3, deepseek-r1)
         },
         "messages": [],
     }
