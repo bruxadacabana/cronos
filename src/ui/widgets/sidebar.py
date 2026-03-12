@@ -204,8 +204,18 @@ class _OllamaDot(QWidget):
             ok = True
         except Exception:
             ok = False
-        if ok != self.online:
-            self.online = ok; self.update()
+        # Atualiza model_name das settings para não perder o nome após repaint
+        try:
+            from core.database import get_setting
+            name = get_setting("ollama_model", "") or ""
+            if name != self.model_name:
+                self.model_name = name
+        except Exception:
+            pass
+        changed = (ok != self.online) or (not self.model_name)
+        self.online = ok
+        if changed:
+            self.update()
 
     def paintEvent(self, event):
         p = QPainter(self)
@@ -222,12 +232,23 @@ class _OllamaDot(QWidget):
             p.setFont(QFont("Special Elite", 9))
             p.setPen(QPen(QColor("#e0d0ff" if self.night else "#2a1a08")))
             if self.online and self.model_name:
+                # Truncar nomes longos (ex: qwen3.5:397b-cloud → qwen3.5:397b-c…)
                 label = self.model_name
+                if len(label) > 20:
+                    label = label[:19] + "…"
             elif self.online:
                 label = "IA online"
             else:
                 label = "IA offline"
-            p.drawText(W_COLLAPSED + 4, cy + 4, label)
+            from PyQt6.QtCore import QRect
+            text_rect = QRect(W_COLLAPSED + 4, 0, w - W_COLLAPSED - 8, h)
+            p.drawText(text_rect,
+                       Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignLeft,
+                       label)
+        else:
+            # Collapsed: mostrar model_name como tooltip
+            tip = self.model_name if self.model_name else ("Online" if self.online else "Offline")
+            self.setToolTip(f"IA — {tip}")
 
 
 class Sidebar(QWidget):
