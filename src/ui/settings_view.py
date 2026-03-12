@@ -22,6 +22,9 @@ class SettingsView(QWidget):
         self.night_mode = night_mode
         self._build_ui()
         self._load_settings()
+        # Carrega modelos disponíveis em background ao abrir (sem travar a UI)
+        from PyQt6.QtCore import QTimer
+        QTimer.singleShot(300, self._load_models)
 
     def _build_ui(self):
         main = QVBoxLayout(self)
@@ -78,6 +81,7 @@ class SettingsView(QWidget):
 
         self.ollama_model = QComboBox()
         self.ollama_model.setEditable(True)
+        self.ollama_model.currentTextChanged.connect(self._on_model_changed)
         aif.addRow("Modelo:", self.ollama_model)
 
         refresh_models_btn = QPushButton("↻ Carregar modelos disponíveis")
@@ -222,27 +226,37 @@ class SettingsView(QWidget):
         set_setting("date_limit_asked", "1")  # marca que o usuário já configurou
         QMessageBox.information(self, "Cronos", "Configurações salvas com sucesso!")
 
+    def _on_model_changed(self, text: str):
+        """Persiste o modelo imediatamente ao selecionar/digitar."""
+        text = text.strip()
+        if text:
+            set_setting("ollama_model", text)
+
     def _on_theme_change(self, index):
         self.theme_changed.emit("day" if index == 0 else "night")
 
     def _load_models(self):
         models = get_available_models()
         saved  = get_setting("ollama_model", "")
-        current = self.ollama_model.currentText() or saved
+        current = self.ollama_model.currentText().strip() or saved
         self.ollama_model.clear()
         if models:
             self.ollama_model.addItems(models)
-            # Restaurar modelo salvo mesmo que não esteja na lista (ex: cloud models)
+            # Modelo salvo não está na lista (ex: cloud adicionado manualmente)
             if current and current not in models:
                 self.ollama_model.addItem(current)
             if current:
                 self.ollama_model.setCurrentText(current)
+            elif models:
+                # Banco vazio: auto-seleciona o primeiro modelo disponível
+                self.ollama_model.setCurrentIndex(0)
+                set_setting("ollama_model", models[0])
         else:
             # Sem conexão: exibir modelo salvo para não perder
-            fallback = saved or "llama3"
-            self.ollama_model.addItem(fallback)
-            self.ollama_model.setCurrentText(fallback)
-            QMessageBox.information(self, "Ollama", "Ollama não está disponível ou nenhum modelo instalado.")
+            fallback = saved or ""
+            if fallback:
+                self.ollama_model.addItem(fallback)
+                self.ollama_model.setCurrentText(fallback)
 
     def _load_alerts(self):
         self.alerts_list.clear()
