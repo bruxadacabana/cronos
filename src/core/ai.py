@@ -40,9 +40,9 @@ def query_ollama(prompt: str, max_tokens: int = 600) -> str:
     """Interface pública para o analyzer.py e outros módulos."""
     return _query(prompt, max_tokens=max_tokens) or ""
 
-def _ollama_generate(prompt: str, max_tokens: int = 600, timeout: int = 60) -> str:
+def _ollama_generate(prompt: str, max_tokens: int = 600, timeout: int = 60, system: str = "") -> str:
     """Alias direto para uso interno (analyzer, trending)."""
-    return _query(prompt, max_tokens=max_tokens, timeout=timeout) or ""
+    return _query(prompt, max_tokens=max_tokens, timeout=timeout, system=system) or ""
 
 
 
@@ -54,6 +54,60 @@ def get_available_models() -> list:
         return [m["name"] for m in data.get("models", [])]
     except Exception:
         return []
+
+
+def _extract_json_from_text(text: str) -> str:
+    """
+    Extrai o primeiro objeto JSON válido de um texto que pode conter
+    raciocínio/thinking do modelo antes do JSON.
+    """
+    # Tentar JSON direto primeiro
+    text = text.strip()
+    try:
+        json.loads(text)
+        return text
+    except Exception:
+        pass
+
+    # Procurar primeiro '{' e tentar parsear a partir daí
+    start = text.find('{')
+    if start == -1:
+        return text
+
+    # Tentar do primeiro '{' até o final
+    candidate = text[start:]
+    try:
+        json.loads(candidate)
+        return candidate
+    except Exception:
+        pass
+
+    # Tentar encontrar o bloco JSON balanceado
+    depth = 0
+    in_string = False
+    escape_next = False
+    for i, ch in enumerate(candidate):
+        if escape_next:
+            escape_next = False
+            continue
+        if ch == '\\' and in_string:
+            escape_next = True
+            continue
+        if ch == '"' and not escape_next:
+            in_string = not in_string
+        if not in_string:
+            if ch == '{':
+                depth += 1
+            elif ch == '}':
+                depth -= 1
+                if depth == 0:
+                    fragment = candidate[:i+1]
+                    try:
+                        json.loads(fragment)
+                        return fragment
+                    except Exception:
+                        break
+    return text
 
 
 def _query(prompt: str, system: str = "", model: str = None,
@@ -105,6 +159,15 @@ def _query(prompt: str, system: str = "", model: str = None,
             content = thinking.strip()
 
         elapsed = time.monotonic() - _t0
+
+        # Extrair JSON de dentro da resposta caso o modelo tenha gerado texto em volta
+        # Ex: modelos thinking que raciocinam antes do JSON
+        if content and '{' in content:
+            # Tentar extrair primeiro bloco JSON válido
+            json_match = _extract_json_from_text(content)
+            if json_match and json_match != content:
+                logger.debug(f"JSON extraído de resposta com texto ({len(content)}c → {len(json_match)}c)")
+                content = json_match
 
         # Log debug da resposta
         logger.debug(

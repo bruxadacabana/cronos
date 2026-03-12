@@ -44,52 +44,63 @@ def _log_error(art_id, title, error, chunk=None, mode="batch"):
         logger.error(f"[{mode}] Erro artigo {art_id}: {error}", exc_info=True)
 
 # ── Prompt de pré-análise (só título, resposta pequena) ───────────────────────
-PRE_ANALYSIS_PROMPT = """/no_think
-Analise o TÍTULO desta notícia e responda APENAS com JSON válido, sem texto adicional.
+PRE_ANALYSIS_SYSTEM = (
+    "You are a JSON API. You ONLY output raw valid JSON, nothing else. "
+    "No explanations, no thinking, no markdown, no code blocks. "
+    "First character of your response must be '{'."
+)
 
-Título: {title}
+PRE_ANALYSIS_PROMPT = """Analyze this news headline and return ONLY valid JSON.
 
-Retorne SOMENTE este JSON preenchido:
+Headline: {title}
+
+Return EXACTLY this JSON structure (filled in):
 {{
-  "keywords": ["palavra1", "palavra2", "palavra3"],
-  "categories": ["tema principal", "subtema"],
+  "keywords": ["term1", "term2", "term3"],
+  "categories": ["main theme", "subtheme"],
   "emotional_tone": "neutro|positivo|negativo|alarmista|esperancoso|indignado|celebrativo",
   "clickbait_score": 0.0
 }}
 
-Regras:
-- keywords: 3 a 6 termos-chave do título
-- categories: 2 a 4 categorias temáticas
-- clickbait_score: 0.0 (sem clickbait) a 1.0 (puro clickbait)
-- NÃO escreva nada antes ou depois do JSON."""
+Rules:
+- keywords: 3 to 6 key terms from the headline
+- categories: 2 to 4 thematic categories  
+- clickbait_score: 0.0 (no clickbait) to 1.0 (pure clickbait)
+- Output ONLY the JSON object, nothing before or after."""
 
 # ── Prompt de análise completa (título + conteúdo) ────────────────────────────
-ANALYSIS_PROMPT = """/no_think
-Você é um analista de mídia. Analise a notícia e retorne SOMENTE JSON válido, sem texto antes ou depois.
+ANALYSIS_SYSTEM = (
+    "You are a JSON API and media analyst. You ONLY output raw valid JSON, nothing else. "
+    "No explanations, no thinking, no markdown, no code blocks. "
+    "First character of your response must be '{'."
+)
 
-Título: {title}
-Conteúdo: {content}
+ANALYSIS_PROMPT = """Analyze this news article and return ONLY valid JSON.
 
-Retorne SOMENTE este JSON preenchido:
+Title: {title}
+Content: {content}
+
+Return EXACTLY this JSON structure (filled in):
 {{
-  "summary": "Resumo em 1 a 2 parágrafos curtos",
-  "categories": ["tema principal", "subtema"],
-  "keywords": ["palavra1", "palavra2", "palavra3"],
+  "summary": "Summary in 1-2 short paragraphs in Portuguese",
+  "categories": ["main theme", "subtheme"],
+  "keywords": ["term1", "term2", "term3"],
   "emotional_tone": "neutro|positivo|negativo|alarmista|esperancoso|indignado|celebrativo",
   "clickbait_score": 0.0,
   "economic_axis": 0.0,
   "authority_axis": 0.0,
-  "implications": "Implicação principal em 1 frase",
+  "implications": "Main implication in 1 sentence in Portuguese",
   "5ws": {{
-    "who": "quem", "what": "o que", "when": "quando", "where": "onde", "why": "por que"
+    "who": "who", "what": "what", "when": "when", "where": "where", "why": "why"
   }}
 }}
 
-Regras obrigatórias:
-- NÃO escreva NADA antes ou depois do JSON
-- economic_axis: -1.0 (esquerda) a +1.0 (direita)
-- authority_axis: -1.0 (libertário) a +1.0 (autoritário)
-- clickbait_score: 0.0 a 1.0"""
+Rules:
+- Output ONLY the JSON object, nothing before or after
+- summary and implications: write in Portuguese
+- economic_axis: -1.0 (left) to +1.0 (right)
+- authority_axis: -1.0 (libertarian) to +1.0 (authoritarian)
+- clickbait_score: 0.0 to 1.0"""
 
 
 # ── Worker de pré-análise (leve, só título) ───────────────────────────────────
@@ -181,7 +192,7 @@ class PreAnalysisWorker(QThread):
             _t0 = time.monotonic()
             _retry_count = getattr(article, "_retry", 0) if hasattr(article, "_retry") else article.get("_pre_retry", 0)
             try:
-                raw = _ollama_generate(prompt, max_tokens=350, timeout=30)
+                raw = _ollama_generate(prompt, max_tokens=600, timeout=45, system=PRE_ANALYSIS_SYSTEM)
                 result = _parse_pre_analysis(raw)
                 elapsed = time.monotonic() - _t0
                 if result:
@@ -274,7 +285,7 @@ class _SingleArticleWorker(QThread):
             _tick_t = threading.Thread(target=_ticker, daemon=True)
             _tick_t.start()
             try:
-                raw = _ollama_generate(prompt, max_tokens=800, timeout=60)
+                raw = _ollama_generate(prompt, max_tokens=1200, timeout=90, system=ANALYSIS_SYSTEM)
                 _stop_tick[0] = True
                 elapsed_chunk = time.monotonic() - _t0
                 res = _parse_analysis(raw)
@@ -554,7 +565,7 @@ class AnalysisWorker(QThread):
                 prompt = ANALYSIS_PROMPT.format(title=title, content=chunk)
                 _t0 = time.monotonic()
                 try:
-                    raw = _ollama_generate(prompt, max_tokens=800, timeout=60)
+                    raw = _ollama_generate(prompt, max_tokens=1200, timeout=90, system=ANALYSIS_SYSTEM)
                     elapsed_chunk = time.monotonic() - _t0
                     res = _parse_analysis(raw)
                     if res:
