@@ -263,8 +263,7 @@ def _bias_label(ea, aa):
 
 class PointsOfViewDialog(QDialog):
     """Pontos de Vista — redesenhado com cards visuais e viés político."""
-    article_selected         = pyqtSignal(dict)
-    retry_analysis_requested = pyqtSignal(int)   # article_id
+    article_selected = pyqtSignal(dict)
 
     def __init__(self, current_article, night_mode=False, parent=None):
         super().__init__(parent)
@@ -352,6 +351,9 @@ class PointsOfViewDialog(QDialog):
 
 
 class ReaderView(QWidget):
+    article_selected         = pyqtSignal(dict)
+    retry_analysis_requested = pyqtSignal(int)   # article_id
+
     def __init__(self, night_mode=False, parent=None):
         super().__init__(parent)
         self.night_mode = night_mode
