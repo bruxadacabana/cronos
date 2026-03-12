@@ -44,11 +44,12 @@ def _log_error(art_id, title, error, chunk=None, mode="batch"):
         logger.error(f"[{mode}] Erro artigo {art_id}: {error}", exc_info=True)
 
 # ── Prompt de pré-análise (só título, resposta pequena) ───────────────────────
-PRE_ANALYSIS_PROMPT = """Analise o TÍTULO desta notícia e responda APENAS com JSON válido.
+PRE_ANALYSIS_PROMPT = """/no_think
+Analise o TÍTULO desta notícia e responda APENAS com JSON válido, sem texto adicional.
 
 Título: {title}
 
-JSON exato (sem markdown):
+Retorne SOMENTE este JSON preenchido:
 {{
   "keywords": ["palavra1", "palavra2", "palavra3"],
   "categories": ["tema principal", "subtema"],
@@ -57,38 +58,38 @@ JSON exato (sem markdown):
 }}
 
 Regras:
-- keywords: 3 a 6 termos-chave extraídos do título
+- keywords: 3 a 6 termos-chave do título
 - categories: 2 a 4 categorias temáticas
 - clickbait_score: 0.0 (sem clickbait) a 1.0 (puro clickbait)
-- Responda SOMENTE o JSON."""
+- NÃO escreva nada antes ou depois do JSON."""
 
 # ── Prompt de análise completa (título + conteúdo) ────────────────────────────
-ANALYSIS_PROMPT = """Você é um analista de mídia experiente e imparcial. Analise a notícia abaixo e responda APENAS com JSON válido.
+ANALYSIS_PROMPT = """/no_think
+Você é um analista de mídia. Analise a notícia e retorne SOMENTE JSON válido, sem texto antes ou depois.
 
 Título: {title}
 Conteúdo: {content}
 
-JSON exato (sem markdown):
+Retorne SOMENTE este JSON preenchido:
 {{
-  "summary": "Resumo em 1 a 2 parágrafos curtos destacando argumentos principais",
-  "categories": ["tema principal", "subtema", "alinhamento político (se houver)"],
+  "summary": "Resumo em 1 a 2 parágrafos curtos",
+  "categories": ["tema principal", "subtema"],
   "keywords": ["palavra1", "palavra2", "palavra3"],
   "emotional_tone": "neutro|positivo|negativo|alarmista|esperancoso|indignado|celebrativo",
   "clickbait_score": 0.0,
   "economic_axis": 0.0,
   "authority_axis": 0.0,
-  "implications": "Implicação principal em 1 frase curta",
+  "implications": "Implicação principal em 1 frase",
   "5ws": {{
     "who": "quem", "what": "o que", "when": "quando", "where": "onde", "why": "por que"
   }}
 }}
 
-Regras:
-- categories: 2 a 5 temas incluindo alinhamento político/ideológico se relevante
-- clickbait_score: 0.0 a 1.0
-- economic_axis: -1.0 (esquerda) a +1.0 (direita), 0.0 = neutro
-- authority_axis: -1.0 (libertário) a +1.0 (autoritário), 0.0 = neutro
-- Responda SOMENTE o JSON."""
+Regras obrigatórias:
+- NÃO escreva NADA antes ou depois do JSON
+- economic_axis: -1.0 (esquerda) a +1.0 (direita)
+- authority_axis: -1.0 (libertário) a +1.0 (autoritário)
+- clickbait_score: 0.0 a 1.0"""
 
 
 # ── Worker de pré-análise (leve, só título) ───────────────────────────────────
@@ -180,7 +181,7 @@ class PreAnalysisWorker(QThread):
             _t0 = time.monotonic()
             _retry_count = getattr(article, "_retry", 0) if hasattr(article, "_retry") else article.get("_pre_retry", 0)
             try:
-                raw = _ollama_generate(prompt, max_tokens=200, timeout=30)
+                raw = _ollama_generate(prompt, max_tokens=350, timeout=30)
                 result = _parse_pre_analysis(raw)
                 elapsed = time.monotonic() - _t0
                 if result:
@@ -193,7 +194,7 @@ class PreAnalysisWorker(QThread):
                     logger.warning(
                         f"[PRE] ✗ JSON inválido/vazio para artigo {art_id}\n"
                         f"  Título  : {title[:80]}\n"
-                        f"  Resposta: {(raw or '')[:200]}"
+                        f"  Resposta: {(raw or '')[:400]}"
                     )
                     done += 1
             except Exception as e:
@@ -273,7 +274,7 @@ class _SingleArticleWorker(QThread):
             _tick_t = threading.Thread(target=_ticker, daemon=True)
             _tick_t.start()
             try:
-                raw = _ollama_generate(prompt, max_tokens=400, timeout=60)
+                raw = _ollama_generate(prompt, max_tokens=800, timeout=60)
                 _stop_tick[0] = True
                 elapsed_chunk = time.monotonic() - _t0
                 res = _parse_analysis(raw)
@@ -286,7 +287,7 @@ class _SingleArticleWorker(QThread):
                 else:
                     logger.warning(
                         f"[PRIORITY] ✗ JSON inválido chunk {i+1} artigo {art_id}\n"
-                        f"  Resposta: {(raw or '')[:200]}"
+                        f"  Resposta: {(raw or '')[:400]}"
                     )
             except Exception as e:
                 _stop_tick[0] = True
@@ -553,7 +554,7 @@ class AnalysisWorker(QThread):
                 prompt = ANALYSIS_PROMPT.format(title=title, content=chunk)
                 _t0 = time.monotonic()
                 try:
-                    raw = _ollama_generate(prompt, max_tokens=400, timeout=60)
+                    raw = _ollama_generate(prompt, max_tokens=800, timeout=60)
                     elapsed_chunk = time.monotonic() - _t0
                     res = _parse_analysis(raw)
                     if res:
@@ -565,7 +566,7 @@ class AnalysisWorker(QThread):
                     else:
                         logger.warning(
                             f"[BATCH] ✗ JSON inválido chunk {i+1} artigo {art_id}\n"
-                            f"  Resposta: {(raw or '')[:200]}"
+                            f"  Resposta: {(raw or '')[:400]}"
                         )
                 except Exception as e:
                     _log_error(art_id, title, e, chunk=i+1, mode="batch")
@@ -601,10 +602,20 @@ class AnalysisWorker(QThread):
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
+def _strip_thinking(raw: str) -> str:
+    """Remove blocos <think>...</think> que modelos reasoning inserem antes do JSON."""
+    # Remove bloco thinking completo
+    raw = re.sub(r"<think>.*?</think>", "", raw, flags=re.DOTALL | re.IGNORECASE)
+    # Remove tag incompleta (thinking cortado pelo max_tokens)
+    raw = re.sub(r"<think>.*$", "", raw, flags=re.DOTALL | re.IGNORECASE)
+    return raw.strip()
+
+
 def _parse_pre_analysis(raw: str) -> dict:
     """Extrai resultado de pré-análise (só keywords/categoria/tom/clickbait)."""
     if not raw:
         return {}
+    raw = _strip_thinking(raw)
     raw = re.sub(r"`{3}(?:json)?", "", raw.strip()).strip().rstrip("`")
     start, end = raw.find("{"), raw.rfind("}") + 1
     if start == -1 or end == 0:
@@ -636,6 +647,7 @@ def _parse_analysis(raw: str) -> dict:
     """Extrai resultado de análise completa."""
     if not raw:
         return {}
+    raw = _strip_thinking(raw)
     raw = re.sub(r"`{3}(?:json)?", "", raw.strip()).strip().rstrip("`")
     start, end = raw.find("{"), raw.rfind("}") + 1
     if start == -1 or end == 0:
