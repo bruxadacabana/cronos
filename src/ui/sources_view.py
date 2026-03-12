@@ -56,9 +56,6 @@ class SourcesView(QWidget):
         self.fetch_on_startup = QCheckBox("Baixar notícias automaticamente ao abrir o Cronos")
         cf_layout.addRow("", self.fetch_on_startup)
 
-        self.substack_urls = QLineEdit()
-        self.substack_urls.setPlaceholderText("ex: newsletter1.substack.com, autor2.substack.com")
-        cf_layout.addRow("URLs do Substack (separadas por vírgula):", self.substack_urls)
 
         btn_layout = QHBoxLayout()
         save_cfg_btn = QPushButton("💾 Salvar Regras")
@@ -124,12 +121,10 @@ class SourcesView(QWidget):
     def _load_feed_settings(self):
         self.fetch_interval.setValue(int(get_setting("fetch_interval", "30")))
         self.fetch_on_startup.setChecked(get_setting("fetch_on_startup", "1") == "1")
-        self.substack_urls.setText(get_setting("substack_urls", ""))
 
     def _save_feed_settings(self):
         set_setting("fetch_interval", str(self.fetch_interval.value()))
         set_setting("fetch_on_startup", "1" if self.fetch_on_startup.isChecked() else "0")
-        set_setting("substack_urls", self.substack_urls.text())
         QMessageBox.information(self, "Salvo", "Regras de atualização salvas com sucesso!")
 
     def reload(self):

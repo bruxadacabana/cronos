@@ -37,11 +37,11 @@ def is_ollama_available() -> bool:
 
 def query_ollama(prompt: str, max_tokens: int = 600) -> str:
     """Interface pública para o analyzer.py e outros módulos."""
-    return _query(prompt) or ""
+    return _query(prompt, max_tokens=max_tokens) or ""
 
 def _ollama_generate(prompt: str, max_tokens: int = 600, timeout: int = 60) -> str:
     """Alias direto para uso interno (analyzer, trending)."""
-    return _query(prompt) or ""
+    return _query(prompt, max_tokens=max_tokens, timeout=timeout) or ""
 
 
 
@@ -55,18 +55,18 @@ def get_available_models() -> list:
         return []
 
 
-def _query(prompt: str, system: str = "", model: str = None) -> Optional[str]:
+def _query(prompt: str, system: str = "", model: str = None,
+           max_tokens: int = 600, timeout: int = None) -> Optional[str]:
     """
     Faz uma query ao Ollama. Retorna texto da resposta ou None se falhar.
+    Não verifica is_ollama_available() aqui — evita HTTP extra antes de cada chamada.
     """
-    if not is_ollama_available():
-        logger.warning("Ollama não disponível")
-        return None
-
     model = model or _get_model()
+    effective_timeout = timeout or TIMEOUT
     payload = {
         "model": model,
         "stream": False,
+        "options": {"num_predict": max_tokens},
         "messages": [],
     }
 
@@ -78,13 +78,13 @@ def _query(prompt: str, system: str = "", model: str = None) -> Optional[str]:
         resp = httpx.post(
             f"{_get_ollama_url()}/api/chat",
             json=payload,
-            timeout=TIMEOUT
+            timeout=effective_timeout
         )
         resp.raise_for_status()
         data = resp.json()
         return data.get("message", {}).get("content", "").strip()
     except httpx.TimeoutException:
-        logger.error("Ollama timeout")
+        logger.error(f"Ollama timeout após {effective_timeout}s")
         return None
     except Exception as e:
         logger.error(f"Ollama error: {e}")

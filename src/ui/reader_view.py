@@ -731,11 +731,29 @@ li {{ margin-bottom:6px; }}
         if idx >= 0:
             self.lang_combo.setItemText(idx, langs.get(lang_code, lang_code))
 
+        # Erro de tradução — mostra mensagem
+        if result.get("error"):
+            from PyQt6.QtWidgets import QMessageBox
+            QMessageBox.warning(self, "Tradução indisponível",
+                f"Não foi possível traduzir o artigo.\n\n{result['error']}\n\n"
+                "Instale o módulo para usar o Google Translate:\n"
+                "  pip install deep-translator")
+            return
+
         # Aplica o texto traduzido na tela
         if result.get("content_translated"):
             art = dict(self.current_article)
             if result.get("title_translated"): art["title"] = result["title_translated"]
+            via = " (via Ollama)" if result.get("via_ollama") else ""
+            art["source_name"] = (art.get("source_name") or "") + f" — traduzido{via}"
             self.reader.setHtml(self._build_html(art, result["content_translated"]))
+        elif result.get("title_translated"):
+            # Só título foi traduzido (conteúdo muito curto ou erro parcial)
+            art = dict(self.current_article)
+            art["title"] = result["title_translated"]
+            self.reader.setHtml(self._build_html(art,
+                self.current_article.get("content_clean") or
+                self.current_article.get("content", "")))
 
     def _toggle_fav(self):
         if self.current_article:

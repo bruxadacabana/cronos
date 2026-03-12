@@ -199,12 +199,13 @@ class _SingleArticleWorker(QThread):
         if not content_full:
             content_full = title
 
-        chunks = chunk_article_text(content_full, chunk_size=15000)
+        content_full = content_full[:5000]
+        chunks = chunk_article_text(content_full, chunk_size=4500)
         all_results = []
         for i, chunk in enumerate(chunks):
             prompt = ANALYSIS_PROMPT.format(title=title, content=chunk)
             try:
-                raw = _ollama_generate(prompt, max_tokens=600, timeout=90)
+                raw = _ollama_generate(prompt, max_tokens=400, timeout=60)
                 res = _parse_analysis(raw)
                 if res:
                     all_results.append(res)
@@ -397,7 +398,8 @@ class AnalysisWorker(QThread):
             if not content_full:
                 content_full = title
 
-            chunks = chunk_article_text(content_full, chunk_size=15000)
+            content_full = content_full[:5000]
+            chunks = chunk_article_text(content_full, chunk_size=4500)
             all_results = []
             for i, chunk in enumerate(chunks):
                 with QMutexLocker(self._mutex):
@@ -406,13 +408,13 @@ class AnalysisWorker(QThread):
                         break
                 prompt = ANALYSIS_PROMPT.format(title=title, content=chunk)
                 try:
-                    raw = _ollama_generate(prompt, max_tokens=600, timeout=90)
+                    raw = _ollama_generate(prompt, max_tokens=400, timeout=60)
                     res = _parse_analysis(raw)
                     if res:
                         all_results.append(res)
                 except Exception as e:
                     logger.error(f"[batch] Erro parte {i+1} artigo {art_id}: {e}")
-                time.sleep(0.3)
+                time.sleep(0.1)
 
             if all_results:
                 final = _merge_chunks(all_results)
